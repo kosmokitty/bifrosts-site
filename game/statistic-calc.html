@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title> Statistic Calculator ✦ Bifrosts </title>
+    <style>
+        .calc-wrapper {
+            max-width: 850px;
+            margin: 40px auto;
+            background: #0f172a;
+            border: 1px solid #4f6496;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .calc-header { text-align: center; margin-bottom: 30px; }
+        .calc-header h1 { margin-bottom: 10px; color: #d6e1ff; }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-input-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            background: #111827;
+            border: 1px solid #2a3755;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .results-area {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding-top: 30px;
+            border-top: 1px solid #2a3755;
+        }
+
+        .result-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result-card.highlight { border: 1px solid #4f6496; background: rgba(79, 100, 150, 0.1); }
+        .result-card small { display: block; color: #94a3b8; text-transform: uppercase; font-size: 0.65rem; margin-bottom: 5px; }
+        .result-card strong { font-size: 1.4rem; color: #fff; }
+
+        .cap-info {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        #build-name { color: #d6e1ff; text-transform: capitalize; }
+        .warning { color: #ff4f4f !important; }
+        .success { color: #4fff8d !important; }
+
+        @media (max-width: 700px) {
+            .input-grid, .stat-input-row, .results-area { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+
+    <main class="archive">
+        <div class="calc-wrapper">
+            <div class="calc-header">
+                <h1>Statistic Builder</h1>
+                <p style="color: #94a3b8;">Create your character's starting stats and see your build archetype.</p>
+            </div>
+
+            <div class="input-grid">
+                <div class="field-group">
+                    <label>Lifestage</label>
+                    <select id="lifestage" onchange="enforceCaps(); autoFillStats(); calculateStats();">
+                        <option value="kitten">Kitten (8 SP Total)</option>
+                        <option value="novice">Novice (14 SP Total)</option>
+                        <option value="specNovice">Specialized Novice (16 SP Total)</option>
+                        <option value="adult">Adult (24 SP Total)</option>
+                        <option value="senior">Senior (24 SP Total)</option>
+                        <option value="elder">Elder (24 SP Total)</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label>Lineage (Eye Color)</label>
+                    <select id="lineage" onchange="calculateStats()">
+                        <option value="dex">Red or Blue (+2 DEX)</option>
+                        <option value="con">Grey or Green (+2 CON)</option>
+                        <option value="wis">Heterochromia (+4 WIS)</option>
+                    </select>
+                </div>
+            </div>
+
+            <label style="display: block; font-size: 0.75rem; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; text-align: center;">Distribute Base Statistics</label>
+            <div id="cap-msg" class="cap-info">Max per stat: 2 SP</div>
+            
+            <div class="stat-input-row">
+                <div class="field-group">
+                    <input type="number" id="base-str" value="0" oninput="enforceCaps(); calculateStats()">
+                    <small style="text-align:center; display:block; color:#4f6496; margin-top:5px;">STR</small>
+                </div>
+                <div class="field-group">
+                    <input type="number" id="base-con" value="0" oninput="enforceCaps(); calculateStats()">
+                    <small style="text-align:center; display:block; color:#4f6496; margin-top:5px;">CON</small>
+                </div>
+                <div class="field-group">
+                    <input type="number" id="base-dex" value="0" oninput="enforceCaps(); calculateStats()">
+                    <small style="text-align:center; display:block; color:#4f6496; margin-top:5px;">DEX</small>
+                </div>
+                <div class="field-group">
+                    <input type="number" id="base-int" value="0" oninput="enforceCaps(); calculateStats()">
+                    <small style="text-align:center; display:block; color:#4f6496; margin-top:5px;">INT</small>
+                </div>
+                <div class="field-group">
+                    <input type="number" id="base-wis" value="0" oninput="enforceCaps(); calculateStats()">
+                    <small style="text-align:center; display:block; color:#4f6496; margin-top:5px;">WIS</small>
+                </div>
+            </div>
+
+            <div class="results-area">
+                <div class="result-card highlight">
+                    <small>Primary Build</small>
+                    <strong id="build-name">Balanced</strong>
+                </div>
+                <div class="result-card highlight">
+                    <small>Health Points</small>
+                    <strong id="hp-total">--</strong>
+                </div>
+                <div class="result-card highlight">
+                    <small>Armor Class</small>
+                    <strong id="ac-total">--</strong>
+                </div>
+                <div class="result-card">
+                    <small>SP Budget</small>
+                    <strong id="sp-counter">0 / 0</strong>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const stages = {
+            kitten: { sp: 8, hp: 5, cap: 2 },
+            novice: { sp: 14, hp: 10, cap: 4 },
+            specNovice: { sp: 16, hp: 15, cap: 4 },
+            adult: { sp: 24, hp: 25, cap: 10 },
+            senior: { sp: 24, hp: 20, cap: 10 },
+            elder: { sp: 24, hp: 15, cap: 10 }
+        };
+
+        const statIds = ['base-str', 'base-con', 'base-dex', 'base-int', 'base-wis'];
+
+        function enforceCaps() {
+            const stageKey = document.getElementById('lifestage').value;
+            const currentCap = stages[stageKey].cap;
+            
+            document.getElementById('cap-msg').innerText = `Max per stat: ${currentCap} SP`;
+
+            statIds.forEach(id => {
+                const input = document.getElementById(id);
+               
+                input.max = currentCap;
+               
+                if (parseInt(input.value) > currentCap) {
+                    input.value = currentCap;
+                }
+            });
+        }
+
+        // Auto fill stats
+        function autoFillStats() {
+            const stageKey = document.getElementById('lifestage').value;
+            const totalToDistribute = stages[stageKey].sp;
+            const currentCap = stages[stageKey].cap;
+            
+            let remaining = totalToDistribute;
+            
+            statIds.forEach(id => {
+                
+                let fill = Math.min(Math.floor(totalToDistribute / 5), currentCap);
+                document.getElementById(id).value = fill;
+                remaining -= fill;
+            });
+
+            // Addition
+            let i = 0;
+            while (remaining > 0 && i < statIds.length) {
+                let currentVal = parseInt(document.getElementById(statIds[i]).value);
+                if (currentVal < currentCap) {
+                    document.getElementById(statIds[i]).value = currentVal + 1;
+                    remaining--;
+                }
+                i++;
+            }
+        }
+
+        // calculation 
+        function calculateStats() {
+            const stageKey = document.getElementById('lifestage').value;
+            const lineage = document.getElementById('lineage').value;
+            
+            const stats = {
+                strength: parseInt(document.getElementById('base-str').value) || 0,
+                constitution: parseInt(document.getElementById('base-con').value) || 0,
+                dexterity: parseInt(document.getElementById('base-dex').value) || 0,
+                intelligence: parseInt(document.getElementById('base-int').value) || 0,
+                wisdom: parseInt(document.getElementById('base-wis').value) || 0
+            };
+
+            const totalSpent = stats.strength + stats.constitution + stats.dexterity + stats.intelligence + stats.wisdom;
+            const limit = stages[stageKey].sp;
+
+            // HP/AC Calculation
+            let calcCon = stats.constitution + (lineage === 'con' ? 2 : 0);
+            let calcDex = stats.dexterity + (lineage === 'dex' ? 2 : 0);
+            const finalHP = stages[stageKey].hp + (10 * calcCon);
+            const finalAC = 10 + calcDex;
+
+            // Build Logic
+            let buildType = "Balanced Build";
+            let highestVal = -1;
+            let primaryStat = "";
+
+            for (let s in stats) {
+                if (stats[s] > highestVal) {
+                    highestVal = stats[s];
+                    primaryStat = s;
+                } else if (stats[s] === highestVal) {
+                    primaryStat = "Balanced";
+                }
+            }
+
+            if (primaryStat !== "Balanced" && highestVal > (totalSpent / 4)) {
+                buildType = primaryStat.charAt(0).toUpperCase() + primaryStat.slice(1) + " Build";
+            }
+
+            document.getElementById('hp-total').innerText = finalHP;
+            document.getElementById('ac-total').innerText = finalAC;
+            document.getElementById('build-name').innerText = buildType;
+            
+            const spDisplay = document.getElementById('sp-counter');
+            spDisplay.innerText = `${totalSpent} / ${limit}`;
+            spDisplay.className = totalSpent > limit ? 'warning' : (totalSpent === limit ? 'success' : '');
+        }
+
+        enforceCaps();
+        autoFillStats();
+        calculateStats();
+    </script>
+</body>
+</html>

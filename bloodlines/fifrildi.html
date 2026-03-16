@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/music.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFRILDI ✦ Where Two Rivers Meet</title>
+
+    <link rel="stylesheet" href="city.css">
+
+    <style>
+
+    :root {
+        /* ── Accent colors ── */
+        --city-primary:   #3a9e6f;   /* buttons, glows, active borders  */
+        --city-secondary: #1a6e8a;   /* deep glow, gradient second stop */
+        --city-accent:    #c8e8d0;   /* main text highlight color       */
+
+        /* ── Glow / border helpers ── */
+        --city-glow:   rgba(58, 158, 111, 0.35);
+        --city-border: rgba(58, 158, 111, 0.25);
+
+        /* ── Backgrounds: deepest → mid → card surface ── */
+        --city-bg-deep: #020805;
+        --city-bg-mid:  #040f08;
+        --city-bg-card: #071510;
+
+        /* ── Parchment / ink (used in culture panel) ── */
+        --city-parchment: #d8ead0;
+        --city-ink:       #1a2e1f;
+    }
+
+    /* ── Page background — swap url() for the new city image ── */
+    body {
+        background-color: var(--city-bg-deep);
+        background-image:
+            linear-gradient(
+                to bottom,
+                rgba(2,8,5,0.55) 0%,
+                rgba(2,8,5,0.72) 50%,
+                rgba(2,8,5,0.88) 100%
+            ),
+            url('/images/backgrounds/nebula.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    /* ── Hero background ── */
+    .hero {
+        background-image:
+            linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, var(--city-bg-deep) 100%),
+            url('/images/backgrounds/nebula.jpg');
+        background-size: cover;
+        background-position: center top;
+    }
+
+    /* ── Fifrildi dual-blood tab strip ── */
+    /*
+       The Characteristics popup has two sub-tabs: Laguz and Forseti.
+       These styles only apply to that popup widget.
+    */
+    .blood-tabs {
+        display: flex;
+        border-bottom: 1px solid rgba(200, 232, 208, 0.15);
+        margin-bottom: 18px;
+        gap: 0;
+    }
+
+    .blood-tab {
+        flex: 1;
+        padding: 9px 12px;
+        font-family: var(--font-title);
+        font-size: 12px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        color: rgba(200, 232, 208, 0.4);
+        transition: color 0.3s ease, border-color 0.3s ease;
+        user-select: none;
+    }
+
+    .blood-tab:hover { color: rgba(200, 232, 208, 0.75); }
+
+    .blood-tab.active-laguz {
+        color: #7ec8e3;
+        border-bottom-color: #7ec8e3;
+    }
+
+    .blood-tab.active-forseti {
+        color: #8ecf6e;
+        border-bottom-color: #8ecf6e;
+    }
+
+    .blood-panel { display: none; }
+    .blood-panel.visible { display: block; }
+
+    /* Subclass indicator on rank rows */
+    .rl-row-sub {
+        font-family: var(--font-title);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: var(--city-primary);
+        opacity: 0.55;
+        white-space: nowrap;
+        margin-right: 2px;
+    }
+    </style>
+</head>
+
+<body>
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- HERO                                         -->
+    <!-- ════════════════════════════════════════════ -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">Where the forest meets the sea</span>
+            <h1>FIFRILDI</h1>
+            <div class="hero-rule"></div>
+            <p class="hero-tagline">Two rivers, one current</p>
+        </div>
+    </header>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- STICKY PAGE NAV                              -->
+    <!-- ════════════════════════════════════════════ -->
+    <nav class="city-nav">
+        <a href="#introduction" class="active">Introduction</a>
+        <a href="#culture">Culture</a>
+        <a href="#ranks">Ranks</a>
+        <a href="#laws">Laws</a>
+    </nav>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- MAIN CONTENT                                 -->
+    <!-- ════════════════════════════════════════════ -->
+    <main class="main-content">
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- INTRODUCTION                            -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="introduction">
+            <div class="frame">
+                <div class="frame-inner">
+                    <div class="section-heading">
+                        <h2>Introduction</h2>
+                        <div class="divider"><div class="divider-gem"></div></div>
+                    </div>
+                    <p class="lore-text">
+                        Nestled in the curve of a forested peninsula past the Sker Mountains,
+                        Fifrildi's placement between where the cities of Laguz and Forseti once
+                        dwelled is fitting for the mixture of two cultures it now stands as. Once a
+                        diplomatic outpost made necessary by the threat of undead monsters and fiery
+                        religious fanatics closing in, it has grown into its own city — one that hosts
+                        both blue and green eyes side by side.
+                    </p>
+                    <div class="btn-row">
+                        <a href="/world/history.html" class="city-btn">
+                            Lore Archive <span class="btn-arrow">›</span>
+                        </a>
+                        <a href="/character/character-creation.html" class="city-btn">
+                            Join Fifrildi <span class="btn-arrow">›</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- TRAIT CARDS                             -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal">
+            <div class="trait-grid">
+
+                <div class="trait-card" data-popup="traits">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/3a9e6f/cat.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Traits</h3>
+                </div>
+
+                <div class="trait-card" data-popup="society-overview">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/3a9e6f/forest.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Society</h3>
+                </div>
+
+                <div class="trait-card" data-popup="combat">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/3a9e6f/sword.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Combat</h3>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- CULTURE                                 -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="culture">
+            <div class="section-heading">
+                <h2>Culture</h2>
+                <div class="divider"><div class="divider-gem"></div></div>
+            </div>
+            <div class="culture-layout">
+
+                <!-- Parchment content panel (left) -->
+                <div class="culture-scroll" id="society-panel">
+                    <div class="rune-glyphs">ᚠᛟᚱᛖᛊᛏ ᛗᛖᛖᛏᛊ ᛟᚲᛖᚨᚾ</div>
+                    <div class="culture-panel-divider"></div>
+                    <h3 id="society-panel-title"></h3>
+                    <div id="society-panel-body"></div>
+                </div>
+
+                <!-- Sidebar navigation (right) -->
+                <div class="culture-sidebar" id="society">
+                    <div class="sidebar-link active" data-society="culture">
+                        Culture <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="religion">
+                        Religion <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="creation">
+                        Creation <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="training">
+                        Training <span class="arrow">›</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- RANKS & LAWS                            -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="ranks">
+            <div class="section-heading">
+                <h2>Ranks &amp; Laws</h2>
+                <div class="divider"><div class="divider-gem"></div></div>
+            </div>
+
+            <div class="ranks-laws-grid">
+
+                <!-- Ranks column -->
+                <div class="rl-panel">
+                    <div class="rl-panel-title">Ranks</div>
+
+                    <div class="rl-row" data-rank-popup="rank-council">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/butterfly.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Council</span>
+                        <span class="rl-row-stat">+2 RSP</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-jarls">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/laurel-wreath.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Jarls</span>
+                        <span class="rl-row-stat">+2 RSP</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-caretakers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/like--v1.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Caretakers</span>
+                        <span class="rl-row-stat">+2 INT</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-healers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/leaf.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Healers</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-foragers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/grass.png" alt="">
+                        </div>
+                        <span class="rl-row-sub">↳</span>
+                        <span class="rl-row-label">Foragers</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-berserkers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/sword.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Berserkers</span>
+                        <span class="rl-row-stat">+2 STR</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-jaegers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/archer.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Jaegers</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-ravens">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/full-body-crow.png" alt="">
+                        </div>
+                        <span class="rl-row-sub">↳</span>
+                        <span class="rl-row-label">Rāvens</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-waylands">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/hammer.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Waylands</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                </div><!-- end ranks -->
+
+                <!-- Laws column -->
+                <div class="rl-panel" id="laws">
+                    <div class="rl-panel-title">Laws</div>
+
+                    <div class="rl-row" data-popup="law-1">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The First Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-2">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Second Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-3">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Third Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-4">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Fourth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-5">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Fifth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-6">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Sixth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-7">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Seventh Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-8">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Eighth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-9">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Ninth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-10">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/3a9e6f/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Tenth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                </div><!-- end laws -->
+
+            </div><!-- end ranks-laws-grid -->
+        </section>
+
+    </main>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- FOOTER                                       -->
+    <!-- ════════════════════════════════════════════ -->
+    <footer class="city-footer">
+        All content &copy; Bifrosts
+    </footer>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- POPUP                                        -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="popup" class="popup" role="dialog" aria-modal="true">
+        <div class="popup-box">
+            <button class="popup-close" id="popup-close" aria-label="Close">✕</button>
+            <button class="popup-nav popup-nav-prev" id="popup-prev" aria-label="Previous">‹</button>
+            <button class="popup-nav popup-nav-next" id="popup-next" aria-label="Next">›</button>
+            <div class="popup-arch"><div class="popup-arch-gem"></div></div>
+            <div class="popup-header">
+                <h2 id="popup-title"></h2>
+                <div class="popup-stat-row" id="popup-stat-row" style="display:none;"></div>
+                <span class="popup-subtitle" id="popup-subtitle" style="display:none;"></span>
+                <div class="divider" style="margin:10px auto 0; max-width:300px;">
+                    <div class="divider-gem"></div>
+                </div>
+            </div>
+            <div class="popup-body-scroll">
+                <div id="popup-body"></div>
+            </div>
+            <div class="popup-footer"><div class="popup-footer-gem"></div></div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SCRIPTS                                      -->
+    <!-- ════════════════════════════════════════════ -->
+    <script>
+
+    /* ══════════════════════════════════════════════
+       SIMPLE POPUP DATA (trait cards + laws)
+    ══════════════════════════════════════════════ */
+    const lore = {
+
+        traits: {
+            title: "Fifrildi — Characteristics",
+            text: `
+                Since cross-blood relationships are considered taboo, typical body types and pelt
+                colors vary widely throughout the city based on a cat's ancestral city. Click a
+                bloodline below to view its characteristics.
+
+                <br><br>
+
+                <div class="blood-tabs">
+                    <div class="blood-tab active-laguz" data-blood="laguz" onclick="switchBlood('laguz')">
+                        ✦ Laguz Blood
+                    </div>
+                    <div class="blood-tab" data-blood="forseti" onclick="switchBlood('forseti')">
+                        ✦ Forseti Blood
+                    </div>
+                </div>
+
+                <div id="blood-laguz" class="blood-panel visible">
+                    <table style="
+                        width:100%;
+                        border-collapse:collapse;
+                        font-family:var(--font-lore);
+                        font-size:16px;
+                        color:#c8a870;
+                    ">
+                        <thead>
+                            <tr>
+                                <th style="font-family:var(--font-title); font-size:12px; letter-spacing:0.25em; text-transform:uppercase; color:#7ec8e3; padding:8px 12px; border-bottom:1px solid rgba(126,200,227,0.25); text-align:left;">
+                                    Trait
+                                </th>
+                                <th style="font-family:var(--font-title); font-size:12px; letter-spacing:0.25em; text-transform:uppercase; color:#7ec8e3; padding:8px 12px; border-bottom:1px solid rgba(126,200,227,0.25); text-align:left;">
+                                    Details
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1); color:#7ec8e3; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Stat Bonus
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1); color:#7ec8e3; font-family:var(--font-title); font-size:14px; letter-spacing:0.2em; font-weight:700;">
+                                    +2 DEX
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1); color:#7ec8e3; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Size
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1);">
+                                    Second-largest among the cities. Water-built for rough waves.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1); color:#7ec8e3; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Height
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1);">
+                                    Average 13"–15" &nbsp;·&nbsp; Munchkin 11" &nbsp;·&nbsp;
+                                    Abnormally Small 12" &nbsp;·&nbsp; Abnormally Large 16"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1); color:#7ec8e3; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Physique
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1);">
+                                    Muscular, compact, and svelte with short fur. A natural oil leaves them adept at swimming.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1); color:#7ec8e3; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Eyes
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1);">
+                                    Blue to purple
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1); color:#7ec8e3; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Pelt Colors
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1);">
+                                    Roiling waves, sandy beaches, and dark ocean cliffsides
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1); color:#7ec8e3; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Spotting
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(126,200,227,0.1);">
+                                    0–60% white spotting
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; color:#7ec8e3; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap; vertical-align:top;">
+                                    Patterns
+                                </td>
+                                <td style="padding:9px 12px;">
+                                    Solid, spotted tabby, classic tabby, ticked tabby, patches, spots, and points
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="blood-forseti" class="blood-panel">
+                    <table style="
+                        width:100%;
+                        border-collapse:collapse;
+                        font-family:var(--font-lore);
+                        font-size:16px;
+                        color:#c8a870;
+                    ">
+                        <thead>
+                            <tr>
+                                <th style="font-family:var(--font-title); font-size:12px; letter-spacing:0.25em; text-transform:uppercase; color:#8ecf6e; padding:8px 12px; border-bottom:1px solid rgba(142,207,110,0.25); text-align:left;">
+                                    Trait
+                                </th>
+                                <th style="font-family:var(--font-title); font-size:12px; letter-spacing:0.25em; text-transform:uppercase; color:#8ecf6e; padding:8px 12px; border-bottom:1px solid rgba(142,207,110,0.25); text-align:left;">
+                                    Details
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1); color:#8ecf6e; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Stat Bonus
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1); color:#8ecf6e; font-family:var(--font-title); font-size:14px; letter-spacing:0.2em; font-weight:700;">
+                                    +2 CON
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1); color:#8ecf6e; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Size
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1);">
+                                    Largest in physical size among all cities. Forest-built for woodland survival.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1); color:#8ecf6e; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Height
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1);">
+                                    Average 14"–16" &nbsp;·&nbsp; Munchkin 12" &nbsp;·&nbsp;
+                                    Abnormally Small 13" &nbsp;·&nbsp; Abnormally Large 17"
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1); color:#8ecf6e; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Physique
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1);">
+                                    Bulky, large, and muscular with long, thick fur suited for forest life.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1); color:#8ecf6e; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Eyes
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1);">
+                                    Mint to lime
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1); color:#8ecf6e; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Pelt Colors
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1);">
+                                    Rich soil, autumn leaves, and woodland creatures
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1); color:#8ecf6e; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                    Spotting
+                                </td>
+                                <td style="padding:9px 12px; border-bottom:1px solid rgba(142,207,110,0.1);">
+                                    0–60% white spotting
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:9px 12px; color:#8ecf6e; font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap; vertical-align:top;">
+                                    Patterns
+                                </td>
+                                <td style="padding:9px 12px;">
+                                    Solid, spotted tabby, classic tabby, mackerel tabby, patches, spots, and tortoiseshell
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <br>
+                <div style="text-align:center;">
+                    <a href="/character/character-creation.html" class="city-btn" style="margin-top:8px;">
+                        Character Creation <span class="btn-arrow">›</span>
+                    </a>
+                </div>
+            `
+        },
+
+        "society-overview": {
+            title: "Fifrildi Society",
+            text: `
+                Due to being a mixture of two very different cultures, Fifrildi society is an
+                amalgamation of both Forsetian and Laguzian values — chosen and cultivated by both
+                bloods for the betterment of the city as a whole. Democratic in leadership and
+                unified in purpose, Fifrildi stands as proof that two rivers can share one current.
+            `
+        },
+
+        combat: {
+            title: "The Berserker Way",
+            text: `
+                The fighters of Fifrildi combine Forseti's Warriors and Laguz's Pikes into one
+                unified fighting force. Njord's ease of turning to combat and Jörd's focus on
+                peaceful relations have resulted in a measured middle ground — Fifrildians are
+                neither the first to draw blood nor the last to defend their own.
+            `
+        },
+
+        "law-1": {
+            title: "The First Edict",
+            text: `
+                Your love, duty, and loyalty are to your city first.
+                Defend your city, even if it may cost you your life.
+            `
+        },
+        "law-2": {
+            title: "The Second Edict",
+            text: `
+                The word of the Council is the law of Fifrildi, as elected officials who were
+                chosen by their citymates to always lead with their city's best interests in mind.
+            `
+        },
+        "law-3": {
+            title: "The Third Edict",
+            text: `
+                If a Councilmember dies, retires, or is deemed unfit for duty, the city will
+                host a vote to elect a new Councilmember to take their place.
+            `
+        },
+        "law-4": {
+            title: "The Fourth Edict",
+            text: `
+                Do not trespass or hunt on another city's territory.
+            `
+        },
+        "law-5": {
+            title: "The Fifth Edict",
+            text: `
+                Elders, mothers, and kits eat first.
+            `
+        },
+        "law-6": {
+            title: "The Sixth Edict",
+            text: `
+                Every cat becomes a novice at 6 cycles and will undergo trials at 10 cycles.
+            `
+        },
+        "law-7": {
+            title: "The Seventh Edict",
+            text: `
+                All novices shall be grouped into pods from 6 cycles to 10 cycles, and at 10
+                cycles will undergo trials to decide their specialization rank.
+            `
+        },
+        "law-8": {
+            title: "The Eighth Edict",
+            text: `
+                All novices must pass a trial in order to choose a specialization. Those who do
+                not pass will always be allowed to try again until they succeed.
+            `
+        },
+        "law-9": {
+            title: "The Ninth Edict",
+            text: `
+                To show nicety or loyalty to those cursed is worse than death itself.
+            `
+        },
+        "law-10": {
+            title: "The Tenth Edict",
+            text: `
+                Fifrildi remains thankful to Njord and Jörd for all they provide.
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       RANK POPUP DATA
+    ══════════════════════════════════════════════ */
+    const rankData = {
+
+        "rank-council": {
+            title:    "Council",
+            stats:    ["+2 RSP"],
+            subtitle: "The Leader Class",
+            body: `
+                <p>
+                    The Council is made up of 8 cats — both blue-eyed and green-eyed — who have
+                    been democratically elected by the city to represent the best interests of
+                    Fifrildi as its leaders. If a Councilmember dies, retires, or is deemed unfit
+                    for duty, the city will host a vote to elect a new Councilmember to take their
+                    place. All Councilmembers wear the Forsetian golden butterfly necklace with an
+                    emerald gemstone, which is not kept by prior members and is passed on to
+                    whoever fills a past member's place.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Ruling Fifrildi</div>
+                    <p>
+                        The Council runs all diplomatic affairs, communicating with citymates and
+                        making decisions for the city's welfare. They discuss and bring to their
+                        peers new rules and decisions regarding the city, and oversee trials,
+                        rune-giving, ceremonies, and all other workings of the city.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Diplomacy</div>
+                    <p>
+                        As the figureheads and leaders of Fifrildi, it is the Council's
+                        responsibility to ensure all matters within and outside of the city run
+                        accordingly. This includes encouraging peaceful co-existence with the other
+                        cities and loners, as well as handling messages and information from
+                        outsiders.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-jarls": {
+            title:    "Jarls",
+            stats:    ["+2 RSP"],
+            subtitle: "The High Class",
+            body: `
+                <p>
+                    Jarls are cats who have been recognized for exceptional loyalty, skill, or
+                    contribution, taking the place of Leads. The Jarl's family members are also
+                    considered Jarls in terms of authority, although they do not hold the official
+                    title — they are not the city's primary Jarls, but part of the extended family.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Assisting the Council</div>
+                    <p>
+                        Jarls hold leadership positions and often communicate with the Council on
+                        city matters. They are to report any issues brought to them and are
+                        typically positioned as the overseer of important plans.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Leading Rank</div>
+                    <p>
+                        As the head of their associated rank, Jarls are required to keep an eye on
+                        all members of their rank and ensure they are orderly and proficient. They
+                        also ensure that all training flows smoothly and that all members are
+                        actively participating.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-caretakers": {
+            title:    "Caretakers",
+            stats:    ["+2 INT"],
+            subtitle: "The Caretaking Class",
+            body: `
+                <p>
+                    A highly valued class, only those identified as having utmost loyalty to
+                    Fifrildi and a deep understanding of both Forseti and Laguz cultures are
+                    allowed to be part of this rank, handpicked by the Council or current
+                    Caretakers.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Kitten Management</div>
+                    <p>
+                        Caretakers are expected to be updated on the status of all kittens in
+                        Fifrildi and help maintain their health and care. They log names, litter
+                        sizes, and mutations or injuries, and are expected to use basic healing
+                        knowledge for minor matters while contacting the Healers immediately for
+                        major concerns.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Kitten Raising</div>
+                    <p>
+                        Although parents typically raise their own kittens, Caretakers are the
+                        sole parents of orphans unless they are adopted, and often watch over other
+                        family kittens during the day. They hold an important role in modeling
+                        social cues, manners, and respect for peers.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Education</div>
+                    <p>
+                        As Caretakers hold responsibility to all the kittens of Fifrildi, this
+                        class must be highly educated on the lore and cultures of both Forseti and
+                        Laguz. Caretakers are expected to be exemplary citizens — knowledgeable in
+                        all of the city's traditions, cultures, and laws — so the youth can be
+                        raised as loyal Fifrildians.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-healers": {
+            title:    "Healers",
+            stats:    ["+2 WIS"],
+            subtitle: "The Healing Class",
+            body: `
+                <p>
+                    While healing was originally more important in Forseti's culture than Laguz's,
+                    the new culture has made both ancestral cities see the merit in having multiple
+                    well-trained healers to handle the city's health.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Herb Knowledge</div>
+                    <p>
+                        Healers are responsible for learning and retaining knowledge pertaining to
+                        herb uses and various remedies. This includes the appearance and uses of a
+                        wide variety of plants. A broad knowledge of how to grow basic herbs is
+                        required of all Healers in Fifrildi.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Patient Care</div>
+                    <p>
+                        Healers are highly trained in the ability to treat a variety of injuries
+                        and ailments quickly, efficiently, and correctly. They keep a close eye on
+                        patients and continually manage aftercare, medication doses, and progress
+                        logging.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Medical Invention</div>
+                    <p>
+                        Those in this class are expected to always be considering new ways for the
+                        health of the city to be improved, and are typically on the front lines of
+                        innovations that make Fifrildi healthier and happier.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-foragers": {
+            title:    "Foragers",
+            stats:    ["+2 WIS"],
+            subtitle: "The Healing Subclass",
+            body: `
+                <p>
+                    Distinct from Healers although part of the same branch, the Forager is the
+                    rank that primarily manages herb growth and usage, as well as medical
+                    assistance at home and on patrols.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Herb Management</div>
+                    <p>
+                        Foragers are responsible for the maintenance and management of Fifrildi's
+                        herb storage, ensuring plants are healthy while removing and destroying
+                        dead or blighted herbs. Foragers also manage the herb gardens, planting,
+                        caring for, and harvesting plants properly.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Healer Assistance</div>
+                    <p>
+                        Not the primary healers within the city walls, Foragers assist the Healers
+                        when requested on some treatments and patient care, particularly aftercare
+                        and progress logging.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Combat Medic</div>
+                    <p>
+                        Unlike Healers whose primary responsibility is to remain within the city
+                        walls, Foragers fill the role of combat medics. They are an integral part
+                        of any patrol as the only source of medical assistance should a fight occur.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-berserkers": {
+            title:    "Berserkers",
+            stats:    ["+2 STR"],
+            subtitle: "The Fighting Class",
+            body: `
+                <p>
+                    The fighters of Fifrildi, this rank combines Forseti's Warriors and Laguz's
+                    Pikes into one unified role to serve the entire city.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Patrolling</div>
+                    <p>
+                        To ensure the territory and the city remain safe and secure, Berserkers
+                        are expected to patrol regularly. They are tasked with spotting dangers
+                        from predators or other cities before they make themselves known. This is
+                        typically done in large groups — if the party finds anything, they will
+                        often face it head-on and deal with the aggressor themselves.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Guarding</div>
+                    <p>
+                        Berserkers typically guard the city from various watch-points: the city
+                        entrance, the Council Hall, and vantage points throughout the city. They
+                        remain alert while on duty, their sight keen enough to spot signs of
+                        danger and act quickly.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Combat</div>
+                    <p>
+                        When it comes to facing a threat, Berserkers are at the front lines. All
+                        Berserkers undergo extensive training and fighting exercises, and even
+                        after completing their specialized novice training, they continue to
+                        participate in large sparring sessions typically overseen by a Jarl of
+                        their rank.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Observing</div>
+                    <p>
+                        Berserkers are integral to ensuring the city's safety. Guards frequently
+                        find themselves on look-out duty within the city walls as well as on
+                        survey patrols. It is their job to alert the city of unusual activity or
+                        approaching threats, and to lead the charge for offensive and defensive
+                        maneuvers.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-jaegers": {
+            title:    "Jaegers",
+            stats:    ["+2 WIS"],
+            subtitle: "The Hunting Class",
+            body: `
+                <p>
+                    The hunters of Fifrildi, this rank combines Forseti's Hunters with Laguz's
+                    Fishers into one unified role to serve the entire city.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Trapping</div>
+                    <p>
+                        Jaegers regularly check, harvest, and reset traps for both water-based and
+                        woodland prey — a great luxury afforded by the combined knowledge of both
+                        Forseti and Laguz. Streams, rivers, and multiple locations across the
+                        forest and along the shoreline are laid with traps. Jaegers are expected
+                        to be proficient with both water traps and woodland traps.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Hunting</div>
+                    <p>
+                        Jaegers are tasked with regularly ensuring that the city is well stocked
+                        with food. It is their duty to hunt prey that can't be caught in a trap,
+                        certifying that everyone in the city is well-fed before the Jaegers
+                        themselves eat. This class typically spends the majority of their time out
+                        in the territory, hunting with a combination of tactics.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Tracking</div>
+                    <p>
+                        Jaegers are expected to be efficient in recognizing and identifying animal
+                        tracks, and to quickly seek out prey or predator scents. They are known
+                        for their sharp noses, which are a necessity for their role.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Ambushing</div>
+                    <p>
+                        In addition to solo hunting, Jaegers highly value teamwork. They often
+                        work in groups to track and take down larger prey or predators, using
+                        body-language and tail-signals as a form of silent communication.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-ravens": {
+            title:    "Rāvens",
+            stats:    ["+2 WIS"],
+            subtitle: "The Hunting Subclass",
+            body: `
+                <p>
+                    Distinct from Jaegers although part of the same branch, the Rāven is a rank
+                    that uses a hunter's tracking prowess to the utmost — primarily tasked with
+                    scouting missions and discovery.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Tracking</div>
+                    <p>
+                        Taking investigation to new heights, Rāvens are expected to be exceptional
+                        trackers beyond a typical Jaeger's needs — able to efficiently and
+                        accurately glean clues and tracks in some of the toughest and most
+                        difficult environments around.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Scouting</div>
+                    <p>
+                        Frequently part of both Berserker and Jaeger patrols, Rāvens use a deep
+                        understanding of nature and what lives in it to scout ahead for threats
+                        and targets. They are often the first to detect something nearby, and are
+                        invaluable to ensuring the safety of patrols and the city at large through
+                        their early warnings.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Discovery</div>
+                    <p>
+                        Rāvens are at times tasked with discovery missions meant to find new
+                        hunting territories, or to walk the borders with other cities and
+                        investigate potential threats and developments in the name of Fifrildi's
+                        safety and growth.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-waylands": {
+            title:    "Waylands",
+            stats:    ["+2 WIS"],
+            subtitle: "The Crafting Class",
+            body: `
+                <p>
+                    The crafters of Fifrildi, this rank combines Forseti's Builders with Laguz's
+                    Divers into one unified role to serve the entire city.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Gathering</div>
+                    <p>
+                        Most Waylands gather their own supplies, traversing both the forest and
+                        the ocean waves to find a host of materials such as wood, stone, shells,
+                        and animal parts. Due to the potential dangers of the work — especially
+                        water-diving — Waylands often go in pairs or are escorted by patrols.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Crafting</div>
+                    <p>
+                        As the central crafters of the city, Waylands make almost everything in
+                        Fifrildi — from tents and homes, to weapons and armor, to accessories and
+                        smaller items. Many cats commission Waylands to make gear or fashion.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Reinforcing</div>
+                    <p>
+                        In addition to building, Waylands are an integral part of reinforcing and
+                        maintaining homes and the city walls. They are also expected to fix and
+                        repair any broken items and weapons.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Reporting</div>
+                    <p>
+                        A rank that divides its time between inside and outside of the city walls,
+                        Waylands are also an important early warning system for changes. As
+                        gatherers, they note what materials are available or missing, as well as
+                        the health of trees. As crafters, they track trends in city requests and
+                        are invaluable in reporting the various uses of city materials.
+                    </p>
+                </div>
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       CULTURE SIDEBAR PANEL DATA
+    ══════════════════════════════════════════════ */
+    const societyContent = {
+
+        culture: {
+            title: "Social Bonds",
+            body: `
+               <p>
+Family life in Fifrildi centers around both blood kin and chosen bonds. Older
+cats often guide younger relatives through their early training as pod-novices
+or specialized novices, passing down skills and expectations through daily
+interaction. At the same time, the use of familial titles extends beyond blood;
+cats frequently refer to trusted companions as kin as a
+way of reinforcing social bonds. Adoption is common, and orphans or close
+companions may be welcomed fully into a household. From an early age, kittens
+are taught that every cat of the city is a citymate deserving of protection,
+regardless of eye color.
+</p>
+
+<p>
+Although parents remain responsible for raising their own kittens, much of
+early kittenhood is spent among the Caretakers. Families often leave their
+young in their care during the day, creating a shared upbringing where kittens
+grow alongside many others in the city. Within these groups they learn stories,
+traditions, and early cultural lessons from some of the most devoted members of
+Fifrildi. Kittens without parents are raised by the Caretakers as well, though
+they are frequently welcomed into family tents and may be adopted whenever a
+household chooses to take them in.
+</p>
+
+<p>
+Daily life is organized around family tents and the larger langhús structures
+where extended households live together. Outside of pod-training periods, cats
+generally share these spaces with their recognized family members. Once a cat
+completes their trials and is acknowledged as an adult, their living
+arrangements become their own choice. Some remain with their family, while
+others build their own tents or live alongside close friends. Constructing a
+tent is considered an important personal milestone, though the process is
+rarely done alone. Citymates often gather to help raise the structure in a
+gesture similar to a house-warming, while larger langhús are usually organized
+and led by Waylands.
+</p>
+
+<p>
+Romantic partnerships are treated as personal commitments between two adults, 
+and cats may pursue relationships with others from their ancestral city. Some pairs announce their partnership in a ceremony
+before the city, while others prefer smaller gatherings or no formal
+declaration at all. The children of Jarls may sometimes be introduced to
+potential partners from other Jarl families, though these introductions carry
+no obligation and either cat may decline without consequence. Regardless of
+circumstance, no romantic partnership is recognized until both cats are acknowledged as adults.
+</p>
+
+<p>
+Cats born with cursed heterochromia occupy a difficult place within the social
+life of the city. These individuals face widespread ostracization and are
+barred from fully participating in many aspects of civic life. The stigma,
+however, remains directed solely at the afflicted cat. Their parents and
+siblings continue to live within the community without blame unless the birth
+is believed to have resulted from knowingly taboo circumstances, such as a
+cross-blooded union.
+</p>
+
+
+            `
+        },
+
+        religion: {
+            title: "Njord & Jörd",
+            body: `
+                <p>
+                    As a result of the Forseti and Laguz fusion, Fifrildi's patron Gods include
+                    both the ocean-focused Njord and the forest-dwelling Jörd. Cats of both
+                    ancestral cities tend to offer thanks and prayer to both Gods, as the aid of
+                    each is essential to the lifestyle of the city.
+                </p>
+                <p>
+                    Cats care equally for the health of both waterways and woodlands, with all
+                    city cats expected to properly appreciate and respect the bounty brought to
+                    them by the Gods.
+                </p>
+                <p>
+                    Njord's ease of turning to combat and Jörd's focus on peaceful relations have
+                    produced a measured middle ground in Fifrildi's new culture. Forsetians have
+                    become more willing to use their weapons and fight compared to their previous
+                    views, while Laguzians are less likely to favor violence and aggression as a
+                    means of solving problems than they once were.
+                </p>
+                <p>
+                    Absorbed from Forseti's culture, runes hold deep and meaningful value. All
+                    cats receive a given rune from the Council when they graduate to a full adult
+                    of the city. The Council considers an individual's past, present, and future
+                    in their choice, and there is a belief that runes are charms that give insight
+                    into someone's heart and fate.
+                </p>
+            `
+        },
+
+        creation: {
+            title: "Creation & Craftsmanship",
+            body: `
+                <p>
+                    Benefitting greatly from the oceanic knowledge of Laguz and the forest
+                    expertise of Forseti, Fifrildi enjoys being at the top of fishing and building
+                    prowess among the cities. Hunting-oriented ranks have special knowledge in the
+                    creation of complex traps and nets using twine, rope, and plant materials,
+                    resulting in access to high levels of healthy fish.
+                </p>
+                <p>
+                    Crafting-oriented ranks are very talented, drawing from everything the ocean
+                    and the forest provides — animal leather, furs, rocks and stones, rope,
+                    beachwood, fish skin and scales, bones, shells, pearls, and wood. Housing
+                    tents are among the strongest and best-made in the cities, typically crafted
+                    from animal pelts and wood alongside vines, plants, rope, fabric, and leather.
+                    With the introduction of the langhús, many homes have been upgraded to wooden
+                    and stone structures complete with hearths and large spaces for bigger
+                    families. The city has minor access to metal for high-quality detailed work,
+                    though gemstones are exceptionally rare and reserved for special projects.
+                </p>
+                <p>
+                    Accessories blend both Forseti and Laguz aesthetics — commonly made from
+                    twine, shells, sea glass, pearls, fish scale, bone, vines, plants, rope,
+                    animal leather, and wood, with some metal on smaller high-quality pieces.
+                </p>
+
+                <div style="
+                    font-family: var(--font-title);
+                    font-size: 12px;
+                    letter-spacing: 0.35em;
+                    text-transform: uppercase;
+                    color: var(--city-ink);
+                    opacity: 0.6;
+                    margin: 20px 0 12px;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid rgba(26,46,31,0.25);
+                ">
+                    Player Contributions
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:10px;">
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Glass</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Created usable glass material and improved the forge to make such material.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Linnea</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Fyke Net</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Created a new means of fishing specific to river fishing.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Óðr Bróðirsterkr</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Funnel Trap</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Created a specialized trap useful in both ocean and river-based fishing.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Óðr Bróðirsterkr</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Barberhøvel</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Created a new weapon studded with shells and stones used to capture and injure enemies.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Onni</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Crab Trap</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Created a trap specialized for catching crabs and crawfish.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Fyrri</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Bog Ore Deposit</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Found an underground bog ore deposit that can be mined — it is only with this ore that the specialized Ulfberht weapon can be crafted.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Discovered by Glaw Bróðirsterkr</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Ulfberht</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Created the blueprint for a new weapon — only Jarls may craft it, made from a rare bog ore deposit.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Glaw Bróðirsterkr</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Anesthetic Fishskin</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Created a bandage made of fishskin soaked in a specially-cultivated numbing herb oil to manage pain and heal injuries faster.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Óskabein Seidrsaga</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Fish Farming</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Created a means of sectioning off riverbeds to farm fish for a sustainable food source year-round.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Óðr Bróðirsterkr</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Jörd's Shrine</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Restored the shrine to Jörd.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Restored by Arianrhod Cúldrach</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Langhús</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            Greatly improved housing made of stronger materials that can handle larger families, complete with hearths and plaques marking the Council Hall and the homes of Jarls.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">Crafted by Otto Hjartalill</div>
+                    </div>
+
+                    <div style="background:rgba(26,46,31,0.12); border:1px solid rgba(26,46,31,0.2); border-left:3px solid rgba(26,46,31,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Hvíldar-stađr</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#3a2010; line-height:1.6; margin-bottom:6px;">
+                            A new area for prey and large predator remains to be taken to as a place of rest and respect, keeping other predators from being attracted to the city.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(26,46,31,0.55);">City contribution</div>
+                    </div>
+
+                </div>
+            `
+        },
+
+        training: {
+            title: "Training & The Pod System",
+            body: `
+                <p>
+                    All kittens, upon reaching the age of 6 cycles, will be placed in a pod with
+                    both blue and green-eyed peers. A pod's name is based on either a Forsetian
+                    forestry theme or a Laguzian oceanic theme. Together, they train as a unit
+                    under assigned instructors from each rank. At 10 cycles, they undergo
+                    specialization trials. Based on performance, the Council may extend one to
+                    three offers of a rank to specialize in, though a novice can only choose one
+                    offer from those they receive. If a novice is unsatisfied with their results,
+                    they may request a re-test to the Council and will be allowed to take the
+                    trials again if approved.
+                </p>
+                <p>
+                    From 10 cycles to 20 cycles, the specialized novice trains under a mentor in
+                    their chosen rank. At the end of the specialized training, they must pass an
+                    assessment — success resulting in their recognition as an adult within their
+                    rank, granting adult privileges and greater access to various armor and
+                    weaponry.
+                </p>
+                <p>
+                    Adult cats wishing to change their rank must present their case to the Council
+                    and secure approval. Once approved, they will lose some of their adult rank
+                    privileges and will be required to undergo 10 cycles of retraining. At the
+                    end of the training, they must pass an assessment as part of their new rank,
+                    with success resulting in recognition as their new rank.
+                </p>
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       BLOODLINE TAB SWITCHER (Characteristics popup)
+    ══════════════════════════════════════════════ */
+    function switchBlood(blood) {
+        /* panels */
+        document.querySelectorAll('.blood-panel').forEach(p => p.classList.remove('visible'));
+        const target = document.getElementById('blood-' + blood);
+        if (target) target.classList.add('visible');
+
+        /* tabs */
+        document.querySelectorAll('.blood-tab').forEach(t => {
+            t.classList.remove('active-laguz', 'active-forseti');
+        });
+        const activeTab = document.querySelector(`.blood-tab[data-blood="${blood}"]`);
+        if (activeTab) activeTab.classList.add('active-' + blood);
+    }
+
+    /* ══════════════════════════════════════════════
+       POPUP ENGINE
+    ══════════════════════════════════════════════ */
+    const popup         = document.getElementById('popup');
+    const popupTitle    = document.getElementById('popup-title');
+    const popupBody     = document.getElementById('popup-body');
+    const popupStatRow  = document.getElementById('popup-stat-row');
+    const popupSubtitle = document.getElementById('popup-subtitle');
+    const popupClose    = document.getElementById('popup-close');
+    const popupPrev     = document.getElementById('popup-prev');
+    const popupNext     = document.getElementById('popup-next');
+
+    let currentMode  = null;
+    let currentIndex = 0;
+
+    const rankOrder = [
+        'rank-council', 'rank-jarls', 'rank-caretakers',
+        'rank-healers', 'rank-foragers',
+        'rank-berserkers',
+        'rank-jaegers', 'rank-ravens',
+        'rank-waylands'
+    ];
+
+    const lawOrder = [
+        'law-1', 'law-2', 'law-3', 'law-4', 'law-5',
+        'law-6', 'law-7', 'law-8', 'law-9', 'law-10'
+    ];
+
+    function updateNavArrows() {
+        const list = currentMode === 'rank' ? rankOrder : lawOrder;
+        if (!list || currentMode === 'simple') {
+            popupPrev.classList.remove('visible');
+            popupNext.classList.remove('visible');
+            return;
+        }
+        popupPrev.classList.toggle('visible', currentIndex > 0);
+        popupNext.classList.toggle('visible', currentIndex < list.length - 1);
+    }
+
+    function renderRank(key) {
+        const d = rankData[key];
+        if (!d) return;
+        popupTitle.textContent = d.title;
+        popupBody.innerHTML    = d.body;
+        popupStatRow.innerHTML = d.stats
+            .map(s => `<span class="popup-stat-badge"><span class="stat-gem">✦</span>${s}</span>`)
+            .join('');
+        popupStatRow.style.display  = 'flex';
+        popupSubtitle.textContent   = d.subtitle;
+        popupSubtitle.style.display = 'block';
+        popup.querySelector('.popup-body-scroll').scrollTop = 0;
+    }
+
+    function renderLaw(key) {
+        const d = lore[key];
+        if (!d) return;
+        popupTitle.textContent      = d.title;
+        popupBody.innerHTML         = `<p>${d.text}</p>`;
+        popupStatRow.style.display  = 'none';
+        popupSubtitle.style.display = 'none';
+        popup.querySelector('.popup-body-scroll').scrollTop = 0;
+    }
+
+    function openSimplePopup(key) {
+        const d = lore[key];
+        if (!d) return;
+        currentMode  = 'simple';
+        currentIndex = 0;
+        popupTitle.textContent      = d.title;
+        popupBody.innerHTML         = `<p>${d.text}</p>`;
+        popupStatRow.style.display  = 'none';
+        popupSubtitle.style.display = 'none';
+        updateNavArrows();
+        showPopup();
+    }
+
+    function openRankPopup(key) {
+        const idx = rankOrder.indexOf(key);
+        if (idx === -1) return;
+        currentMode  = 'rank';
+        currentIndex = idx;
+        renderRank(key);
+        updateNavArrows();
+        showPopup();
+    }
+
+    function openLawPopup(key) {
+        const idx = lawOrder.indexOf(key);
+        if (idx === -1) return;
+        currentMode  = 'law';
+        currentIndex = idx;
+        renderLaw(key);
+        updateNavArrows();
+        showPopup();
+    }
+
+    function navigatePopup(direction) {
+        const list = currentMode === 'rank' ? rankOrder : lawOrder;
+        const next = currentIndex + direction;
+        if (next < 0 || next >= list.length) return;
+        currentIndex = next;
+        if (currentMode === 'rank') renderRank(list[currentIndex]);
+        else                        renderLaw(list[currentIndex]);
+        updateNavArrows();
+    }
+
+    function showPopup() {
+        popup.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup() {
+        popup.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    document.body.addEventListener('click', e => {
+        const rankTrigger   = e.target.closest('[data-rank-popup]');
+        const simpleTrigger = e.target.closest('[data-popup]');
+        if (rankTrigger)   { openRankPopup(rankTrigger.dataset.rankPopup); return; }
+        if (simpleTrigger) {
+            const key = simpleTrigger.dataset.popup;
+            if (key.startsWith('law-')) { openLawPopup(key); return; }
+            openSimplePopup(key);
+            return;
+        }
+        if (e.target === popup) closePopup();
+    });
+
+    popupPrev.addEventListener('click', () => navigatePopup(-1));
+    popupNext.addEventListener('click', () => navigatePopup(+1));
+    popupClose.addEventListener('click', closePopup);
+    document.addEventListener('keydown', e => {
+        if (!popup.classList.contains('is-open')) return;
+        if (e.key === 'Escape')     closePopup();
+        if (e.key === 'ArrowLeft')  navigatePopup(-1);
+        if (e.key === 'ArrowRight') navigatePopup(+1);
+    });
+
+    /* ══════════════════════════════════════════════
+       CULTURE SIDEBAR SWITCHER
+    ══════════════════════════════════════════════ */
+    const panelTitle   = document.getElementById('society-panel-title');
+    const panelBody    = document.getElementById('society-panel-body');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link[data-society]');
+
+    panelTitle.style.transition = 'opacity 0.2s ease';
+    panelBody.style.transition  = 'opacity 0.2s ease';
+
+    function switchSocietyPanel(key) {
+        if (!societyContent[key]) return;
+        panelTitle.style.opacity = panelBody.style.opacity = '0';
+        setTimeout(() => {
+            panelTitle.innerHTML = societyContent[key].title;
+            panelBody.innerHTML  = societyContent[key].body;
+            panelTitle.style.opacity = panelBody.style.opacity = '1';
+        }, 200);
+        sidebarLinks.forEach(l => l.classList.toggle('active', l.dataset.society === key));
+    }
+
+    sidebarLinks.forEach(l => l.addEventListener('click', () => switchSocietyPanel(l.dataset.society)));
+    switchSocietyPanel('culture');
+
+    /* ══════════════════════════════════════════════
+       STICKY NAV ACTIVE STATE + SCROLL REVEAL
+    ══════════════════════════════════════════════ */
+    const navLinks = document.querySelectorAll('.city-nav a');
+
+    document.querySelectorAll('section[id]').forEach(section => {
+        new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    navLinks.forEach(a =>
+                        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)
+                    );
+                }
+            });
+        }, { threshold: 0.3 }).observe(section);
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 }).observe(el);
+    });
+
+    </script>
+</body>
+</html>

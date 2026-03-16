@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title> Combat ✦ Bifrosts </title>
+    <style>
+       
+        .combat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0 40px 0;
+            align-items: stretch;
+        }
+
+        .action-card {
+            background: rgba(30, 41, 59, 0.5); 
+            border: 1px solid #4f6496;
+            border-radius: 12px;
+            padding: 20px;
+            transition: 0.3s ease;
+        }
+
+        .attack-card {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid #2a3755;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .action-card:hover, .attack-card:hover {
+            border-color: #d6e1ff;
+            background: rgba(17, 24, 39, 0.9);
+            transform: translateY(-3px);
+        }
+
+        h4 {
+            margin-top: 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .action-card ul {
+            padding-left: 18px;
+            margin-bottom: 0;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .attack-card p {
+            margin: 0;
+            color: #d6e1ff;
+            font-weight: bold;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+       
+        @media (max-width: 900px) {
+            .combat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+
+    <main class="archive">
+
+        <h1> Combat </h1>
+        <div class="section-divider"></div>
+        <p>Combat in Bifrosts is built for flexibility and fairness. Instead of strict turn orders, long initiative chains, or frequent replies from the same two players, battles unfold round by round, with each participant contributing one action in the order that best suits them. This keeps the system clear and easy to follow, while also respecting busy schedules, time zone differences, and allowing each character to shine—preventing any 'main characters' from appearing. </p>
+
+        <p>Rounds are paced depending on the event. Fast-moving skirmishes may ask for responses within twenty-four hours, while larger or slower encounters may stretch to three days per reply. Either way, the goal is to maintain momentum without leaving anyone behind. You're not obligated to respond, if you miss a turn, you can simply reply to the next one!</p>
+
+        <h2>Turn Order</h2>
+        <div class="section-divider"></div>
+        <p>There are no initiative rolls. Everyone gets one reply per round, and actions can come in any order. This structure creates a natural pace where each player has the chance to shape the scene without worrying about missing their “slot" or replying too infrequently.</p>
+
+        <h2>Actions</h2>
+        <div class="section-divider"></div>
+        <p>When your turn comes, you choose how your character acts. You can choose one action per turn, and can get more creative than the list below! This list is to give new players a general idea as to what they can do:</p>
+        
+        <div class="combat-grid">
+            <div class="action-card">
+                <h4>Flee</h4>
+                <ul>
+                    <li>Attempt to escape combat.</li>
+                    <li>Your opponent will decide whether to let you go or pursue.</li>
+                    <li>If you're chased, you'll have to roll a 1d20 + DEX. The higher roll determines if you escape or are caught.</li>
+                </ul>
+            </div>
+
+            <div class="action-card">
+                <h4>Dodge</h4>
+                <ul>
+                    <li>By choosing this action, you'll attempt to evade an incoming strike.</li>
+                    <li>Both sides will roll a 1d20 + DEX.</li>
+                    <li>If you successfully dodge, your opponents next attack will be at a disadvantage (they roll twice, using the lowest result.)</li>
+                </ul>
+            </div>
+
+            <div class="action-card">
+                <h4>Attack</h4>
+                <ul>
+                    <li>Attempt to hit your opoonent.</li>
+                    <li>Which is resolved in two steps:</li>
+                    <li>Accuracy (DEX): Roll a 1D20 + DEX vs. targets AC (Armour Class).</li>
+                    <li>Damage (STR): If successful, roll damage dice + STR modifier.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Attacking</h2>
+        <div class="section-divider"></div>
+        <p>The first step in making an attack is accuracy. Roll 1d20 + DEX against your opponent’s Armor Class. A result equal to or higher than the AC means the attack connects. If the target successfully dodged the previous round, the attacker rolls with disadvantage.</p>
+        <p>If the attack lands, you move to damage. The dice rolled depend on the move or weapon used, with your Strength modifier added to the result. If it doesn't land, you missed your attack and cannot do more during this turn—unless you choose to purchase a re-roll in the Stardust Shop.</p>
+
+        <h3>Weaponless Attacks</h3>
+        <div class="section-divider"></div>
+        
+        <div class="combat-grid">
+            <div class="attack-card">
+                <h4>Swat</h4>
+                <p>2d4 + STR</p>
+            </div>
+            <div class="attack-card">
+                <h4>Rake</h4>
+                <p>1d8 + STR</p>
+            </div>
+            <div class="attack-card">
+                <h4>Wrestle</h4>
+                <p>1d6 + STR</p>
+            </div>
+            <div class="attack-card">
+                <h4>Bite</h4>
+                <p>1d8 + STR</p>
+            </div>
+            <div class="attack-card">
+                <h4>Pounce</h4>
+                <p>1d6 + STR</p>
+            </div>
+        </div>
+
+        <h2>Special Rolls</h2>
+        <div class="section-divider"></div>
+        <p>Natural rolls add a dramatic edge to combat. A natural 20 means a critical hit, which doubles your damage. While a natural 1 is an automatic miss and damages your character by 1d10 (1d5 for kittens). </p>
+
+        <h2>Death Saving Throw</h2>
+        <div class="section-divider"></div>
+        <p>When a Character starts their turn with 0 Health Points (HP), their character falls unconscious and they must make a special saving throw, known as the death saving throw. This determines whether they creep closer to death or hang onto life. This saving throw isn’t tied to any ability score, and the player’s roll is entirely left up to fate. </p>
+        <p><b>Death Saving Throw: 1d20</b>. The user must roll at least a 10 or higher to succeed a roll, otherwise it is considered a failed roll. You must continue rolling until you have rolled either three successes or three fails. Three successes allows your character to become stable, three failures equates to death. You continue to roll until you collect three of a kind, which determines your fate. The number of both is reset to zero when you regain any hit points or become stable.</p>
+        <ul>
+            <li>When you roll a 1 on a d20, it counts as two failures.</li>
+            <li>If you roll a 20 on a d20, you regain 1 health point (hp).</li>
+            <li>If you take any damage while you have 0 health points, you suffer a death-saving throw failure. If the damage is from a critical hit, you suffer two failures instead. If the damage equals or exceeds your hit point maximum, you suffer instant death.</li>
+        </ul>
+
+    </main>
+</body>
+</html>

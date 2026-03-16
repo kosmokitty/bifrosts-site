@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>The World ✦ Bifrosts</title>
+    <style>
+
+        /* GRID FOR PREDATORS/PREY/WEATHER */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(79, 100, 150, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        /* SEASON GRID */
+        .season-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .season-box {
+            background: rgba(79, 100, 150, 0.1);
+            border: 1px solid rgba(79, 100, 150, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .season-box h4 {
+            margin-top: 0;
+            color: #d6e1ff;
+            border-bottom: 1px solid rgba(214, 225, 255, 0.2);
+            padding-bottom: 5px;
+        }
+
+        /* LOCATION LISTS */
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0 40px 0;
+        }
+
+        .location-item {
+            background: #111827;
+            border: 1px solid #2a3755;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .location-item h4 {
+            margin-top: 0;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        /* CITY HEADERS */
+        .city-section {
+            margin-top: 60px;
+            padding: 20px;
+            border-radius: 15px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+
+        @media (max-width: 768px) {
+            .season-grid, .info-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+
+<!-- ================= END NAV ================= -->
+
+    <main class="archive">
+
+        <h1>Fyrstrheim</h1>
+        <div class="section-divider"></div>
+
+            <h2>Terrain</h2>
+            <p>Bifrosts is heavily inspired by Iceland, with a landscape that closely mirrors the country’s unique terrain. A key influence is Hallormsstaðaskógur, the national forest in East Iceland, known for its natural birch groves and abundant pine trees. Scattered across the territory are breathtaking landscapes—cascading waterfalls, erupting geysers, black sand beaches, and geothermal hot springs.</p>
+            <p>The climate is predominantly cold, windy, and overcast for much of the year, shaped by its high-latitude location. Though frigid northern winds sweep through the region, the surrounding ocean helps moderate the extremes. Still, the weather remains wildly unpredictable and often brutal, forging an environment where survival is a daily struggle—not just for the characters, but for the wildlife of Fryrstheim as well.</p>
+            <p>In such unforgiving conditions, watching out for one another and being apart of a city is vital. Though death is a constant threat, survival is possible—for those who stand together.</p>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Predators</h3>
+                <p>The majority of Fyrstrheim’s terrestrial predators are arctic foxes, lynxes, wolves, wolverines, coyotes, and more. However, the skies are rich with danger, as Iceland hosts a wide variety of birds of prey—including sea eagles, white-tailed eagles, seagulls, falcons, hawks, and kites.</p>
+                <p>Encounters with polar bears are exceedingly rare, as they do not maintain a permanent presence in the region. Seals may also pose a threat on occasion, though depending on the species and its level of aggression, felines are unlikely to be their preferred prey.</p>
+                <p>The main source of danger prominent in Fyrstrheim of this time consists of mythic legends... creatures that are not supposed to exist...</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Prey</h3>
+                <p>Fyrstheim’s available prey fluctuates with the seasons, but primarily consists of small mammals and birds. Rodents such as mice, rats, rabbits, hares, and pikas are common, along with small birds, weasels, minks, and other similar species.</p>
+                <p>Squirrels, frogs, and other small creatures that are not native to Iceland do appear in Fyrstrheim along with many other rodents. </p>
+                <p>Weasels and minks are bountiful but are especially difficult and dangerous to hunt, often requiring a coordinated effort from a team of felines to successfully take them down. </p>
+            </div>
+        </div>
+
+        <div class="info-card" style="margin-bottom: 30px;">
+            <h3>Weather</h3>
+            <p>Fyrstheim experiences four distinct seasons, though it often doesn't feel that way due to the erratic and rapidly shifting weather. Storms and strong winds are common across the continent, and heavy rainfall is frequent throughout the year.</p>
+            <p>Surprisingly, Fyrstheim can also become quite warm. This is largely due to the Gulf Stream, which brings warm ocean currents from the Caribbean along the western and southern coasts. As the mild Atlantic air mixes with the colder Arctic air, sudden and dramatic weather changes occur.</p>
+            <p>Another source of warmth lies beneath the surface—Fyrstheim sits atop a geothermal hotspot. The land is alive with geothermal activity: bubbling hot springs, erupting geysers, steaming mud pools, minor volcanic activity, and the occasional tremor.</p>
+            <p>Overall, temperatures remain relatively mild throughout the year, with less drastic shifts between summer and winter than one might expect. However, the weather can turn in an instant. A calm, sunny morning can quickly transform into a raging blizzard.</p>
+            <p>This unpredictability makes shelter and living in a city vital; for those caught unprepared, the weather itself can become a deadly threat.</p>
+        </div>
+
+        <h3>Seasons</h3>
+        <div class="season-grid">
+            <div class="season-box">
+                <h4>Summer (June - September)</h4>
+                <p>Summers in Fyrstheim are cool and bright, with temperatures ranging between 40°F (5°C) and 58°F (15°C). The Midnight Sun graces the end of the season, with daylight lasting nearly 24 hours in June. While September sees around 13 hours of light, summer remains sun-drenched and mild overall.</p>
+            </div>
+
+            <div class="season-box">
+                <h4>Fall (September - December)</h4>
+                <p>This is when Fyrstheim’s unpredictable weather truly begins to show. Temperatures drop noticeably, ranging from 30°F (0°C) to 50°F (10°C). Storms become more frequent, and daylight begins to fade—from 13 hours in September down to just 4 by December.</p>
+            </div>
+
+            <div class="season-box">
+                <h4>Winter (December - March)</h4>
+                <p>The coldest season in Fyrstheim brings heavy snow, fierce winds, and rapidly changing conditions. Temperatures hover around 30°F (-1°C), but can plunge much lower. Daylight becomes scarce, with only 4 hours in December gradually increasing to 12 by March. However, the darkness reveals a gift—the Northern Lights, which dance across the winter sky.</p>
+            </div>
+
+            <div class="season-box">
+                <h4>Spring (March - June)</h4>
+                <p>Spring marks the retreat of winter and the return of life to Fyrstheim. Flowers bloom, birds migrate back, and temperatures climb from 38°F (3°C) to 54°F (12°C). Daylight steadily increases, stretching from 12 hours in March to 21 by early June.</p>
+            </div>
+        </div>
+
+        <h2>Territory</h2>
+        <div class="section-divider"></div>
+        <p>The terrain across Fyrstheim shifts wildly from place to place, sometimes within the same day’s travel. One moment you’re weaving through soft, mossy forests, and the next you’re climbing over jagged rocks as the land suddenly turns steep and mountainous. There’s a kind of unpredictability to it—beautiful, but not always friendly.</p>
+        <p>Along the coasts, you’ll find stretches of beach that feel almost out of place. Some are soft and sandy, peaceful enough to rest on if the weather allows. Others are made of black sand, dark and gritty beneath your paws, a reminder of the island’s volcanic heart.</p>
+        <p>Head northeast, and everything starts to rise. Towering mountains dominate the skyline, carved and weathered by time. Between them lie deep valleys, green and full of life—sheltered spots where prey is more plentiful and the winds don’t bite quite as hard.</p>
+        <p>Each city in Fyrstheim sits in its own kind of world, shaped by the land around it. No two places feel exactly the same, and if you’re not paying attention, the ground beneath your feet can change faster than the sky above your head.</p>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Helgafell</h4>
+                <p>Helgafell, meaning Holy Mountain, serves as the heart of neutrality across Fyrstheim. It’s a sacred, respected meeting ground—untouched by the rivalries or politics of the surrounding cities. Here, cities come together to trade goods, share knowledge, and form alliances under a temporary peace. No blood is meant to be spilled on this land, and that agreement is one of the few things all territories honor.</p>
+                <p>Helgafell itself rises in the distance, a looming mountain shrouded in cloud and mystery. Though few have scaled it, its presence is enough—a symbol of balance and sacred purpose. All city paths eventually lead here.</p>
+            </div>
+            <div class="info-card">
+                <h4>Einn Lake</h4>
+                <p>At the center of the neutral ground lies Einn Lake—its name translating to One Lake. It is among the largest lakes in Fyrstheim, both in size and importance. Calm and quiet, its waters are surprisingly temperate, often radiating a soft, soothing warmth. Even in the heart of winter, the lake rarely freezes over completely, leading some to believe it is heated by the same geothermal energy that pulses beneath the land.</p>
+                <p>Some say the lake holds spiritual significance, as if Helgafell watches over it, and in turn, it watches over all who gather at its shores.</p>
+            </div>
+        </div>
+
+        <h2>Fyrstrheim Map</h2>
+        <div class="section-divider"></div>
+        <p>Territories and terrains have changed over the years—nothing stays still for long in Fyrstheim. Forseti has been reduced to ash, burned down to nothing but memory and scorched earth. Laguz fell soon after, overrun by Draugr, their haunting presence now rooted deep within the land.</p>
+        <p>As the balance shifts, the cities are being pushed and pulled. Stormr has grown smaller, its borders slowly eroded as Eldur expands, pressing in with quiet force. Meanwhile, Fifrildi is on the move—its people scattering, seeking space, or maybe opportunity.</p>
+        <p>Change is constant in this world, and no territory is safe from it.</p>
+        
+        <div class="map-placeholder">Fyrstrheim Map</div>
+
+        <h2>City Terrain</h2>
+        <div class="section-divider"></div>
+        <div class="info-grid">
+            <div>
+                <p>Each city in Fyrstheim is shaped not just by its people, but by the land it calls home. The terrain isn’t just a backdrop—it defines how they live, how they fight, and how they survive.</p>
+                <p>Eldur sits cradled in a vast bowl of mountains, surrounded on all sides by towering stone walls. The peaks act as both shield and prison, locking in the heat from the volcanic veins that run beneath the ground. Smoke often rises from hidden fissures, and the air carries the faint scent of sulfur. It's a harsh, fire-forged land—but to those who live there, it's a source of strength and pride.</p>
+            </div>
+            <div>
+                <p>Stormr claims the highest ground in all of Fyrstheim, nestled among the sharp, snow-covered peaks where the winds never sleep. Life at this altitude is unforgiving. The cliffs are steep, the paths narrow, and storms roll in without warning. But those who call Stormr home are as resilient as the stone beneath their paws, carved by wind and weather into something unshakable.</p>
+                <p>Fifrildi, by contrast, is tucked away in the serene beauty of the aspen wood forests. Their home is bathed in soft, dappled light and surrounded by whispering leaves that shift gold in the fall. The forest is alive with birdsong, and the ground is soft with moss and fallen leaves. It’s a place of quiet strength and deep-rooted traditions, where every tree feels like a watchful guardian.</p>
+            </div>
+        </div>
+
+        <div class="city-section">
+            <div style="text-align: center; margin-bottom: 20px;"><img src="/images/icons/eldur.png"></div>
+            <h2>Eldur Kingdom</h2>
+            <div class="section-divider"></div>
+            <p>Eldur is surrounded by expansive mountain ranges, with a central meadow and a large crystalline lake. Beech trees dominate the landscape, mixed with pine, and the city features extensive cave systems and tunnels through the mountains. Natural hot springs line the outskirts, fueled by the nearby mountains.</p>
+            
+            <div class="location-grid">
+                <div class="location-item"><h4>Bruni Mountains</h4><p>Dark and jagged, Bruni Mountains are rarely crossed, with steep cliffs and deep caverns. Instead of climbing, cats travel through the caves and mines carved into the mountains.</p></div>
+                <div class="location-item"><h4>Bruni Forest</h4><p>A dense pine forest filled with common foliage and herbs. It’s the darkest area of Eldur’s territory, rich in prey and a popular hunting spot.</p></div>
+                <div class="location-item"><h4>Bruni Pass</h4><p>A shaded, well-trodden path between Eldr Lake and Bruni Mountains, surrounded by tall pine trees.</p></div>
+                <div class="location-item"><h4>Bruni Ponds</h4><p>Scattered throughout Bruni Forest, these ponds create a swampy region in a bowl-shaped meadow, fostering forest growth and diverse prey.</p></div>
+                <div class="location-item"><h4>Eldr Forest</h4><p>A large pine forest teeming with foliage and herbs, ideal for hunting and exploration.</p></div>
+                <div class="location-item"><h4>Eldr Lake</h4><p>The largest lake in Eldur, half within city walls, teeming with fish, algae, and waterfowl. Its shores are scattered with small eddies.</p></div>
+                <div class="location-item"><h4>Einn Forest</h4><p>A small deciduous forest with scattered mountains to the southwest. Known for its shade, clearings, and proximity to Einn Lake.</p></div>
+                <div class="location-item"><h4>Einn Lake</h4><p>A small lake surrounded by beech trees and hills. It’s shallow along the edges, deepening at the center.</p></div>
+                <div class="location-item"><h4>Einn Outpost</h4><p>Located in a hidden valley on the northern outskirts of Einn Forest, this outpost is sheltered by pine trees and flat, grassy terrain, perfect for training.</p></div>
+                <div class="location-item"><h4>Hotpools</h4><p>Scattered throughout Eldur’s territory, these natural hot springs are popular for relaxing and easing sore muscles, surrounded by flowers and foliage.</p></div>
+                <div class="location-item"><h4>Springs Outpost</h4><p>Perched on a mountain range near the Hot Pools, this outpost overlooks the city and territory, situated in a cave.</p></div>
+                <div class="location-item"><h4>Atrid Forest</h4><p>A sparse forest with aspens and meadows, known for vibrant colors, abundant prey, and rich herb life along rivers and streams.</p></div>
+                <div class="location-item"><h4>Atrid River</h4><p>A wide, slow-moving river passing through Eldur and neutral grounds, teeming with prey in its shallows.</p></div>
+                <div class="location-item"><h4>Atrid Rapids</h4><p>Where River Atrid becomes steep and rocky, creating dangerous rapids. Few creatures live here due to the constant current.</p></div>
+                <div class="location-item"><h4>Atrid Outpost</h4><p>Hidden in a cavern beside the slower section of River Atrid, this outpost resides in a meadow-like area with abundant foliage and flowers.</p></div>
+                <div class="location-item"><h4>Helgafell Pass</h4><p>The border between Eldur and Helgafell, marked by rolling hills and a valley with a view of Helgafell mountain.</p></div>
+                <div class="location-item"><h4>The Edge</h4><p>A dangerous cliffside with ravines offering a view over Haettr Pass and Haettr Rapids, known for its instability.</p></div>
+                <div class="location-item"><h4>Haettr Pass</h4><p>A stretch of land between two cliffs, with Haettr Rapids running through it. The area is grassy, with fast-moving waters.</p></div>
+                <div class="location-item"><h4>Haettr Rapids</h4><p>Swift, dangerous currents in Haettr Pass, leading to Haettr Falls, a 50-foot waterfall that connects to the sea.</p></div>
+            </div>
+
+            <h3>Claimed Stormr Lands</h3>
+            <p>Once grappling with the harsh consequences of starvation, Eldur has emerged stronger and faster than ever before. The relentless struggle has forged them into a kingdom of resilience and tenacity. With the acquisition of Stormr's territory, Eldur now stretches its reach across rugged mountains and treacherous terrains, solidifying their strength.</p>
+            
+            <div class="location-grid">
+                <div class="location-item"><h4>Njord Outpost</h4><p>Hidden on a high hill, surrounded by brambles and vines, Njord Outpost is expertly concealed while offering a bird's-eye view of the surrounding area. Mist and vibrant foliage embrace the outpost, with climbing plants weaving through the wooden frames.</p></div>
+                <div class="location-item"><h4>Njord Forest</h4><p>An ancient forest with a canopy of elm, fir, and chestnut trees. Beams of light filter through the thick leaves, nurturing herbs and climbing plants. Flowers grow in a scattered, disordered fashion, adding vibrant splashes of color to the otherwise dark green landscape.</p></div>
+                <div class="location-item"><h4>Njord Rapids</h4><p>Swift and dangerous, the roars of Njord Rapids echo throughout the territory. Large rocks stand firm against the current, and the rapids serve as a constant reminder of the perilous waters that could spell the end for the unwary. Many have fallen to their fates in this river.</p></div>
+                <div class="location-item"><h4>Njord Lake</h4><p>A peaceful lake with clear, trickling springs and lively insects and critters. The croaks of frogs add to the calming enviornment, while the soft, moisture-rich terrain encourages lush plant growth along its shores, including moss and herbs.</p></div>
+                <div class="location-item"><h4>Hot Springs</h4><p>Nestled in the mountains, these steamy, bubbly waters offer a perfect retreat for felines seeking private relaxation. The area is rugged and concealed, with moss-covered stones and aquatic plants scattered throughout.</p></div>
+                <div class="location-item"><h4>River Outpost</h4><p>Hidden within the shelter of large mountains, the River Outpost sits beside a peaceful spring and river. Surrounded by young trees, including cypress and sycamore, the area is perfect for relaxation with ample openings for sunlight and lush ferns.</p></div>
+                <div class="location-item"><h4>Ocean-Side</h4><p>A sparse, open area with small trees, bushes, and ferns. The soft sandy beach and rocky outcroppings offer shelter, though the area is rarely visited, mainly frequented by birds of prey. Though many young Eldurians often visit this area for fun.</p></div>
+                <div class="location-item"><h4>Rolling Hills</h4><p>Soft, lush, rolling fields covered in hills with bountiless prey and foliage. There are little to no trees here, but plenty of pushes and wildlife to be found.</p></div>
+            </div>
+        </div>
+
+        <div class="city-section">
+            <div style="text-align: center; margin-bottom: 20px;"><img src="/images/icons/stormr.png"></div>
+            <h2>Stormr Kingdom</h2>
+            <div class="section-divider"></div>
+            <p>Stormr is set in the high mountains, a terrain of rugged rock, snow, and gravel. Pine trees grow sparsely at higher altitudes, while a small valley below features a lake surrounded by denser forests. Despite the beauty of the valley, Stormr’s felines prefer the rocky, treacherous terrain, where their agility is most suited to the challenging environment.</p>
+
+            <div class="location-grid">
+                <div class="location-item"><h4>Verdr Mountains</h4><p>Towering, snow-capped peaks dominate the landscape, often used as landmarks due to their imposing size. Pine and redwood trees stand proud against the mountains and decorate the ridge.</p></div>
+                <div class="location-item"><h4>Verdr Woods</h4><p>A dense, moody forest filled with moisture-drenched leaves and branches. The air is alive with the sounds of vermin and woodpeckers, creating a harmonious backdrop for the lush environment.</p></div>
+                <div class="location-item"><h4>The Palace</h4><p>A grand castle carved into the heart of the mountain, decorated with tall wooden beams and watchposts. Small holes in the rock allow light to enter, illuminating the dark halls and creating a perfect living space.</p></div>
+                <div class="location-item"><h4>Shiver Pond</h4><p>A small, hidden pond with frigid waters fed by a spring from the mountains. Moss, ferns, and herbs thrive in the rich soil around the pond, offering a peaceful spot in the territory.</p></div>
+                <div class="location-item"><h4>The Leap</h4><p>A cliffside carved by winds and the deadly rapids below. This dangerous area offers a view but requires a leap of faith to cross safely, trusting one’s agility to navigate the ravine.</p></div>
+                <div class="location-item"><h4>Leap Lake</h4><p>A serene, shallow lake nestled between mountains and The Leap. With crystal-clear waters, the lake provides an excellent wading spot.</p></div>
+                <div class="location-item"><h4>Leap Falls</h4><p>Small, sparkling waterfalls trickle into Leap Lake, creating a tranquil atmosphere with the gentle bubbling of the water.</p></div>
+                <div class="location-item"><h4>Main Road</h4><p>A path that leads from the city to The Leap. Covered by canopies, the road is lined with vibrant herbs, mushrooms, and curling vines.</p></div>
+                <div class="location-item"><h4>The Ridge</h4><p>A vast, verdant forest with towering redwood, yew, and chestnut trees. The area is marked by loud, whistling winds and rocky cliff-lines, offering both beauty and a natural defense against the elements.</p></div>
+                <div class="location-item"><h4>Ridge Outpost</h4><p>Perched on a cliffside, this heavily built outpost is protected by thick trees and caves, making it a safe haven during storms. The Ridge provides a perfect vantage point, allowing for clear sight of the surrounding terrain.</p></div>
+                <div class="location-item"><h4>Shiver Forest</h4><p>A dense forest dominated by tall pines and occasional juniper trees. The canopy casts dark shadows, while light filters through the branches, inspiring plant growth on the forest floor, including many rare herbs.</p></div>
+            </div>
+        </div>
+
+        <div class="city-section">
+            <div style="text-align: center; margin-bottom: 20px;"><img src="/images/icons/fifrildi.png"></div>
+            <h2>Fifrildi City</h2>
+            <div class="section-divider"></div>
+            <p>Fifrildi is nestled within serene aspen groves, surrounded by scattered meadows and dense forests, offering a peaceful and bountiful landscape. The area is known for its calm beauty, with vibrant seasons, flowers, herbs, and rich foliage. As it's a newer city, it doesn't have many landmarks, which will likely be added onto as the city grows. </p>
+
+            <div class="location-grid">
+                <div class="location-item"><h4>Lupin Forest</h4><p>Lupin Forest is a sprawling expanse of tall, winding trees, their branches heavy with the scent of pine and moss. The air here is cool and filled with the sounds of distant rustling leaves. A place of serenity, the forest offers a sanctuary for both wildlife and those who seek peace within its shaded depths. Underfoot, the ground is soft with thick layers of fallen needles and lush ferns, creating a perfect environment for small creatures to thrive.</p></div>
+                <div class="location-item"><h4>Cliff-Side</h4><p>The cliffside near Fifrildi City offers an shocking view of the ocean stretching endlessly into the horizon. The sharp drop below reveals jagged rocks that meet crashing waves as the wind that howls through the cliffs. Wildflowers cling to the cliff’s edge, and the sound of the ocean fills the air, echoing against the high walls of rock. This perilous vantage point serves as both a natural barrier and a place for those who seek solitude from the city.</p></div>
+                <div class="location-item"><h4>Bramble Patch</h4><p>A dense and thorny barrier lies just outside the city gates, known as the Bramble Patch. Twisted vines and thick thorns weave together, creating a near-impenetrable defense that serves as a natural safeguard for the city. Only those familiar with the labyrinth of brambles can navigate its thorny maze without injury. Its tangled thicket acts as both a deterrent for invaders and a haven for smaller creatures who have made it their home.</p></div>
+                <div class="location-item"><h4>Skylit Meadow</h4><p>A wide, open expanse of lush grass and wildflowers, bathed in the soft glow of the sky above. The meadow stretches out like a sea of green, where the sun's rays filter through the tall grasses, creating patterns of light and shadow on the ground. Here, the breeze is gentle, carrying the scent of blooming flowers and fresh earth. It is a peaceful haven for all who wander through, offering a place of rest beneath the open skies. This serene landscape is a favorite spot for those looking to find calm amidst the bustle of city life.</p></div>
+                <div class="location-item"><h4>Silk Stream</h4><p>A flowing river that weaves its way through the heart of the city. The gentle flow reflects the sunlight in a cascade of silvery light, cutting through the landscape and providing a natural boundary between territories. The stream eventually winds its way north toward Helgafell, where its waters feed into the lakes and valleys of the neutral grounds. Its beauty is matched only by its utility, as the stream sustains both the city’s life and the surrounding lands.</p></div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>

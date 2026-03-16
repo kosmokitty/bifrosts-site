@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/music.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bifrosts</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+/* ================= LOYALTIES ================= */
+
+.loyalties {
+    padding: 100px 40px;
+    text-align: center;
+}
+
+.loyalties h3 {
+    font-family: 'Marcellus SC', serif;
+    font-size: 0.78rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #4f6496;
+    margin-bottom: 50px;
+}
+
+.portal-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.portal {
+    position: relative;
+    width: 280px;
+    height: 380px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-decoration: none;
+    display: block;
+    flex-shrink: 0;
+}
+
+.portal:hover { transform: translateY(-8px); }
+
+.portal-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+}
+
+.portal:hover .portal-bg { transform: scale(1.06); }
+
+.portal.eldur .portal-bg {
+    background-image:
+        linear-gradient(to top, rgba(60,10,5,0.95) 0%, rgba(120,30,10,0.5) 50%, rgba(180,60,20,0.2) 100%),
+        url('/images/backgrounds/solar_flare.jpg');
+}
+.portal.fifrildi .portal-bg {
+    background-image:
+        linear-gradient(to top, rgba(5,30,25,0.95) 0%, rgba(10,80,60,0.5) 50%, rgba(20,140,100,0.2) 100%),
+        url('/images/backgrounds/nebula.jpg');
+}
+.portal.stormr .portal-bg {
+    background-image:
+        linear-gradient(to top, rgba(8,12,30,0.95) 0%, rgba(20,35,80,0.5) 50%, rgba(40,70,140,0.2) 100%),
+        url('/images/backgrounds/milkyway.jpg');
+}
+
+.portal::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    z-index: 3;
+    transition: opacity 0.3s;
+    opacity: 0.6;
+}
+.portal.eldur::before    { background: linear-gradient(to right, transparent, #ff6b35, transparent); }
+.portal.fifrildi::before { background: linear-gradient(to right, transparent, #6efce8, transparent); }
+.portal.stormr::before   { background: linear-gradient(to right, transparent, #93c5fd, transparent); }
+.portal:hover::before { opacity: 1; }
+
+.portal-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    padding: 28px 24px;
+}
+
+.portal-symbol { font-size: 2.2rem; margin-bottom: 12px; display: block; opacity: 0.9; }
+
+.portal-name {
+    font-family: 'Marcellus SC', serif;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    color: #fff;
+    margin: 0 0 4px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+}
+
+.portal-type {
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    font-style: italic;
+    margin: 0 0 20px;
+    opacity: 0.6;
+}
+
+.portal.eldur    .portal-type { color: #fca5a5; }
+.portal.fifrildi .portal-type { color: #99f6e4; }
+.portal.stormr   .portal-type { color: #93c5fd; }
+
+.portal-btn {
+    display: inline-block;
+    padding: 9px 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: 0.3s ease;
+    width: fit-content;
+    border: 1px solid;
+    margin: 0 auto;
+}
+
+.portal.eldur    .portal-btn { color: #fca5a5; border-color: rgba(252,165,165,0.4); background: rgba(185,28,28,0.15); }
+.portal.fifrildi .portal-btn { color: #6efce8; border-color: rgba(110,252,232,0.4); background: rgba(20,184,150,0.15); }
+.portal.stormr   .portal-btn { color: #93c5fd; border-color: rgba(147,197,253,0.4); background: rgba(30,64,175,0.15); }
+
+.portal:hover .portal-btn {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.5);
+    color: #fff;
+}
+
+/* ================= PORTAL MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    .loyalties {
+        padding: 60px 20px;
+    }
+
+    .loyalties h3 {
+        margin-bottom: 32px;
+    }
+
+    /* Stack portals vertically, full width */
+    .portal-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .portal {
+        width: 100%;
+        max-width: 420px;
+        height: 260px;
+    }
+
+    /* Horizontal layout inside each card */
+    .portal-content {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+        padding: 20px 24px;
+        gap: 16px;
+        text-align: left;
+    }
+
+    .portal-symbol {
+        font-size: 2.4rem;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .portal-info {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .portal-name  { font-size: 1.2rem; }
+    .portal-type  { font-size: 0.65rem; margin-bottom: 12px; }
+
+    .portal-btn {
+        font-size: 0.7rem;
+        padding: 7px 16px;
+        letter-spacing: 2px;
+        margin: 0;
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 400px) {
+    .portal { height: 220px; }
+    .portal-name { font-size: 1rem; letter-spacing: 2px; }
+}
+
+    </style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<div id="nav-placeholder"></div>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+    <div class="hero-content">
+        <img src="/images/icons/wisp_png.png" class="wisp" alt="Wisp">
+        <h1>Welcome to</h1>
+        <h2>BIFROSTS</h2>
+        <p>
+            Bifrosts is a plot-heavy roleplay group rated PG-18.
+            Inspired by Warrior Cats, Dungeons & Dragons, and Norse Mythology.
+            Characters choose their paths and shape their destinies.
+        </p>
+    </div>
+</section>
+
+<!-- ================= LOYALTIES ================= -->
+<section class="loyalties">
+
+    <h3>Where Do Your Loyalties Lie?</h3>
+
+    <div class="portal-container">
+
+        <a class="portal eldur" href="/bloodlines/eldur.html">
+            <div class="portal-bg"></div>
+            <div class="portal-content">
+                <span class="portal-symbol">🔥</span>
+                <div class="portal-info">
+                    <p class="portal-name">Eldur</p>
+                    <p class="portal-type">"Where the ash falls, the ember endures."</p>
+                    <span class="portal-btn">Enter Eldur</span>
+                </div>
+            </div>
+        </a>
+
+        <a class="portal fifrildi" href="/bloodlines/fifrildi.html">
+            <div class="portal-bg"></div>
+            <div class="portal-content">
+                <span class="portal-symbol">🦋</span>
+                <div class="portal-info">
+                    <p class="portal-name">Fifrildi</p>
+                    <p class="portal-type">"From ruin, we learned to fly."</p>
+                    <span class="portal-btn">Enter Fifrildi</span>
+                </div>
+            </div>
+        </a>
+
+        <a class="portal stormr" href="/bloodlines/stormr.html">
+            <div class="portal-bg"></div>
+            <div class="portal-content">
+                <span class="portal-symbol">⚡</span>
+                <div class="portal-info">
+                    <p class="portal-name">Stormr</p>
+                    <p class="portal-type">"The mountain does not bow to the wind."</p>
+                    <span class="portal-btn">Enter Stormr</span>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <h2>BIFROSTS</h2>
+    <h3>A Warrior Cat Fantasy RPG</h3>
+    <small>Website © Etherisk</small>
+    <p></p>
+    <small>Website Art © Etherisk, LittleBearish</small>
+</footer>
+
+</body>
+</html>

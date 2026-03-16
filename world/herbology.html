@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title> Herbology ✦ Bifrosts </title>
+    <style>
+        /* DASHBOARD GRID */
+        .rune-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .rune-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            height: 180px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rune-card:hover { transform: translateY(-3px); background: rgba(255, 255, 255, 0.06); }
+
+        /* RARITY BORDERS */
+        .herb-common { border-left: 4px solid #44ff44 !important; }
+        .herb-uncommon { border-left: 4px solid #ffcc44 !important; }
+        .herb-rare { border-left: 4px solid #bb44ff !important; }
+        .herb-dangerous { border-left: 4px solid #ff4444 !important; }
+
+        /* DASHBOARD IMAGES */
+        .herb-img-top {
+            width: 100%;
+            flex: 1;
+            object-fit: cover;
+            display: block;
+            min-height: 0;
+        }
+
+        .ailment-header { padding: 8px; flex-shrink: 0; }
+        .ailment-header h3 { font-size: 0.75rem; margin: 0; letter-spacing: 1px; text-transform: uppercase; }
+
+        .ailment-content {
+            display: none;
+            padding: 0 10px 10px 10px;
+            font-size: 0.6rem;
+            line-height: 1.4;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: left;
+            flex-shrink: 0;
+        }
+
+        .ailment-content p {
+            font-size: 0.7rem; 
+        }
+
+        .ailment-content.open { display: block !important; }
+
+        /* When content is open, allow card to grow */
+        .rune-card:has(.ailment-content.open) {
+            height: auto;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) { .rune-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+
+<!-- ================= END NAV ================= -->
+
+    <main class="archive">
+        <h1> Herbology </h1>
+        <div class="section-divider"></div>
+        <p>
+            A list of all the herbs that can be found throughout Fyrstrheim, and a page often 
+            visited by our city healers. If you have additional herbs you'd like to see on this 
+            page, please send a suggestion in our discord.
+        </p>
+
+        <div class="rarity-key">
+            <span><span class="dot common"></span> Common</span>
+            <span><span class="dot uncommon"></span> Uncommon</span>
+            <span><span class="dot rare"></span> Rare</span>
+            <span><span class="dot dangerous"></span> Poisonous</span>
+        </div>
+        
+        <div class="rune-grid">
+
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/alpine.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Alpine Bistort</h3></div>
+                <div class="ailment-content"><p>Root treats abscesses, mouth infections, and sore throats. Good for ulcers.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/angelica.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Angelica</h3></div>
+                <div class="ailment-content"><p>Protects against contagious sickness and lung infections. Strengthens the heart.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/arnica.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Arnica</h3></div>
+                <div class="ailment-content"><p>Used for bruising and muscle aches. Do not use on open wounds.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/artic_thyme.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Arctic Thyme</h3></div>
+                <div class="ailment-content"><p>Strengthens heart and helps bronchitis symptoms.</p></div>
+            </div>
+
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/beechleaves.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Beech Leaves</h3></div>
+                <div class="ailment-content"><p>Soothes nerves, stomach inflammation, and burned skin.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/bilberry.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Bilberry</h3></div>
+                <div class="ailment-content"><p>Sharpens senses and cools blood during fever.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/birchbark.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Birch Bark</h3></div>
+                <div class="ailment-content"><p>Ground into paste for skin infections or used for splints.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/blackalder.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Black Alder</h3></div>
+                <div class="ailment-content"><p>Treats bleeding, sore throats, and arthritis swelling.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/bogbean.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Bogbean</h3></div>
+                <div class="ailment-content"><p>Combats flu and treats snake bites or other venoms.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/borage.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Borage</h3></div>
+                <div class="ailment-content"><p>Brings down fevers and eases dry coughs.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/broom.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Broom</h3></div>
+                <div class="ailment-content"><p>Used for broken legs and serious wound cleaning.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/burnet.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Burnet</h3></div>
+                <div class="ailment-content"><p>Soothes boils and stops internal bleeding.</p></div>
+            </div>
+
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/catchweed.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Catchweed</h3></div>
+                <div class="ailment-content"><p>Fuzzy burrs used to keep poultices stuck to fur.</p></div>
+            </div>
+            <div class="rune-card herb-rare">
+                <img src="/images/herbs/catmint.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟣 Catmint</h3></div>
+                <div class="ailment-content"><p>The primary cure for Greencough and Whitecough.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/chamomile.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Chamomile</h3></div>
+                <div class="ailment-content"><p>Calms the heart and mind; soothes joint pain.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/chives.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Chives</h3></div>
+                <div class="ailment-content"><p>Expels worms and aids memory and sleep.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/cinquefoil.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Cinquefoil</h3></div>
+                <div class="ailment-content"><p>Reduces inflammation and aids jaundice.</p></div>
+            </div>
+            <div class="rune-card herb-rare">
+                <img src="/images/herbs/cloudberry.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟣 Cloudberry</h3></div>
+                <div class="ailment-content"><p>Vital for winter fatigue and scurvy prevention.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/cobwebs.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Cobwebs</h3></div>
+                <div class="ailment-content"><p>Pressed over wounds to soak up blood and bind them.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/comfrey.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Comfrey</h3></div>
+                <div class="ailment-content"><p>Repairs broken bones and soothes burns.</p></div>
+            </div>
+
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/daisy.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Daisy</h3></div>
+                <div class="ailment-content"><p>Good for aching joints and skin rashes.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/dandelion.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Dandelion</h3></div>
+                <div class="ailment-content"><p>Milk for bee stings; leaves for digestion.</p></div>
+            </div>
+            <div class="rune-card herb-dangerous">
+                <img src="/images/herbs/deathangel.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>💀 Death Angel</h3></div>
+                <div class="ailment-content"><p>Ghostly white mushroom. Causes total liver and kidney failure. Untreatable.</p></div>
+            </div>
+            <div class="rune-card herb-dangerous">
+                <img src="/images/herbs/deathberries.png" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>💀 Deathberries</h3></div>
+                <div class="ailment-content"><p>Red Yew berries. Shuts down the heart almost instantly. Lethal.</p></div>
+            </div>
+
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/elderberry.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Elderberry</h3></div>
+                <div class="ailment-content"><p>Prevents flu and treats winter chills.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/feverfew.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Feverfew</h3></div>
+                <div class="ailment-content"><p>Best for migraines and cooling high fevers.</p></div>
+            </div>
+            <div class="rune-card herb-dangerous">
+                <img src="/images/herbs/foxglove.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>💀 Foxglove</h3></div>
+                <div class="ailment-content"><p>Seeds and leaves cause cardiac collapse. Highly poisonous.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/gentian.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Gentian</h3></div>
+                <div class="ailment-content"><p>Softens muscle spasms and shivers.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/goldenrod.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Goldenrod</h3></div>
+                <div class="ailment-content"><p>Treats arthritis and heals skin ulcers.</p></div>
+            </div>
+
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/hawkweed.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Hawkweed</h3></div>
+                <div class="ailment-content"><p>Used for asthma and bronchitis.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/heather.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Heather</h3></div>
+                <div class="ailment-content"><p>Soothes stomachs and cleans wounds.</p></div>
+            </div>
+            <div class="rune-card herb-dangerous">
+                <img src="/images/herbs/hemlock.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>💀 Hemlock</h3></div>
+                <div class="ailment-content"><p>Causes paralysis and respiratory failure. Extremely toxic.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/horsetail.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Horsetail</h3></div>
+                <div class="ailment-content"><p>Stops bleeding and cleans deep infections.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/moss.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Icelandic Moss</h3></div>
+                <div class="ailment-content"><p>Coats the throat and stomach to stop irritation.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/juniper.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Juniper</h3></div>
+                <div class="ailment-content"><p>Berries for digestion, breathing, and kidney issues.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/kelp.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Kelp</h3></div>
+                <div class="ailment-content"><p>Protects the heart and combats stress.</p></div>
+            </div>
+
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/ladysmantle.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Lady's Mantle</h3></div>
+                <div class="ailment-content"><p>Root used to stop heavy bleeding.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/lovage.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Lovage</h3></div>
+                <div class="ailment-content"><p>Eases stomach pain and eye redness.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/meadwort.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Meadwort</h3></div>
+                <div class="ailment-content"><p>Gentle painkiller for joints and reflux.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/mint.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Mint</h3></div>
+                <div class="ailment-content"><p>Reduces stomach inflammation and boosts immunity.</p></div>
+            </div>
+            <div class="rune-card herb-dangerous">
+                <img src="/images/herbs/nightshade.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>💀 Nightshade</h3></div>
+                <div class="ailment-content"><p>Causes dilated pupils and heart failure. Deadly.</p></div>
+            </div>
+            <div class="rune-card herb-dangerous">
+                <img src="/images/herbs/oleander.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>💀 Oleander</h3></div>
+                <div class="ailment-content"><p>Slows the heart until it stops. Every part is lethal.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/pennyroyal.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Pennyroyal</h3></div>
+                <div class="ailment-content"><p>Eases headaches and whooping cough.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/poppy.jpeg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Poppy</h3></div>
+                <div class="ailment-content"><p>Induces deep sleep and treats shock/severe pain.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/primrose.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Primrose</h3></div>
+                <div class="ailment-content"><p>Sedative for tension and gout.</p></div>
+            </div>
+
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/reindeermoss.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Reindeer Moss</h3></div>
+                <div class="ailment-content"><p>Poultice for joints and treats coughs.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/rosemary.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Rosemary</h3></div>
+                <div class="ailment-content"><p>Treats circulation and mouth infections.</p></div>
+            </div>
+            <div class="rune-card herb-rare">
+                <img src="/images/herbs/roseroot.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟣 Roseroot</h3></div>
+                <div class="ailment-content"><p>Lifts anxiety and fights exhaustion.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/rowan.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Rowan</h3></div>
+                <div class="ailment-content"><p>Clears the voice and strengthens the heart.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/sage.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Sage</h3></div>
+                <div class="ailment-content"><p>Excellent for sore throats and tonsillitis.</p></div>
+            </div>
+            <div class="rune-card herb-uncommon">
+                <img src="/images/herbs/sheepsorrel.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟡 Sheep Sorrel</h3></div>
+                <div class="ailment-content"><p>Aids the immune system and liver.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/stingingnettle.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Stinging Nettle</h3></div>
+                <div class="ailment-content"><p>Aids arthritis and helps clean the blood.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/vervain.jpg" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Vervain</h3></div>
+                <div class="ailment-content"><p>Remedy for colds and shortness of breath.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/willow.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Willow</h3></div>
+                <div class="ailment-content"><p>Natural pain reliever for heads and spines.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/wintergreen.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Wintergreen</h3></div>
+                <div class="ailment-content"><p>Antiseptic for wounds and ulcers.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/woodruff.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Woodruff</h3></div>
+                <div class="ailment-content"><p>Tranquilizer for insomnia and restlessness.</p></div>
+            </div>
+            <div class="rune-card herb-common">
+                <img src="/images/herbs/yarrow.webp" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><h3>🟢 Yarrow</h3></div>
+                <div class="ailment-content"><p>Stops bleeding and induces vomiting for poison.</p></div>
+            </div>
+
+        </div> 
+    </main>
+
+    <script>
+        document.querySelectorAll(".ailment-toggle").forEach(button => {
+            button.addEventListener("click", () => {
+                button.nextElementSibling.classList.toggle("open");
+            });
+        });
+    </script>
+</body>
+</html>

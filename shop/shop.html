@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title> Shop ✦ Bifrosts </title>
+    <style>
+        .rune-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            align-items: start;
+            margin-bottom: 3rem;
+        }
+
+        .rune-card {
+            background: rgba(30, 30, 35, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.08);
+            text-align: center;
+        }
+
+        .shop-img {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            background: rgba(0,0,0,0.2);
+            display: block;
+        }
+
+        .item-header { padding: 10px; }
+        .price-tag { font-size: 0.80rem; color: #6facea; font-weight: bold; display: block; margin-top: 4px; }
+
+        .item-content {
+            display: none;
+            padding: 0 10px 12px 10px;
+            font-size: 0.7rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .item-content p {
+    font-size: 0.7rem;
+        }
+
+        .item-content.open { display: block; }
+
+        @media (max-width: 1000px) { .rune-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .rune-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+
+<body>
+<div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+
+<!-- ================= END NAV ================= -->
+
+<main class="archive">
+
+<h1> Shop </h1>
+<div class="section-divider"></div>
+
+<div class="shop-intro">
+<p>In our world, we use the currency of Stardust! You can collect Stardust by drawing, writing, completing prompts, participating in quests, or through interacting with the world! You can use Stardust to purchase plots, litters, character accessories, mutations, additional character coins, tokens, or items for your character!</p>
+<p>You can't make any purchases on our website, but on our Discord you'll find the Claims Channel! This is where you can order items from the shop which will then be placed in your player inventory. Your inventory can be viewed on your character card!</p>
+</div>
+
+<h2>Rules</h2>
+<ol>
+<li>Stardust may not be transferred between players!</li>
+<li>You may not upload pre-existing artwork to earn stardust.</li>
+<li>Purchases may not be split between members, it must be paid in full!</li>
+<li>Purchases may not send your bank into the negatives.</li>
+<li>We may refuse a purchase for any reason.</li>
+</ol>
+
+<!-- CHARACTER RUNE STONES -->
+
+<h2>Character Rune Stones</h2>
+<p>In order to have an additional character, you must purchase a character rune stone after winning a tryout! However, there is a one month cool-down; but we do not require this item to be repurchased for accidental or unplanned character deaths!</p>
+
+<div class="rune-grid">
+
+<!-- ALL 10 Rune Stones -->
+
+<div class="rune-card"><img src="/images/icons/fehu.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Fehu</h4><span class="price-tag">FREE</span></div>
+<div class="item-content"><p>With your 1st character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/uruz.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Uruz</h4><span class="price-tag">200 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 2nd character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/thurisaz.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Thurisaz</h4><span class="price-tag">300 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 3rd character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/ansuz.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Ansuz</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 4th character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/raidho.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Raidho</h4><span class="price-tag">500 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 5th character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/kennaz.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Kennaz</h4><span class="price-tag">600 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 6th character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/gebo.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Gebo</h4><span class="price-tag">700 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 7th character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/gebo2.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Wunjo</h4><span class="price-tag">800 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 8th character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/hagalaz.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Hagalaz</h4><span class="price-tag">900 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 9th character.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/nauthiz.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Nauthiz</h4><span class="price-tag">1000 Stardust</span></div>
+<div class="item-content"><p>Unlocks your 10th character.</p></div></div>
+
+</div>
+
+<!-- OUTPOST TOKEN -->
+
+<h2>Outpost Token</h2>
+<p>This token can be purchased alongside a character rune and is limited to five purchases per season, which lasts two months. It allows an existing member to bring in an orphaned character of any age from a city outpost. However, characters younger than six cycles must have a novice or adult guide, either through a new NPC or by using multiple outpost tokens from other players. Some cities may be unavailable for this token if they lack an outpost or do not need new characters. The token expires at the end of the season, with no refunds or extensions.</p>
+
+<div class="rune-grid">
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle">
+    <h4>Outpost Token</h4>
+    <span class="price-tag">
+        100 Stardust
+    </span>
+</div>
+<div class="item-content">
+    <p>
+        Brings in a new character from an outpost when purchased alongside a character rune.
+    </p>
+</div>
+</div>
+</div>
+
+<!-- SACRED TIES -->
+
+<h2>Sacred Ties</h2>
+<p>Forge bonds and shape the future of your lineage with these artifacts. Whether sealing eternal love, bridging destinies, or welcoming new life, these items will allow your characters to intertwine their fates.</p>
+
+<div class="rune-grid">
+
+<div class="rune-card">
+<img src="/images/icons/betrothal_rune.png" class="shop-img">
+<div class="item-header item-toggle">
+<h4>Betrothal Rune</h4>
+<span class="price-tag">50 Stardust</span>
+</div>
+<div class="item-content">
+<p>Allows characters to be betrothed and have a wedding to celebrate their union. They will officially be recognized as a couple on the tree and in their city. Requires at least one art or literature piece worth 50 stardust.</p>
+</div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/eternal_stone.png" class="shop-img">
+<div class="item-header item-toggle">
+<h4>Soulbind Crystal</h4>
+<span class="price-tag">100 Stardust</span>
+</div>
+<div class="item-content">
+<p>Binds characters souls eternally and induces a city-wide ceremony. These characters may never take another partner after purchasing this item. This crystal requires at least two art or literature pieces worth at least 50 stardust.</p>
+</div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/cursed.png" class="shop-img">
+<div class="item-header item-toggle">
+<h4>Decrepit Rune</h4>
+<span class="price-tag">500 - 1000 Stardust</span>
+</div>
+<div class="item-content">
+<p>Allows characters of different city lineages to form romantic relationships. The cost varies and stacks ontop of other purchases. Requires at least four art or literature pieces worth at least 50 stardust.</p>
+</div>
+</div>
+
+</div>
+
+
+<!-- FERTILITY CRYSTALS -->
+
+<h2>Fertility Crystals</h2>
+<p>These enchanted crystals, often gifted to expecting mothers, help guide new life into the world. To purchase this item, you must open a ticket to discuss your litter with the staff team. Additionally, both players must contribute either two artworks or two literature pieces, each worth 50 Stardust, with the work evenly split. This ensures both parents are active participants and that their characters have interacted prior to the litter.</p>
+
+<div class="rune-grid">
+
+<div class="rune-card">
+<img src="/images/icons/quartz.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Quartz Crystal</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Unlocks your character's 1st litter.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/amethyst.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Amethyst Crystal</h4><span class="price-tag">200 Stardust</span></div>
+<div class="item-content"><p>Unlocks your character's 2nd litter.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/moonstone.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Moonstone Crystal</h4><span class="price-tag">300 Stardust</span></div>
+<div class="item-content"><p>Unlocks your character's 3rd litter.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/opal.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Opal Crystal</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>Unlocks your character's final litter.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/luster.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Luster Dust</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Allows a player to reroll or add a kitten to their litter.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/iridescence.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Iridescence</h4><span class="price-tag">200 Stardust</span></div>
+<div class="item-content"><p>Allows a player to completely reroll a litter.</p></div>
+</div>
+
+</div>
+
+
+<!-- SIGNIFICANT EVENTS -->
+
+<h2>Significant Events</h2>
+<p>Change your character’s fate with one of these items. All items must be discussed and approved in a ticket before purchase. Any unauthorized purchases will be void. Characters must be at least 6 cycles old to be eligible. Members must come prepared with their own plot ideas, as Bifrost staff will not create plots for you.</p>
+
+<div class="rune-grid">
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Small Plot</h4><span class="price-tag">300 Stardust</span></div>
+<div class="item-content"><p>Allows a character to have a small plot within their city, such as saving another character or having a significant interaction with an NPC.​</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Medium Plot</h4><span class="price-tag">500 Stardust</span></div>
+<div class="item-content"><p>Allows a character to have a medium plot within their city, which may hold a certain level of significant impact.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Large Plot</h4><span class="price-tag">1000 Stardust</span></div>
+<div class="item-content"><p>Allows a character to have a large plot within their city, such as running away or having a major impact on their city or another.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Star's Guidance</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Allows a character to run their own seasonal prompt, which may earn reputation depending on their actions.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Harrowing Hunt</h4><span class="price-tag">300 Stardust</span></div>
+<div class="item-content"><p>Allows a character to encounter a rnged wild animal. Be warned—some battles may be deadly depending on the opponent.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Citrine Binding</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Allows a character to form a romantic relationship with one or more NPCs. Read more about this item here before purchasing.</p></div>
+</div>
+
+</div>
+
+
+<!-- PLOT FORM -->
+
+<h3>Plot Form</h3>
+<p>Before opening a ticket to request a plot, please fill out the following form:</p>
+<p><b>Characters:</b> Which character's are involved?</p>
+<p><b>City:</b> Which city is this plot taking place in?</p>
+<p><b>Plot Type:</b> What size or type is this plot?</p>
+<p><b>Timeframe:</b> When does this need to be completed?</p>
+<p><b>Season:</b> What season will this plot take place in?</p>
+<p><b>Outcome:</b> What is your desired outcome? The more detailed you are, the better we can assist you.</p>
+
+<!-- MARK OF THE BATTLE -->
+
+<h2>Mark Of The Battle</h2>
+<p>Marks from battles can be purchased here, permanent symbols of a character's fiercest encounters. Each scar tells its own tale, a lasting echo of the struggles and triumphs that have shaped them, forever imprinted on their skin as a testament to their resilience and strength. Your character must be at least six cycles to purchase these items, and each scar should be worn due to good cause. Scars must be approved in a ticket before being applied.</p>
+
+<div class="rune-grid">
+
+<div class="rune-card">
+<img src="/images/icons/small_scar.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Small Scar</h4><span class="price-tag">50 Stardust</span></div>
+<div class="item-content"><p>Unlocks a small scar.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/med_scar.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Medium Scar</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Unlocks a medium scar.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/large_scar.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Large Scar</h4><span class="price-tag">150 Stardust</span></div>
+<div class="item-content"><p>Unlocks an large scar.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/XL_scar.png" class="shop-img">
+<div class="item-header item-toggle"><h4>XL Scar</h4><span class="price-tag">200 Stardust</span></div>
+<div class="item-content"><p>Unlocks one of each scar.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="/images/icons/scarsizes.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Scar Set</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>Unlocks one of each scar.</p></div>
+</div>
+
+</div>
+<small>Scar art by RosyLemonade</small>
+
+
+<!-- GENETIC MUTATIONS -->
+
+<h2>Genetic Mutations</h2>
+<p>All of the items listed below must be discussed in a ticket before purchasing. Some genetic mutations do not take up a ban slot.</p>
+
+<div class="rune-grid">
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Abnormally Small</h4><span class="price-tag">200 Stardust</span></div>
+<div class="item-content"><p>This mutation causes the character to be abnormally small, falling outside the usual size guidelines. While there are no health issues associated with this size, they may face limitations in physical abilities like jumping, swimming, or running.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Abnormally Large</h4><span class="price-tag">200 Stardust</span></div>
+<div class="item-content"><p>This mutation causes the character to be abnormally large, surpassing the usual size limits. While the character doesn’t face any health issues, being larger may grant advantages in strength and speed, making them physically more capable than their peers.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Melanism</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>A genetic condition that leads to an increased amount of melanin in the skin and fur. These characters are entirely black, including their fur, skin, claws, and nose. However, they do not tend to experience health issues because of this trait.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Vitiligo</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>A genetic condition that causes patches of skin or fur to lose color, with the areas gradually expanding over time. The condition does not affect the overall health of the character, but the appearance can change significantly.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Four Ears</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>A recessive mutation that results in an additional set of ear flaps. While the extra flaps do not provide additional hearing organs, they still alter their appearance. This mutation does not impact the character's hearing abilities.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Polycaudal</h4><span class="price-tag">300 Stardust</span></div>
+<div class="item-content"><p>A mutation that results in two tails. While most cats can control both tails simultaneously, they cannot move them independently. Although this trait is seen as unusual, it doesn't present significant disadvantages.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Polydactyl</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Cats with extra digits on one or more paws, which can vary in size and structure. The condition may lead to injuries, infections, or irregular growth of the nails and pads.</p></div>
+</div>
+
+<div class="rune-card">
+<img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Syndactyly</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>A condition where cats have fused or abnormal digits, affecting paw pads and nails. Though it causes minimal discomfort, affected cats may experience little to no lameness.</p></div>
+</div>
+
+</div>
+
+
+<!-- BANS -->
+
+<h2>Bans</h2>
+<p>All items listed below must be discussed in a ticket before purchase. They may be declined or approved to ensure the condition or ailment is portrayed accurately and sensitively, while avoiding harmful stereotypes. Bans take up a slot on your character card, as each player may only own 5 bans at a time, while characters may only have a total of 2 bans applied. Bans typically are limited per city, which can be viewed on our character-cards.</p>
+
+<p><button type="button"><a href="https://docs.google.com/spreadsheets/d/1u9MEuRmg8sXOoUtKMN1KOn1lpuTHb07Iynt4SpCPvoA/edit?usp=sharing">Character Cards</a></button></p>
+
+<div class="rune-grid">
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Albinism</h4><span class="price-tag">300 Stardust</span></div>
+<div class="item-content"><p>A genetic disorder that results in little or no melanin production, leading to white fur and pink or blue eyes. Cats with albinism may experience vision problems and light sensitivity, with some possibly having a lazy eye.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Munchkin</h4><span class="price-tag">500 Stardust</span></div>
+<div class="item-content"><p>A breed characterized by short legs due to a genetic mutation causing dwarfism. Munchkins are at higher risk for osteoarthritis and spinal issues like lordosis, and may struggle participating in physical activites.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Minskin</h4><span class="price-tag">500 Stardust</span></div>
+<div class="item-content"><p>A hybrid breed with short legs and a sparse coat, Minskins face health challenges similar to Munchkins and Hairless breeds, such as muscle and heart problems due to their size and lack of fur.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Heterochromia</h4><span class="price-tag">1000 Stardust</span></div>
+<div class="item-content"><p>A rare condition where a cat has mismatched eyes, often seen as a curse in society. Cats with heterochromia face severe discrimination and may have one of their eyes removed.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Anisocoria</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>A condition where one pupil is larger than the other, leading to eye pain, blurry vision, and light sensitivity. It may be caused by trauma or an underlying health issue.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Deaf</h4><span class="price-tag">600 Stardust</span></div>
+<div class="item-content"><p>Congenital deafness, often seen in white or mostly white cats, leads to complete or partial hearing loss. Affected cats may face challenges with balance and may use Cat Sign Language (CSL).</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Partial Deafness</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>A condition where a cat experiences partial hearing loss due to congenital causes or injury, which can affect balance and may communicate with Cat Sign Language (CSL).</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Mute</h4><span class="price-tag">600 Stardust</span></div>
+<div class="item-content"><p>A condition where a cat is born mute or becomes mute due to physical damage. These cats are typically reliant on CSL to communicate with their peers.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Twisted Jaw</h4><span class="price-tag">500 Stardust</span></div>
+<div class="item-content"><p>A broken or twisted jaw caused by blunt force trauma can result in swelling, misalignment, and difficulty eating. Affected cats may need to eat soft foods due to their inability to chew.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Blind</h4><span class="price-tag">600 Stardust</span></div>
+<div class="item-content"><p>A cat born blind or injured to the point of blindness may rely on enhanced senses like smell and hearing to navigate their environment.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Partial Blindness</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>A condition where a cat is blind in one eye, affecting their depth perception and balance. They may rely on enhanced senses like smell and hearing to navigate their environment.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Broken Spine</h4><span class="price-tag">800 Stardust</span></div>
+<div class="item-content"><p>A severe injury caused that can result in paralysis of the hind legs. This condition may lead to difficulty moving and respiratory issues if fluid accumulates in the lungs.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Missing or Broken Limbs</h4><span class="price-tag">300 Stardust</span></div>
+<div class="item-content"><p>Cats with missing or permanently damaged limbs may face challenges with mobility and balance. They may experience chronic pain or phantom limb sensations, and may struggle to keep up with their peers.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Lykoi</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>The Lykoi breed has a unique roan pattern and partial hair loss, especially around the ears, nose, and feet. Despite their hairlessness, they do not face significant health problems, but may be sensitive to sun, heat, and cold.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Sphinx</h4><span class="price-tag">400 Stardust</span></div>
+<div class="item-content"><p>Sphinx cats are naturally hairless. Due to their lack of fur, they require regular upkeep of their ears, skin, and paws to prevent infection. They are prone to heart disease and muscle weakness.</p></div></div>
+
+</div>
+
+
+<!-- MISCELLANEOUS -->
+
+<h2>Miscellanious</h2>
+<p>General items that may or may not require a ticket purchase.</p>
+
+<div class="rune-grid">
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Name Changer</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Allows a player to change their character's name.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Pelt Changer</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Allows a player to change their characters appearance.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>White Increaser</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Allows a character to have more white than the allotted amount due to city restrictions.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Rare Pelt</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Allows a character to differentiate outside of their city's common pelt-colors, which must be applied before birth or be paired with a pelt changer.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Advantage</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>Allows a member to roll twice, with your highest roll being the one you keep. May only be purchased with the intention of using it instantly, and may only be used 3x in an event.</p></div></div>
+
+<div class="rune-card"><img src="/images/icons/dice.png" class="shop-img">
+<div class="item-header item-toggle"><h4>Dice Re-roll</h4><span class="price-tag">50 Stardust</span></div>
+<div class="item-content"><p>Allows a player to re-roll once, and may only be applied or bought during events or plots. May only be used 3x for a single roll and during an event.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Familiar Re-Roll</h4><span class="price-tag">100 Stardust</span></div>
+<div class="item-content"><p>May allow a player to re-roll their familiar at any time, with the member getting to choose between 3 new options.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Rearrange 1 Statistic Point (SP)</h4><span class="price-tag">50 Stardust</span></div>
+<div class="item-content"><p>Allows a member to rearrange one statistic point. Can only be used once, and may not be used to rearrange all of your statistics.</p></div></div>
+
+<div class="rune-card"><img src="IMAGE_URL_HERE" class="shop-img">
+<div class="item-header item-toggle"><h4>Rearrange Kitten Statistic Points (SP)</h4><span class="price-tag">200 Stardust</span></div>
+<div class="item-content"><p>Allows a member to rearrange their original kitten statistic points once, and may not be used again.</p></div></div>
+
+</div>
+
+</main>
+
+<script>
+document.querySelectorAll(".item-toggle").forEach(toggle => {
+    toggle.addEventListener("click", function () {
+        const content = this.nextElementSibling;
+        content.classList.toggle("open");
+    });
+});
+</script>
+
+</body>
+</html>

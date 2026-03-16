@@ -1,0 +1,353 @@
+<!-- ================= NAV ================= -->
+
+<nav>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="nav-links">
+
+        <a href="/index.html">Home</a>
+
+        <div class="dropdown">
+            <a href="/world/world.html">World</a>
+            <div class="dropdown-content">
+                <a href="/world/ailments.html">Ailments</a>
+                <a href="/world/astronomy.html">Astronomy</a>
+                <a href="/world/familiars.html">Familiars</a>
+                <a href="/world/herbology.html">Herbology</a>
+                <a href="/world/history.html">History</a>
+                <a href="/world/runes.html">Runes</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="/game/game.html">Game</a>
+            <div class="dropdown-content">
+                <a href="/game/activity-checks.html">Activity Checks</a>
+                <a href="/game/combat.html">Combat</a>
+                <a href="/game/equipment.html">Equipment</a>
+                <a href="/game/joining.html">Joining</a>
+                <a href="/game/reputation.html">Reputation</a>
+                <a href="/game/statistics.html">Statistics</a>
+                <a href="/game/statistic-calc.html">SP Calculator</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="/character/character-creation.html">Character Creation</a>
+            <div class="dropdown-content">
+                <a href="/character/accessories.html">Accessories</a>
+                <a href="/character/aging-ranking.html">Aging and Ranking</a>
+                <a href="/character/litter-guide.html">Litter Guide</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="#">Bloodlines</a>
+            <div class="dropdown-content">
+                <a href="/bloodlines/eldur.html">Eldur</a>
+                <a href="/bloodlines/fifrildi.html">Fifrildi</a>
+                <a href="/bloodlines/stormr.html">Stormr</a>
+                <a href="/bloodlines/hybrids.html">Hybrids</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <a href="/shop/shop.html">Shop</a>
+            <div class="dropdown-content">
+                <a href="/shop/earnings.html">Earnings</a>
+            </div>
+        </div>
+
+        <a href="/about-us.html">About Us</a>
+
+    </div>
+</nav>
+
+<!-- ================= MUSIC ================= -->
+
+<audio id="bg-music" loop>
+    <source src="/music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="music-toggle" class="muted">
+    <div class="music-bars">
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <svg class="music-icon" viewBox="0 0 24 24" width="20" height="20">
+        <path fill="#93c5fd" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.03,19.86 21,16.28 21,12C21,7.72 18.03,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.03C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+    </svg>
+    <div class="music-slash"></div>
+</button>
+
+<style>
+
+/* ================================================= */
+/* NAV BASE                                          */
+/* ================================================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 30px;
+    background: rgba(5, 10, 25, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    flex-wrap: nowrap;
+}
+
+nav a {
+    color: #d6e1ff;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 13px;
+    font-family: 'Marcellus SC', serif;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+nav a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(180, 200, 255, 0.8);
+}
+
+/* ================================================= */
+/* DROPDOWN — DESKTOP                                */
+/* ================================================= */
+
+.dropdown { position: relative; }
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(5, 10, 25, 0.97);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 12px 0;
+    min-width: 180px;
+    display: none;
+    flex-direction: column;
+    border: 1px solid rgba(150, 180, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+
+.dropdown-content a {
+    padding: 10px 20px;
+    display: block;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #d6e1ff;
+    transition: 0.2s;
+}
+
+.dropdown-content a:hover {
+    background: rgba(100, 150, 255, 0.15);
+    color: #ffffff;
+}
+
+.dropdown:hover .dropdown-content { display: flex; }
+
+/* ================================================= */
+/* HAMBURGER — hidden on desktop                     */
+/* ================================================= */
+
+.nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 1100;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: rgba(180, 200, 255, 0.85);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ================================================= */
+/* MUSIC BUTTON                                      */
+/* ================================================= */
+
+#music-toggle {
+    position: fixed;
+    top: 14px;
+    right: 20px;
+    z-index: 2000;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(147, 197, 253, 0.35);
+    background: rgba(4, 44, 83, 0.65);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+#music-toggle:hover {
+    border-color: rgba(147, 197, 253, 0.7);
+    box-shadow: 0 0 16px rgba(147, 197, 253, 0.3);
+}
+
+#music-toggle:not(.muted) {
+    border-color: rgba(147, 197, 253, 0.6);
+    box-shadow: 0 0 14px rgba(147, 197, 253, 0.25), 0 0 0 4px rgba(147, 197, 253, 0.08);
+}
+
+.music-bars {
+    display: none;
+    align-items: center;
+    gap: 2px;
+}
+
+.music-bars span {
+    display: block;
+    width: 3px;
+    border-radius: 2px;
+    background: #93c5fd;
+    animation: musicwave 0.8s ease-in-out infinite alternate;
+}
+
+.music-bars span:nth-child(1) { height: 8px;  animation-delay: 0s; }
+.music-bars span:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+.music-bars span:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+.music-bars span:nth-child(4) { height: 16px; animation-delay: 0.1s; }
+.music-bars span:nth-child(5) { height: 8px;  animation-delay: 0.25s; }
+
+@keyframes musicwave {
+    from { transform: scaleY(0.4); opacity: 0.5; }
+    to   { transform: scaleY(1);   opacity: 1; }
+}
+
+.music-icon { opacity: 0.4; display: block; }
+
+.music-slash {
+    position: absolute;
+    width: 26px;
+    height: 1.5px;
+    background: #f87171;
+    transform: rotate(45deg);
+    border-radius: 2px;
+    display: block;
+}
+
+#music-toggle:not(.muted) .music-bars { display: flex; }
+#music-toggle:not(.muted) .music-icon { display: none; }
+#music-toggle:not(.muted) .music-slash { display: none; }
+
+/* ================================================= */
+/* MOBILE (≤ 768px)                                  */
+/* ================================================= */
+
+@media (max-width: 768px) {
+
+    nav {
+        justify-content: space-between;
+        padding: 0 18px;
+        height: 54px;
+        gap: 0;
+        flex-wrap: nowrap;
+    }
+
+    .nav-hamburger { display: flex; }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        position: fixed;
+        top: 54px;
+        left: 0;
+        width: 100%;
+        background: rgba(5, 10, 25, 0.98);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-top: 1px solid rgba(150, 180, 255, 0.15);
+        padding: 8px 0 24px;
+        z-index: 999;
+        overflow-y: auto;
+        max-height: calc(100vh - 54px);
+    }
+
+    .nav-links.open { display: flex; }
+
+    .nav-links > a,
+    .nav-links > .dropdown > a {
+        display: block;
+        width: 100%;
+        padding: 13px 24px;
+        font-size: 13px;
+        letter-spacing: 2px;
+        border-bottom: 1px solid rgba(150, 180, 255, 0.07);
+        white-space: normal;
+    }
+
+    .dropdown { width: 100%; }
+
+    .dropdown-content {
+        position: static;
+        transform: none;
+        display: none;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.25);
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        min-width: unset;
+        border-bottom: 1px solid rgba(150, 180, 255, 0.07);
+    }
+
+    .nav-links.open .dropdown-content { display: flex; }
+
+    .dropdown-content a {
+        padding: 10px 24px 10px 42px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: rgba(180, 200, 255, 0.65);
+        border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+        color: #fff;
+        background: rgba(100, 150, 255, 0.1);
+    }
+
+    #music-toggle {
+        top: 8px;
+        right: 60px;
+        width: 36px;
+        height: 36px;
+    }
+}
+
+</style>

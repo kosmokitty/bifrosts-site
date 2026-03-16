@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <script src="/music.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STORMR ✦ Fallen From Grace</title>
+
+    <link rel="stylesheet" href="city.css">
+
+    <style>
+
+    :root {
+        /* ── Accent colors ── */
+        --city-primary:   #8a8aad;   /* muted violet — once royal, now ashen  */
+        --city-secondary: #4a4a6a;   /* deep shadow purple                    */
+        --city-accent:    #c8c8df;   /* cool silver-white text                */
+
+        /* ── Glow / border helpers ── */
+        --city-glow:   rgba(138, 138, 173, 0.3);
+        --city-border: rgba(138, 138, 173, 0.2);
+
+        /* ── Backgrounds: deepest → mid → card surface ── */
+        --city-bg-deep: #050508;
+        --city-bg-mid:  #090910;
+        --city-bg-card: #0e0e18;
+
+        /* ── Parchment / ink ── */
+        --city-parchment: #dddde8;
+        --city-ink:       #1c1c2e;
+    }
+
+    /* ── Page background ── */
+    body {
+        background-color: var(--city-bg-deep);
+        background-image:
+            linear-gradient(
+                to bottom,
+                rgba(5,5,8,0.6) 0%,
+                rgba(5,5,8,0.75) 50%,
+                rgba(5,5,8,0.92) 100%
+            ),
+            url('/images/backgrounds/milkyway.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    /* ── Hero background ── */
+    .hero {
+        background-image:
+            linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, var(--city-bg-deep) 100%),
+            url('/images/backgrounds/milkyway.jpg');
+        background-size: cover;
+        background-position: center top;
+    }
+
+    /* ══════════════════════════════════════════════
+       CRISIS BANNER
+       Shown at the top of the page beneath the nav.
+       Communicates the city's current dire state.
+    ══════════════════════════════════════════════ */
+    .crisis-banner {
+        background: rgba(90, 20, 20, 0.55);
+        border-top:    1px solid rgba(180, 60, 60, 0.35);
+        border-bottom: 1px solid rgba(180, 60, 60, 0.35);
+        padding: 13px 30px;
+        text-align: center;
+        font-family: var(--font-title);
+        font-size: 12px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(220, 160, 160, 0.9);
+    }
+
+    .crisis-banner-gem {
+        display: inline-block;
+        width: 6px; height: 6px;
+        background: rgba(200, 80, 80, 0.7);
+        transform: rotate(45deg);
+        margin: 0 14px;
+        position: relative;
+        top: -1px;
+    }
+
+    /* ══════════════════════════════════════════════
+       STRUCK-THROUGH / DEFUNCT RANK ROWS
+       Ranks that no longer exist are shown visually
+       crossed out and non-interactive.
+    ══════════════════════════════════════════════ */
+    .rl-row.defunct {
+        opacity: 0.38;
+        cursor: default;
+        pointer-events: none;
+        position: relative;
+    }
+
+    /* Diagonal strike line across defunct rows */
+    .rl-row.defunct::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 6px,
+            rgba(138, 138, 173, 0.07) 6px,
+            rgba(138, 138, 173, 0.07) 7px
+        );
+        pointer-events: none;
+    }
+
+    .rl-row.defunct .rl-row-label {
+        text-decoration: line-through;
+        text-decoration-color: rgba(200, 100, 100, 0.6);
+    }
+
+    /* Small "DISSOLVED" tag for defunct rows */
+    .rl-row-dissolved {
+        font-family: var(--font-title);
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(200, 100, 100, 0.7);
+        border: 1px solid rgba(200, 100, 100, 0.3);
+        padding: 2px 7px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    </style>
+</head>
+
+<body>
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- HERO                                         -->
+    <!-- ════════════════════════════════════════════ -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">They believed Thor's storms could not touch them</span>
+            <h1>STORMR</h1>
+            <div class="hero-rule"></div>
+            <p class="hero-tagline">Fallen from grace</p>
+        </div>
+    </header>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- STICKY PAGE NAV                              -->
+    <!-- ════════════════════════════════════════════ -->
+    <nav class="city-nav">
+        <a href="#introduction" class="active">Introduction</a>
+        <a href="#culture">Culture</a>
+        <a href="#ranks">Ranks</a>
+        <a href="#laws">Laws</a>
+    </nav>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- CRISIS BANNER                                -->
+    <!-- ════════════════════════════════════════════ -->
+    <div class="crisis-banner">
+        <span class="crisis-banner-gem"></span>
+        Stormr is in crisis — falling to Eldur &nbsp;·&nbsp; the Monarchy dissolved
+        <span class="crisis-banner-gem"></span>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- MAIN CONTENT                                 -->
+    <!-- ════════════════════════════════════════════ -->
+    <main class="main-content">
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- INTRODUCTION                            -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="introduction">
+            <div class="frame">
+                <div class="frame-inner">
+                    <div class="section-heading">
+                        <h2>Introduction</h2>
+                        <div class="divider"><div class="divider-gem"></div></div>
+                    </div>
+                    <p class="lore-text">
+                        Stormr sits at the northwest portion of the island, open to the mountains
+                        and the sky. Once proud, secretive, and untouchable — a city that believed
+                        itself closest to the gods — it has been brought low by war, famine, and
+                        betrayal from within. Eldur has claimed much of their territory. Supplies
+                        dwindle. The Monarch, once the city's unbreakable pillar, shattered the
+                        trust of their people and was executed. The crown is gone. The pieces
+                        remain.
+                    </p>
+                    <div class="btn-row">
+                        <a href="/world/history.html" class="city-btn">
+                            Lore Archive <span class="btn-arrow">›</span>
+                        </a>
+                        <a href="/character/character-creation.html" class="city-btn">
+                            Join Stormr <span class="btn-arrow">›</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- TRAIT CARDS                             -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal">
+            <div class="trait-grid">
+
+                <div class="trait-card" data-popup="traits">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/8a8aad/cat.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Traits</h3>
+                </div>
+
+                <div class="trait-card" data-popup="society-overview">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/8a8aad/castle.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Society</h3>
+                </div>
+
+                <div class="trait-card" data-popup="combat">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/8a8aad/sword.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Combat</h3>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- CULTURE                                 -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="culture">
+            <div class="section-heading">
+                <h2>Culture</h2>
+                <div class="divider"><div class="divider-gem"></div></div>
+            </div>
+            <div class="culture-layout">
+
+                <div class="culture-scroll" id="society-panel">
+                    <div class="rune-glyphs">ᛊᛏᛟᚱᛗᚱ ᚠᛖᛚᛚ ᚠᚱᛟᛗ ᚷᚱᚨᚲᛖ</div>
+                    <div class="culture-panel-divider"></div>
+                    <h3 id="society-panel-title"></h3>
+                    <div id="society-panel-body"></div>
+                </div>
+
+                <div class="culture-sidebar" id="society">
+                    <div class="sidebar-link active" data-society="culture">
+                        Culture <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="religion">
+                        Religion <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="creation">
+                        Creation <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="training">
+                        Training <span class="arrow">›</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- RANKS & LAWS                            -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="ranks">
+            <div class="section-heading">
+                <h2>Ranks &amp; Laws</h2>
+                <div class="divider"><div class="divider-gem"></div></div>
+            </div>
+
+            <div class="ranks-laws-grid">
+
+                <!-- Ranks column -->
+                <div class="rl-panel">
+                    <div class="rl-panel-title">Ranks</div>
+
+                    <!-- DISSOLVED — Monarchy gone -->
+                    <div class="rl-row defunct">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/crown.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Monarch</span>
+                        <span class="rl-row-dissolved">Dissolved</span>
+                    </div>
+
+                    <!-- DISSOLVED — Heirs gone with the crown -->
+                    <div class="rl-row defunct">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/star.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Heir</span>
+                        <span class="rl-row-dissolved">Dissolved</span>
+                    </div>
+
+                    <!-- DISSOLVED — Royal Guard had no royals to guard -->
+                    <div class="rl-row defunct">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/shield.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Royal Guard</span>
+                        <span class="rl-row-dissolved">Dissolved</span>
+                    </div>
+
+                    <!-- ACTIVE — Seer rank, no special authority badge -->
+                    <div class="rl-row" data-rank-popup="rank-seer">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/sparkles.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Seer</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-healer">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/leaf.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Healer</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-teacher">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/book.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Teacher</span>
+                        <span class="rl-row-stat">+2 INT</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-talon">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/sword.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Talon</span>
+                        <span class="rl-row-stat">+2 STR</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-raptor">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/archer.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Raptor</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                </div><!-- end ranks -->
+
+                <!-- Laws column -->
+                <div class="rl-panel" id="laws">
+                    <div class="rl-panel-title">Laws</div>
+
+                    <div class="rl-row" data-popup="law-1">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The First Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-2">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Second Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-3">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Third Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-4">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Fourth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-5">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Fifth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-6">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Sixth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-7">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Seventh Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-8">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Eighth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <!-- DISSOLVED law — monarchy-specific edict -->
+                    <div class="rl-row defunct">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Ninth Edict</span>
+                        <span class="rl-row-dissolved">Repealed</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-10">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Tenth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-11">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/8a8aad/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Eleventh Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                </div><!-- end laws -->
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- FOOTER                                       -->
+    <!-- ════════════════════════════════════════════ -->
+    <footer class="city-footer">
+        All content &copy; Bifrosts 
+    </footer>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- POPUP                                        -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="popup" class="popup" role="dialog" aria-modal="true">
+        <div class="popup-box">
+            <button class="popup-close" id="popup-close" aria-label="Close">✕</button>
+            <button class="popup-nav popup-nav-prev" id="popup-prev" aria-label="Previous">‹</button>
+            <button class="popup-nav popup-nav-next" id="popup-next" aria-label="Next">›</button>
+            <div class="popup-arch"><div class="popup-arch-gem"></div></div>
+            <div class="popup-header">
+                <h2 id="popup-title"></h2>
+                <div class="popup-stat-row" id="popup-stat-row" style="display:none;"></div>
+                <span class="popup-subtitle" id="popup-subtitle" style="display:none;"></span>
+                <div class="divider" style="margin:10px auto 0; max-width:300px;">
+                    <div class="divider-gem"></div>
+                </div>
+            </div>
+            <div class="popup-body-scroll">
+                <div id="popup-body"></div>
+            </div>
+            <div class="popup-footer"><div class="popup-footer-gem"></div></div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SCRIPTS                                      -->
+    <!-- ════════════════════════════════════════════ -->
+    <script>
+
+    /* ══════════════════════════════════════════════
+       SIMPLE POPUP DATA (trait cards + laws)
+    ══════════════════════════════════════════════ */
+    const lore = {
+
+        traits: {
+            title: "Stormr — Characteristics",
+            text: `
+                Stormr inhabitants are the smallest among the cities, typically bearing bright pelts
+                suited to mountain life. Quick and light on their feet, they are built for jumping
+                and climbing the steep terrain of their mountain home.
+
+                <br><br>
+
+                <table style="
+                    width:100%;
+                    border-collapse:collapse;
+                    font-family:var(--font-lore);
+                    font-size:16px;
+                    color:#c8c8df;
+                ">
+                    <thead>
+                        <tr>
+                            <th style="font-family:var(--font-title); font-size:12px; letter-spacing:0.25em; text-transform:uppercase; color:var(--city-accent); padding:8px 12px; border-bottom:1px solid rgba(200,200,223,0.2); text-align:left;">
+                                Trait
+                            </th>
+                            <th style="font-family:var(--font-title); font-size:12px; letter-spacing:0.25em; text-transform:uppercase; color:var(--city-accent); padding:8px 12px; border-bottom:1px solid rgba(200,200,223,0.2); text-align:left;">
+                                Details
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Stat Bonus
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08); color:rgba(200,200,223,0.6); font-family:var(--font-title); font-size:12px; letter-spacing:0.12em;">
+                                +2 CON
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Height
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08);">
+                                Average 11"–13" &nbsp;·&nbsp; Munchkin 9" &nbsp;·&nbsp;
+                                Abnormally Small 10" &nbsp;·&nbsp; Abnormally Large 14"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Physique
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08);">
+                                Small, lithe, and long-furred
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Eyes
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08);">
+                                Black to white scale. Colorful sclera (blue, orange, green) are common and carry no stigma.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Spotting
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(200,200,223,0.08);">
+                                0–100% white spotting
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap; vertical-align:top;">
+                                Patterns
+                            </td>
+                            <td style="padding:9px 12px;">
+                                Pointed, pointed tabby, clouded tabby, calico, rosette,
+                                marbled rosette, ticked tabby, solid
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br>
+                <div style="text-align:center;">
+                    <a href="/character/character-creation.html" class="city-btn" style="margin-top:8px;">
+                        Character Creation <span class="btn-arrow">›</span>
+                    </a>
+                </div>
+            `
+        },
+
+        "society-overview": {
+            title: "A Broken Kingdom",
+            text: `
+                Stormr was once the most secretive and self-sufficient of all cities — independent,
+                proud, and certain of their divine favor under Thor. That certainty has been
+                shattered. The Monarch broke faith with the people, was tried, and executed. The
+                crown no longer exists. Magic appeared without warning, further eroding trust in
+                the old order. Meanwhile, Eldur claims more territory with every passing season.
+                What remains of Stormr endures — barely.
+            `
+        },
+
+        combat: {
+            title: "The Talon's Burden",
+            text: `
+                The Talons and Raptors of Stormr fight now not for glory or a crown, but for
+                survival. Food is scarce. Herbs are running low. Territory has been surrendered
+                to Eldur one piece at a time. Those who remain in the fighting and hunting ranks
+                carry the weight of a city that once believed itself untouchable — and now must
+                simply endure.
+            `
+        },
+
+        "law-1": {
+            title: "The First Edict",
+            text: `
+                Your love, duty, and loyalty are to your city first.
+                Defend your city, even if it may cost you your life.
+            `
+        },
+        "law-2": {
+            title: "The Second Edict",
+            text: `
+                Do not trespass or hunt on another city's territory.
+            `
+        },
+        "law-3": {
+            title: "The Third Edict",
+            text: `
+                The word of the Seers is the law of Stormr, in the absence of a Monarchy.
+            `
+        },
+        "law-4": {
+            title: "The Fourth Edict",
+            text: `
+                Only those of the Seer rank may serve as trusted advisors and decision-makers
+                for the city. The Seers must be highly respected — their word is closely tied
+                with the law.
+            `
+        },
+        "law-5": {
+            title: "The Fifth Edict",
+            text: `
+                Elders, mothers, and kits eat first.
+            `
+        },
+        "law-6": {
+            title: "The Sixth Edict",
+            text: `
+                Every cat becomes a novice at 6 cycles and will choose their specialty at
+                10 cycles.
+            `
+        },
+        "law-7": {
+            title: "The Seventh Edict",
+            text: `
+                To show nicety or loyalty to those cursed is worse than death itself.
+            `
+        },
+        "law-8": {
+            title: "The Eighth Edict",
+            text: `
+                Stormr remains thankful to Thor and all he provides.
+            `
+        },
+        /* Law-9 was: "Speaking against the Monarchy or the Seers is treasonous."
+           The Monarchy clause has been repealed. Row is shown as defunct in the HTML. */
+        "law-10": {
+            title: "The Tenth Edict",
+            text: `
+                Speaking against the Seers is considered treasonous,
+                with punishments varying in severity.
+            `
+        },
+        "law-11": {
+            title: "The Eleventh Edict",
+            text: `
+                Stormr remains thankful to Thor and all he provides. Anyone who denies Thor
+                and the Gods is considered traitorous to the city.
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       RANK POPUP DATA
+    ══════════════════════════════════════════════ */
+    const rankData = {
+
+        "rank-seer": {
+            title:    "Seer",
+            stats:    ["+2 WIS"],
+            subtitle: "The Divination Class",
+            body: `
+                <p>
+                    Once the closest confidants of the Monarchy — advisors, fortune-tellers, and
+                    star-readers — the Seers carry a weight that has only grown heavier since the
+                    crown fell. Though they were never designed to rule, the city looks to them
+                    for guidance in a time when all other structures have crumbled.
+                </p>
+                <p>
+                    Though originally a role passed down by blood, it has long since been opened
+                    to any cat with the sense of purpose, duty, and talent it requires. The eldest
+                    Seer holds informal authority as the head of the group.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Star-Charting &amp; Cloud-Reading</div>
+                    <p>
+                        Seers are responsible for cloud-reading, fortune-telling, and star-charting.
+                        They predict harvests, hunts, and weather — and determine the luck of
+                        newly-born children. In a city now desperately short on food and resources,
+                        these predictions carry more weight than ever.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Counsel &amp; Advising</div>
+                    <p>
+                        Seers serve as trusted advisors in matters of city welfare, offering
+                        guidance informed by their readings and knowledge. Their word carries
+                        significant weight under Stormr's current laws.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Crowning &amp; Ceremony</div>
+                    <p>
+                        The eldest Seer traditionally crowns the Monarch with a set of custom-carved
+                        antlers. This ceremony has not been performed since the execution. Whether
+                        it will ever be performed again is an open question in Stormr.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-healer": {
+            title:    "Healer",
+            stats:    ["+2 WIS"],
+            subtitle: "The Healing Class",
+            body: `
+                <p>
+                    Healers serve a critical purpose in Stormr, made more urgent by the city's
+                    current crisis. With territory lost to Eldur, supply lines cut, and herb
+                    gardens strained, Stormr's Healers must be exceptionally creative and careful
+                    with every resource. Up to three Healers may serve at a time, each able to
+                    take on a novice, for a maximum of six. All Healers work together — there is
+                    no official head, though the eldest holds informal respect.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Herb Knowledge</div>
+                    <p>
+                        Healers are responsible for learning and retaining knowledge pertaining to
+                        herb uses and various remedies, including the appearance and uses of a wide
+                        variety of plants.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Foraging &amp; Gardening</div>
+                    <p>
+                        Being able to safely find and gather herbs, as well as recognize which are
+                        safe or unsafe for use. A broad knowledge of how to grow basic herbs is
+                        required — the city maintains gardens specifically so no cat who doesn't
+                        need to leave the city walls will have to.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Patient Care</div>
+                    <p>
+                        Healers are highly trained in the ability to treat a variety of injuries
+                        and ailments quickly, efficiently, and correctly. With war casualties and
+                        dwindling resources, their skills are more demanded than ever.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-teacher": {
+            title:    "Teacher",
+            stats:    ["+2 INT"],
+            subtitle: "The Teaching Class",
+            body: `
+                <p>
+                    Teachers are responsible for educating every novice before they choose their
+                    specialization at 10 cycles. They are the most proficient in city knowledge,
+                    bookkeeping, and history — and are also responsible for gathering information
+                    about other cities. In a broken Stormr, preserving what knowledge remains
+                    has become a quiet act of defiance against erasure.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Educating</div>
+                    <p>
+                        Teachers educate the next generation in historical, cultural, and city
+                        matters — everything a cat of Stormr needs to know before they choose
+                        their path.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Knowledge Keeping</div>
+                    <p>
+                        Teachers are in charge of all matters related to knowledge — scroll-writing,
+                        scroll-keeping, and the upkeep of the royal and common libraries. They are
+                        required to know all lore and history of the scrolls they write and receive.
+                        Each cat in Stormr may request their own scroll, updated with lineage,
+                        accomplishments, and important life events. It is the Teacher's responsibility
+                        to maintain these records.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Communicating</div>
+                    <p>
+                        Teachers are required to communicate with other cities at social gatherings,
+                        acquiring knowledge of herb uses, hunting tactics, and other city matters
+                        for Stormr's benefit.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">The Guild</div>
+                    <p>
+                        Despite the Guild being a controversial group, they hold many scrolls for
+                        Teachers to borrow — including all birth records of children across
+                        Fyrstrheim. Teachers are expected to commune with them.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-talon": {
+            title:    "Talon",
+            stats:    ["+2 STR"],
+            subtitle: "The Fighting Class",
+            body: `
+                <p>
+                    The fighting rank of Stormr. With the Royal Guard dissolved alongside the
+                    Monarchy, the Talons now bear the full weight of the city's defense — and
+                    they are stretched thin. Eldur's advances have cost them territory and
+                    comrades. They fight not for a crown now, but for what little remains.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Patrolling</div>
+                    <p>
+                        To ensure the territory and city remain safe and secure, Talons patrol
+                        regularly to spot dangers from predators or other cities before they make
+                        themselves known. This is done in large groups — if the party encounters
+                        anything, they face it head-on.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Guarding</div>
+                    <p>
+                        Talons guard the city from various watch-points: the city entrance and
+                        vantage points throughout. They remain alert, their sight keen enough to
+                        spot signs of danger and act quickly.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Combat</div>
+                    <p>
+                        When facing a threat, Talons are at the front lines. All Talons undergo
+                        extensive training and fighting exercises, continuing with large sparring
+                        sessions under their Head Talon long after novice training ends.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Observing</div>
+                    <p>
+                        Talons frequently find themselves on look-out duty at city vantage points.
+                        It is their job to alert the city to unusual activity or approaching threats,
+                        reporting immediately to the Head Talon.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-raptor": {
+            title:    "Raptor",
+            stats:    ["+2 WIS"],
+            subtitle: "The Hunting Class",
+            body: `
+                <p>
+                    The hunters of Stormr. With food scarce and territory shrinking, the Raptors
+                    are among the most vital cats in the city. Every hunt matters. Every trap
+                    checked matters. They carry the quiet knowledge that the city's survival
+                    rests on what they bring back.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Hunting</div>
+                    <p>
+                        Raptors are tasked with regularly ensuring the city is well stocked with
+                        food. It is their duty to hunt prey so that everyone in the city is fed
+                        before they themselves eat. This class typically spends the majority of
+                        their time out in the territory.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Tracking</div>
+                    <p>
+                        Raptors are expected to be efficient in recognizing and identifying animal
+                        tracks, and to quickly seek out prey or predator scents. They are known
+                        for their sharp noses, a necessity for their class.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Ambushing</div>
+                    <p>
+                        In addition to hunting alone, Raptors highly value teamwork — working in
+                        groups to take down larger prey or predators, using body-language and
+                        tail-signals as a form of silent communication.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Scouting</div>
+                    <p>
+                        As the best trackers of Stormr, Raptors are used for scouting missions —
+                        tracking miscellaneous scents and oddities within the territory. They often
+                        pair with Talons when a keen nose is needed to locate a threat.
+                    </p>
+                </div>
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       CULTURE SIDEBAR PANEL DATA
+    ══════════════════════════════════════════════ */
+    const societyContent = {
+
+        culture: {
+            title: "Culture",
+            body: `
+                <p>
+                    Stormr is the most secretive of all cities, independent and largely
+                    self-sufficient — or it was. Due to its isolated mountain territory, Stormr
+                    holds the most history within its walls of any city, and has always valued
+                    education and historic preservation above most things. That pride in knowledge
+                    is one of the few things the crisis has not yet taken.
+                </p>
+                <p>
+                    Stormr cats use flight-related and bird-related terms to describe their peers
+                    and the world around them — a hatchling, a fledgling, an egghead. Birds of
+                    prey in particular are admired and respected, sometimes used to test a cat's
+                    strength and resolve.
+                </p>
+                <p>
+                    Family bonds are deeply important. Stormr uses familial terms — mother,
+                    father, brother, sister — and practices communal living by rank: a Raptor's
+                    den, a Talon's den, a Healer's den, an Elder's den. When a kitten reaches
+                    three cycles, they move from their private birth den into the communal
+                    Roosting Den with other mothers and young. At six cycles, mothers return to
+                    their respective dens while children remain until they choose their class at
+                    ten cycles.
+                </p>
+                <p>
+                    Each cat may request their own scroll, updated throughout their life with
+                    lineage, accomplishments, and significant events — good or ill. Maintaining
+                    these scrolls is the duty of the Teachers and the Palace.
+                </p>
+
+                <div style="
+                    font-family:var(--font-title);
+                    font-size:12px;
+                    letter-spacing:0.35em;
+                    text-transform:uppercase;
+                    color:var(--city-ink);
+                    opacity:0.55;
+                    margin:22px 0 14px;
+                    padding-bottom:8px;
+                    border-bottom:1px solid rgba(28,28,46,0.2);
+                ">Ceremonies</div>
+
+                <p>
+                    <strong style="font-family:var(--font-title); font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--city-ink);">
+                        A Union of Souls
+                    </strong><br>
+                    When two or more cats wish to be united and recognized as an official
+                    pairing, they may present themselves to the Healers to request a bonding
+                    ceremony. They celebrate with a dance and song beneath the starlight,
+                    adorning themselves in grey and blue silks and paint to match the bright
+                    blue moon.
+                </p>
+                <p>
+                    <strong style="font-family:var(--font-title); font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--city-ink);">
+                        The Beginning
+                    </strong><br>
+                    When a child is born, the eldest Seer visits the family to give blessings
+                    of good will and health, announcing the new addition to the city. The Seer
+                    may perform a small ceremony to predict the kitten's future.
+                </p>
+                <p>
+                    <strong style="font-family:var(--font-title); font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--city-ink);">
+                        The End
+                    </strong><br>
+                    By seventy-one cycles, a cat is encouraged to retire as an elder. The
+                    Seers recognize the cat's service to Stormr and bid them rest — to heal
+                    their physical or spiritual wounds and spend their final cycles in peace.
+                </p>
+                <p>
+                    <strong style="font-family:var(--font-title); font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--city-ink);">
+                        The Highest Mountain's Toll
+                    </strong><br>
+                    Death is not rejoiced in Stormr. It is a deep and quiet grief. When a cat
+                    passes unexpectedly, close relatives and friends gather to wish them farewell
+                    as they depart back to Odin. The body is buried under stones on the highest
+                    mountain. We are all born alone, and we all die alone.
+                </p>
+            `
+        },
+
+        religion: {
+            title: "The Fallen Faith",
+            body: `
+                <p>
+                    Religion has always been prominent in Stormr. Cats believe in Thor and the
+                    Gods, traditionally relying on the Monarchy and the Seers as conduits of
+                    divine will. It is common to drink a purple liquid and commence religious
+                    ceremonies before meals, thanking the Gods for what has been provided.
+                </p>
+                <p>
+                    All Stormr felines believe in Odin as the supreme deity — that he guides
+                    the dead to Valhalla or to Hel's lands. Death is not rejoiced in Stormr.
+                    It is a deep and quiet grief.
+                </p>
+                <p>
+                    The faith has been shaken. A city that believed itself touched by divine
+                    favor — that Thor's storms protected them — has watched its Monarch betray
+                    that trust, watched magic appear without warning or explanation, and watched
+                    Eldur take their land piece by piece. The Seers still lead the ceremonies.
+                    But the certainty that once filled them has grown quieter.
+                </p>
+            `
+        },
+
+        creation: {
+            title: "The Silk Trade",
+            body: `
+                <p>
+                    Stormr leads all cities in the crafting of finery. They have a robust silk
+                    trade and are the only city where silk is easily and readily produced. The
+                    city also has access to leather, metal, minerals, gems, vines, plants, rocks
+                    and stones, wood, fabrics, bone, and more — though wartime losses have
+                    strained these supplies.
+                </p>
+                <p>
+                    Silk is primarily farmed within the Palace. Cotton remains in the city.
+                    Accessories are commonly made from fine threads, fabric, silk, leather, plant
+                    material, and some small bits of metal. Weapons draw from rocks, stones, and
+                    bones most frequently — the city's small metal supply is typically reserved
+                    for accessories. Jewelry holds a heavy presence in Stormr; the city has always
+                    indulged in jewels and silks.
+                </p>
+
+                <div style="
+                    font-family: var(--font-title);
+                    font-size: 12px;
+                    letter-spacing: 0.35em;
+                    text-transform: uppercase;
+                    color: var(--city-ink);
+                    opacity: 0.6;
+                    margin: 20px 0 12px;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid rgba(28,28,46,0.25);
+                ">
+                    Player Contributions
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:10px;">
+
+                    <div style="background:rgba(28,28,46,0.1); border:1px solid rgba(28,28,46,0.2); border-left:3px solid rgba(28,28,46,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Scarecrows</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#2a2a3e; line-height:1.6; margin-bottom:6px;">
+                            Created a means to protect food and herbs in the form of scarecrows.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(28,28,46,0.55);">Crafted by Morrigan</div>
+                    </div>
+
+                    <div style="background:rgba(28,28,46,0.1); border:1px solid rgba(28,28,46,0.2); border-left:3px solid rgba(28,28,46,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Valkyries</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#2a2a3e; line-height:1.6; margin-bottom:6px;">
+                            Created the Valkyries — a specialized group of Talons inducted into
+                            the elite for their power and tenacity.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(28,28,46,0.55);">Created by Niviatsiak</div>
+                    </div>
+
+                    <div style="background:rgba(28,28,46,0.1); border:1px solid rgba(28,28,46,0.2); border-left:3px solid rgba(28,28,46,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Tent Improvement</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#2a2a3e; line-height:1.6; margin-bottom:6px;">
+                            Created a new design used in tent construction.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(28,28,46,0.55);">Crafted by Ivar</div>
+                    </div>
+
+                    <div style="background:rgba(28,28,46,0.1); border:1px solid rgba(28,28,46,0.2); border-left:3px solid rgba(28,28,46,0.45); padding:12px 14px;">
+                        <div style="font-family:var(--font-title); font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:var(--city-ink); margin-bottom:5px;">Seer Documentation</div>
+                        <div style="font-family:var(--font-lore); font-size:15px; color:#2a2a3e; line-height:1.6; margin-bottom:6px;">
+                            Created a document detailing the purpose and training of Seers,
+                            used to teach future generations.
+                        </div>
+                        <div style="font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; color:rgba(28,28,46,0.55);">Created by Ilmarinen</div>
+                    </div>
+
+                </div>
+            `
+        },
+
+        training: {
+            title: "Education",
+            body: `
+                <p>
+                    Stormr believes in communal classes — all children of age are taught
+                    together by the city's Teachers about the history, general knowledge,
+                    surroundings, and territory of their home. They learn basic survival skills
+                    in hunting and fighting, and how to navigate the mountain landscape from
+                    within its walls.
+                </p>
+                <p>
+                    Newly made novices are not permitted to explore the territory alone or
+                    even with an adult companion. They learn landmarks through map-work first,
+                    building an understanding of their home before they are permitted to set
+                    foot in it unsupervised.
+                </p>
+                <p>
+                    At 10 cycles of age, each novice chooses which class they wish to pursue.
+                    They inform their Teachers of their decision and are placed under the watch
+                    of a more experienced member of that class to further their training.
+                </p>
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       POPUP ENGINE
+    ══════════════════════════════════════════════ */
+    const popup         = document.getElementById('popup');
+    const popupTitle    = document.getElementById('popup-title');
+    const popupBody     = document.getElementById('popup-body');
+    const popupStatRow  = document.getElementById('popup-stat-row');
+    const popupSubtitle = document.getElementById('popup-subtitle');
+    const popupClose    = document.getElementById('popup-close');
+    const popupPrev     = document.getElementById('popup-prev');
+    const popupNext     = document.getElementById('popup-next');
+
+    let currentMode  = null;
+    let currentIndex = 0;
+
+    /* Only active (non-defunct) ranks are navigable */
+    const rankOrder = [
+        'rank-seer', 'rank-healer', 'rank-teacher',
+        'rank-talon', 'rank-raptor'
+    ];
+
+    const lawOrder = [
+        'law-1', 'law-2', 'law-3', 'law-4', 'law-5',
+        'law-6', 'law-7', 'law-8', 'law-10', 'law-11'
+    ];
+
+    function updateNavArrows() {
+        const list = currentMode === 'rank' ? rankOrder : lawOrder;
+        if (!list || currentMode === 'simple') {
+            popupPrev.classList.remove('visible');
+            popupNext.classList.remove('visible');
+            return;
+        }
+        popupPrev.classList.toggle('visible', currentIndex > 0);
+        popupNext.classList.toggle('visible', currentIndex < list.length - 1);
+    }
+
+    function renderRank(key) {
+        const d = rankData[key];
+        if (!d) return;
+        popupTitle.textContent = d.title;
+        popupBody.innerHTML    = d.body;
+        popupStatRow.innerHTML = d.stats
+            .map(s => `<span class="popup-stat-badge"><span class="stat-gem">✦</span>${s}</span>`)
+            .join('');
+        popupStatRow.style.display  = 'flex';
+        popupSubtitle.textContent   = d.subtitle;
+        popupSubtitle.style.display = 'block';
+        popup.querySelector('.popup-body-scroll').scrollTop = 0;
+    }
+
+    function renderLaw(key) {
+        const d = lore[key];
+        if (!d) return;
+        popupTitle.textContent      = d.title;
+        popupBody.innerHTML         = `<p>${d.text}</p>`;
+        popupStatRow.style.display  = 'none';
+        popupSubtitle.style.display = 'none';
+        popup.querySelector('.popup-body-scroll').scrollTop = 0;
+    }
+
+    function openSimplePopup(key) {
+        const d = lore[key];
+        if (!d) return;
+        currentMode  = 'simple';
+        currentIndex = 0;
+        popupTitle.textContent      = d.title;
+        popupBody.innerHTML         = `<p>${d.text}</p>`;
+        popupStatRow.style.display  = 'none';
+        popupSubtitle.style.display = 'none';
+        updateNavArrows();
+        showPopup();
+    }
+
+    function openRankPopup(key) {
+        const idx = rankOrder.indexOf(key);
+        if (idx === -1) return;
+        currentMode  = 'rank';
+        currentIndex = idx;
+        renderRank(key);
+        updateNavArrows();
+        showPopup();
+    }
+
+    function openLawPopup(key) {
+        const idx = lawOrder.indexOf(key);
+        if (idx === -1) return;
+        currentMode  = 'law';
+        currentIndex = idx;
+        renderLaw(key);
+        updateNavArrows();
+        showPopup();
+    }
+
+    function navigatePopup(direction) {
+        const list = currentMode === 'rank' ? rankOrder : lawOrder;
+        const next = currentIndex + direction;
+        if (next < 0 || next >= list.length) return;
+        currentIndex = next;
+        if (currentMode === 'rank') renderRank(list[currentIndex]);
+        else                        renderLaw(list[currentIndex]);
+        updateNavArrows();
+    }
+
+    function showPopup() {
+        popup.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup() {
+        popup.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    document.body.addEventListener('click', e => {
+        const rankTrigger   = e.target.closest('[data-rank-popup]');
+        const simpleTrigger = e.target.closest('[data-popup]');
+        if (rankTrigger)   { openRankPopup(rankTrigger.dataset.rankPopup); return; }
+        if (simpleTrigger) {
+            const key = simpleTrigger.dataset.popup;
+            if (key.startsWith('law-')) { openLawPopup(key); return; }
+            openSimplePopup(key);
+            return;
+        }
+        if (e.target === popup) closePopup();
+    });
+
+    popupPrev.addEventListener('click', () => navigatePopup(-1));
+    popupNext.addEventListener('click', () => navigatePopup(+1));
+    popupClose.addEventListener('click', closePopup);
+    document.addEventListener('keydown', e => {
+        if (!popup.classList.contains('is-open')) return;
+        if (e.key === 'Escape')     closePopup();
+        if (e.key === 'ArrowLeft')  navigatePopup(-1);
+        if (e.key === 'ArrowRight') navigatePopup(+1);
+    });
+
+    /* ══════════════════════════════════════════════
+       CULTURE SIDEBAR SWITCHER
+    ══════════════════════════════════════════════ */
+    const panelTitle   = document.getElementById('society-panel-title');
+    const panelBody    = document.getElementById('society-panel-body');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link[data-society]');
+
+    panelTitle.style.transition = 'opacity 0.2s ease';
+    panelBody.style.transition  = 'opacity 0.2s ease';
+
+    function switchSocietyPanel(key) {
+        if (!societyContent[key]) return;
+        panelTitle.style.opacity = panelBody.style.opacity = '0';
+        setTimeout(() => {
+            panelTitle.innerHTML = societyContent[key].title;
+            panelBody.innerHTML  = societyContent[key].body;
+            panelTitle.style.opacity = panelBody.style.opacity = '1';
+        }, 200);
+        sidebarLinks.forEach(l => l.classList.toggle('active', l.dataset.society === key));
+    }
+
+    sidebarLinks.forEach(l => l.addEventListener('click', () => switchSocietyPanel(l.dataset.society)));
+    switchSocietyPanel('culture');
+
+    /* ══════════════════════════════════════════════
+       STICKY NAV + SCROLL REVEAL
+    ══════════════════════════════════════════════ */
+    const navLinks = document.querySelectorAll('.city-nav a');
+
+    document.querySelectorAll('section[id]').forEach(section => {
+        new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    navLinks.forEach(a =>
+                        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)
+                    );
+                }
+            });
+        }, { threshold: 0.3 }).observe(section);
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 }).observe(el);
+    });
+
+    </script>
+</body>
+</html>

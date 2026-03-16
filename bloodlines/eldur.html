@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/music.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELDUR ✦ Through Flame Reborn</title>
+
+    <link rel="stylesheet" href="city.css">
+
+    <style>
+    /* ELDUR THEME */
+    :root {
+        /* ── Accent colors ── */
+        --city-primary:   #ff7a00;   /* buttons, glows, active borders  */
+        --city-secondary: #ff3c00;   /* deep glow, gradient second stop */
+        --city-accent:    #f1d7a1;   /* main text highlight color       */
+
+        /* ── Glow / border helpers ── */
+        --city-glow:   rgba(255, 122, 0, 0.35);
+        --city-border: rgba(255, 122, 0, 0.25);
+
+        /* ── Backgrounds */
+        --city-bg-deep: #050302;
+        --city-bg-mid:  #0a0604;
+        --city-bg-card: #100806;
+    }
+
+    /* ── Page background — swap url() for the new city image ── */
+    body {
+        background-color: var(--city-bg-deep);
+        background-image:
+            linear-gradient(
+                to bottom,
+                rgba(5,3,2,0.55) 0%,
+                rgba(5,3,2,0.72) 50%,
+                rgba(5,3,2,0.88) 100%
+            ),
+            url('/images/backgrounds/solar_flare.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    /* ── Hero background ── */
+    .hero {
+        background-image:
+            linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, var(--city-bg-deep) 100%),
+            url('/images/backgrounds/solar_flare.jpg');
+        background-size: cover;
+        background-position: center top;
+    }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- HERO                                         -->
+    <!-- ════════════════════════════════════════════ -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">Only those who endure the flame are worthy of the crown</span>
+            <h1>ELDUR</h1>
+            <div class="hero-rule"></div>
+            <p class="hero-tagline">Through flame we are reborn</p>
+        </div>
+    </header>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- STICKY PAGE NAV                              -->
+    <!-- ════════════════════════════════════════════ -->
+    <nav class="city-nav">
+        <a href="#introduction" class="active">Introduction</a>
+        <a href="#culture">Culture</a>
+        <a href="#ranks">Ranks</a>
+        <a href="#laws">Laws</a>
+    </nav>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- MAIN CONTENT                                 -->
+    <!-- ════════════════════════════════════════════ -->
+    <main class="main-content">
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- INTRODUCTION                            -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="introduction">
+            <div class="frame">
+                <div class="frame-inner">
+                    <div class="section-heading">
+                        <h2>Introduction</h2>
+                        <div class="divider"><div class="divider-gem"></div></div>
+                    </div>
+                    <p class="lore-text">
+                        Eldur believes themselves to be born from fire — embers sizzling through their veins,
+                        phoenix ash burning in their blood. They are a regal people, unshaken in their belief
+                        that they stand above the other cities, a conviction proven through conquest. Storm's
+                        lands seized, and its Monarchy reduced to memory, burned by the claws of Eldurians.
+                    </p>
+                    <div class="btn-row">
+                        <a href="/world/history.html" class="city-btn">
+                            Lore Archive <span class="btn-arrow">›</span>
+                        </a>
+                        <a href="/character/character-creation.html" class="city-btn">
+                            Join Eldur <span class="btn-arrow">›</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- TRAIT CARDS                             -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal">
+            <div class="trait-grid">
+
+                <div class="trait-card" data-popup="traits">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/ff7a00/cat.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Traits</h3>
+                </div>
+
+                <div class="trait-card" data-popup="society-overview">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/ff7a00/fire-element.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Society</h3>
+                </div>
+
+                <div class="trait-card" data-popup="combat">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/ff7a00/sword.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Combat</h3>
+                </div>
+
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!-- MAGIC CARD — hidden until magic system is ready.        -->
+                <!-- To re-enable: remove the display:none style below,     -->
+                <!-- and uncomment the "magic" entry in the lore{} object   -->
+                <!-- in the script section.                                  -->
+                <!-- ═══════════════════════════════════════════════════════ -->
+                <!--
+                <div class="trait-card" data-popup="magic">
+                    <div class="icon-box">
+                        <img src="https://img.icons8.com/ios-filled/50/ff7a00/fire-element.png" alt="" width="44" height="44">
+                    </div>
+                    <h3>Magic</h3>
+                </div>
+                -->
+
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- CULTURE                                 -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="culture">
+            <div class="section-heading">
+                <h2>Culture</h2>
+                <div class="divider"><div class="divider-gem"></div></div>
+            </div>
+            <div class="culture-layout">
+
+                <!-- Parchment content panel (left) -->
+                <div class="culture-scroll" id="society-panel">
+                    <div class="rune-glyphs">ᚠᛁᚱᛖ ᛒᚢᚱᚾᛊ ᛈᚺᛟᛖᚾᛁᚲᛊ ᚱᛁᛊᛖ</div>
+                    <div class="culture-panel-divider"></div>
+                    <h3 id="society-panel-title"></h3>
+                    <div id="society-panel-body"></div>
+                </div>
+
+                <!-- Sidebar navigation (right) -->
+                <div class="culture-sidebar" id="society">
+                    <div class="sidebar-link active" data-society="culture">
+                        Culture <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="religion">
+                        Religion <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="creation">
+                        Creation <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="training">
+                        Training <span class="arrow">›</span>
+                    </div>
+                    <div class="sidebar-link" data-society="jewelry">
+                        Jewelry <span class="arrow">›</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────── -->
+        <!-- RANKS & LAWS                            -->
+        <!-- ─────────────────────────────────────── -->
+        <section class="section reveal" id="ranks">
+            <div class="section-heading">
+                <h2>Ranks &amp; Laws</h2>
+                <div class="divider"><div class="divider-gem"></div></div>
+            </div>
+
+            <div class="ranks-laws-grid">
+
+                <!-- Ranks column -->
+                <div class="rl-panel">
+                    <div class="rl-panel-title">Ranks</div>
+
+                    <div class="rl-row" data-rank-popup="rank-konungr">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/crown.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Konungríki</span>
+                        <span class="rl-row-stat">+2 RSP</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-kinrik">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/crown-of-thorns.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Kinrik</span>
+                        <span class="rl-row-stat">+5 REP</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-torches">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/olympic-torch.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Torches</span>
+                        <span class="rl-row-stat">+2 RSP</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-caretaker">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/like--v1.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Caretaker</span>
+                        <span class="rl-row-stat">+2 INT</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-healers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/leaf.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Healers</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-embers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/sword.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Embers</span>
+                        <span class="rl-row-stat">+2 STR</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-seekers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/visible.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Seekers</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-rank-popup="rank-makers">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/ruby-gemstone.png" alt="">
+                        </div>
+                        <span class="rl-row-label">Makers</span>
+                        <span class="rl-row-stat">+2 WIS</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                </div><!-- end ranks -->
+
+                <!-- Laws column -->
+                <div class="rl-panel" id="laws">
+                    <div class="rl-panel-title">Laws</div>
+
+                    <div class="rl-row" data-popup="law-1">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The First Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-2">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Second Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-3">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Third Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-4">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Fourth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-5">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Fifth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-6">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Sixth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-7">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Seventh Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-8">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Eighth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-9">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Ninth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                    <div class="rl-row" data-popup="law-10">
+                        <div class="rl-row-icon">
+                            <img src="https://img.icons8.com/ios-filled/30/ff7a00/scales.png" alt="">
+                        </div>
+                        <span class="rl-row-label">The Tenth Edict</span>
+                        <span class="rl-row-arrow">›</span>
+                    </div>
+
+                </div><!-- end laws -->
+
+            </div><!-- end ranks-laws-grid -->
+        </section>
+
+    </main>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- FOOTER                                       -->
+    <!-- ════════════════════════════════════════════ -->
+    <footer class="city-footer">
+        All content &copy; Bifrosts
+    </footer>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- POPUP                                        -->
+    <!-- ════════════════════════════════════════════ -->
+    <div id="popup" class="popup" role="dialog" aria-modal="true">
+        <div class="popup-box">
+            <button class="popup-close" id="popup-close" aria-label="Close">✕</button>
+            <button class="popup-nav popup-nav-prev" id="popup-prev" aria-label="Previous">‹</button>
+            <button class="popup-nav popup-nav-next" id="popup-next" aria-label="Next">›</button>
+            <div class="popup-arch"><div class="popup-arch-gem"></div></div>
+            <div class="popup-header">
+                <h2 id="popup-title"></h2>
+                <div class="popup-stat-row" id="popup-stat-row" style="display:none;"></div>
+                <span class="popup-subtitle" id="popup-subtitle" style="display:none;"></span>
+                <div class="divider" style="margin:10px auto 0; max-width:300px;">
+                    <div class="divider-gem"></div>
+                </div>
+            </div>
+            <div class="popup-body-scroll">
+                <div id="popup-body"></div>
+            </div>
+            <div class="popup-footer"><div class="popup-footer-gem"></div></div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════ -->
+    <!-- SCRIPTS                                      -->
+    <!-- ════════════════════════════════════════════ -->
+    <script>
+
+    /* ══════════════════════════════════════════════
+       SIMPLE POPUP DATA (trait cards + laws)
+       Each entry: { title, text }
+       text supports HTML.
+    ══════════════════════════════════════════════ */
+    const lore = {
+
+        traits: {
+            title: "Eldur — Characteristics",
+            text: `
+                Nestled amongst the Bruni Mountains at the northernmost tip of Fyrstrheim, Eldurian
+                cats are the third-largest in physical size among all cities. Built for agility and
+                acrobatic traversal of the mountain cave system, they are slender and svelte with
+                various fur lengths. Pelt colors evoke red-stained wood, dark coals, and bright flame.
+                White spotting is rare.
+
+                <br><br>
+
+                <table style="
+                    width:100%;
+                    border-collapse:collapse;
+                    font-family:var(--font-lore);
+                    font-size:16px;
+                    color:#c8a870;
+                ">
+                    <thead>
+                        <tr>
+                            <th style="
+                                font-family:var(--font-title);
+                                font-size:12px;
+                                letter-spacing:0.25em;
+                                text-transform:uppercase;
+                                color:var(--city-accent);
+                                padding:8px 12px;
+                                border-bottom:1px solid rgba(241,215,161,0.2);
+                                text-align:left;
+                            ">Trait</th>
+                            <th style="
+                                font-family:var(--font-title);
+                                font-size:12px;
+                                letter-spacing:0.25em;
+                                text-transform:uppercase;
+                                color:var(--city-accent);
+                                padding:8px 12px;
+                                border-bottom:1px solid rgba(241,215,161,0.2);
+                                text-align:left;
+                            ">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Stat Bonus
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:14px; letter-spacing:0.2em; font-weight:700;">
+                                +2 DEX
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Height
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08);">
+                                Average 12"–14" &nbsp;·&nbsp; Munchkin 10" &nbsp;·&nbsp;
+                                Abnormally Small 11" &nbsp;·&nbsp; Abnormally Large 15"
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Physique
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08);">
+                                Slender, lithe, and lean with various fur lengths
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Eyes
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08);">
+                                Red to orange
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08); color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap;">
+                                Spotting
+                            </td>
+                            <td style="padding:9px 12px; border-bottom:1px solid rgba(241,215,161,0.08);">
+                                0–10% white spotting
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:9px 12px; color:var(--city-primary); font-family:var(--font-title); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; white-space:nowrap; vertical-align:top;">
+                                Patterns
+                            </td>
+                            <td style="padding:9px 12px;">
+                                Solid, classic tabby, ticked tabby, marbled/classic rosette,
+                                smoke, bi-color, tortoiseshell, and pointed
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br>
+                <div style="text-align:center;">
+                    <a href="/character/character-creation.html" class="city-btn" style="margin-top:8px;">
+                        Character Creation <span class="btn-arrow">›</span>
+                    </a>
+                </div>
+            `
+        },
+
+        "society-overview": {
+            title: "Society",
+            text: `
+                Originally a trade-dependent city, Eldur has since shifted its emphasis to survival
+                and self-reliance after the plague severed peaceful connections with the other cities.
+                A hierarchy forged in the crucible of strength — those who prove themselves through
+                flame rise, and those who falter are reduced to ash.
+            `
+        },
+
+        combat: {
+            title: "Ember Arts",
+            text: `
+                The fighters of Eldur undergo intense training and continue to do so long after they
+                graduate, ensuring they remain of expert skill and capable of handling incredibly
+                dangerous scenarios. Swift and lethal, Eldurian warriors fight with the same
+                philosophy as fire itself — relentless, consuming, and never retreating.
+            `
+        },
+
+        /* ── MAGIC — uncomment when magic is ready ──────────────
+        magic: {
+            title: "???",
+            text: `
+                ???
+            `
+        },
+        ────────────────────────────────────────────────────────────── */
+
+        "law-1": {
+            title: "The First Edict",
+            text: `
+                Your love, duty, and loyalty are to your city first.
+                Defend your city, even if it may cost you your life.
+            `
+        },
+        "law-2": {
+            title: "The Second Edict",
+            text: `
+                The word of the ruling Konungríki and the Kinrik is the law of Eldur.
+            `
+        },
+        "law-3": {
+            title: "The Third Edict",
+            text: `
+                If the ruling Konungríki dies, retires, or is removed from position,
+                only the eldest Kinrik may take on the mantle as the new leader of Eldur.
+            `
+        },
+        "law-4": {
+            title: "The Fourth Edict",
+            text: `
+                To speak against the ruling Konungríki and the Kinrik is considered treasonous,
+                with punishments varying in severity.
+            `
+        },
+        "law-5": {
+            title: "The Fifth Edict",
+            text: `
+                Trespassing and hunting on the land of other cities is permitted under the orders
+                of the Konungríki, to ensure the city is always well-fed and has access to any
+                resource so desired.
+            `
+        },
+        "law-6": {
+            title: "The Sixth Edict",
+            text: `
+                The Konungríki, Kinrik, and the Torches eat first.
+            `
+        },
+        "law-7": {
+            title: "The Seventh Edict",
+            text: `
+                Every cat becomes a novice at 6 cycles and will choose their fate's card,
+                which will decide what rank they will train under.
+            `
+        },
+        "law-8": {
+            title: "The Eighth Edict",
+            text: `
+                To show sympathy or loyalty to those cursed is worse than death itself.
+            `
+        },
+        "law-9": {
+            title: "The Ninth Edict",
+            text: `
+                The ruling Konungríki determines who may fill the ranks of Torches,
+                and can remove or replace anyone at any time.
+            `
+        },
+        "law-10": {
+            title: "The Tenth Edict",
+            text: `
+                Eldur remains thankful to Loki for all he provides.
+                Anyone who denies Loki and their fate is traitorous.
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       RANK POPUP DATA
+       Each entry: { title, stats[], subtitle, body }
+       body supports full HTML including .popup-duty blocks.
+    ══════════════════════════════════════════════ */
+    const rankData = {
+
+        "rank-konungr": {
+            title:    "Konungríki",
+            stats:    ["+2 RSP"],
+            subtitle: "The Leader Class",
+            body: `
+                <p>
+                    Eldur was originally a Monarchy, whose traditions were broken by a cat named
+                    Gunvald, who created the Phoenix and Fire roles so he and his brother Salomon
+                    could rule together. Salomon has since reinstated the Monarchy system, replacing
+                    the Phoenix of the city with a new ruling royal class. Titled Konungr for a king
+                    and Dróttning for a queen, this rank is the utmost ruler of Eldur and is rarely
+                    questioned without consequences. The ruling Konungríki wears a large golden
+                    necklace inlaid with ruby gemstones and decorated with bright red feathers.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Ruling Eldur</div>
+                    <p>
+                        The Konungríki runs all diplomatic affairs, communicating with citymates and
+                        making decisions for the city's welfare. They discuss and bring to their peers
+                        new rules and decisions regarding the city, and oversee card ceremonies,
+                        assessments, and all other workings of the city.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Prioritize</div>
+                    <p>
+                        As the figurehead and leader of Eldur, it is the Konungríki's responsibility
+                        to ensure all matters within and outside of the city run accordingly. This
+                        includes ensuring the city has access to all resources and materials so
+                        desired, managing trade relations with other cities, and the expulsion of
+                        outsiders.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-kinrik": {
+            title:    "Kinrik",
+            stats:    ["+5 REP"],
+            subtitle: "The Royal Class",
+            body: `
+                <p>
+                    As the royal family related to the Konungríki, cats of this class are to be
+                    respected and feared just as their ruling family members are. This class
+                    encompasses the blood family of the Konungríki, specifically the heirs to the
+                    throne: the male Hilmirs and the female Hilms. Currently, only the eldest child
+                    qualifies to take over the throne after the ruling Konungríki dies, retires, or
+                    is removed from their position.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Prepare</div>
+                    <p>
+                        The Kinrik do not have any class-specific tasks assigned, as this is a
+                        bloodline-tied class. Instead, their role is to learn and prepare to be the
+                        future potential leaders of Eldur alongside their obligations within their
+                        rank. They are the only cats permitted to choose their own rank — their
+                        card-picking ceremony is for show only, a fact kept secret from all
+                        Eldurian citizens.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-torches": {
+            title:    "Torches",
+            stats:    ["+2 RSP"],
+            subtitle: "The Second-in-Command Class",
+            body: `
+                <p>
+                    Hand-picked by the Konungríki, the Torches are a collective of cats who serve
+                    as the head of their associated rank, of utmost loyalty and skill. They must
+                    also have survived and succeeded in the dangerous Torch Trials.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Assisting the Konungríki</div>
+                    <p>
+                        Torches fill important support roles for the Konungríki and often communicate
+                        with them on city matters. They are to report any issues brought to them and
+                        are typically positioned as the overseer of important plans.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Leading Rank</div>
+                    <p>
+                        As the head of their associated rank, Torches are required to keep an eye on
+                        all members of their rank and ensure they are orderly and proficient. They
+                        also ensure that all training flows smoothly and that all members are
+                        actively participating.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-caretaker": {
+            title:    "Caretaker",
+            stats:    ["+2 INT"],
+            subtitle: "The Caretaking Class",
+            body: `
+                <p>
+                    A unique role in Eldur, the Caretaker is hand-picked by the Konungríki and
+                    tasked with ensuring all kittens of Eldur are educated properly on loyalty to
+                    the city and the Kinrik. The Caretaker is chosen regardless of their current
+                    rank, whose duties they are expected to continue with in some capacity in
+                    addition to filling this role.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Kitten Management</div>
+                    <p>
+                        The Caretaker is expected to be updated on the status of all kittens in
+                        Eldur and help maintain their health and care. They track names, litter
+                        sizes, and mutations or injuries, and are expected to use basic healing
+                        knowledge for minor matters while contacting the Healers immediately for
+                        major concerns.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Kitten Raising</div>
+                    <p>
+                        Although parents typically raise their own kittens, the Caretaker is the
+                        sole parent of orphans unless they are adopted, and often watches over other
+                        family kittens during the day. They hold an important role in modeling
+                        social cues, manners, and respect for peers.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Education</div>
+                    <p>
+                        As the Caretaker holds responsibility to all the kittens of Eldur, this
+                        class must be highly educated on the lore and cultures of the city. The
+                        Caretaker is expected to be an exemplary citizen — knowledgeable in all
+                        of the city's traditions, cultures, and laws — so the youth can be raised
+                        as loyal Eldurians to the Kinrik.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-healers": {
+            title:    "Healers",
+            stats:    ["+2 WIS"],
+            subtitle: "The Healing Class",
+            body: `
+                <p>
+                    The Healers in Eldur have a difficult job due to the city's remote location,
+                    forced to be picky with their herb usage and creative with how to grow and store
+                    supplies. The Healers, typically the eldest one, preside over the fateful
+                    card-picking ceremony.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Herb Management</div>
+                    <p>
+                        Healers are responsible for learning and retaining knowledge pertaining to
+                        herb uses and various remedies. This includes the appearance and uses of a
+                        wide variety of plants. They are also responsible for the maintenance and
+                        management of the herb gardens and herb storage, ensuring plants are healthy
+                        while removing and destroying dead or blighted herbs.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Patient Care</div>
+                    <p>
+                        Healers are highly trained in the ability to treat a variety of injuries and
+                        ailments quickly, efficiently, and correctly. They keep a close eye on
+                        patients and continually manage aftercare, medication doses, and progress
+                        logging.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Medical Invention</div>
+                    <p>
+                        Those in this class are expected to always be considering different ways for
+                        the health of the city to be improved, and are typically on the front lines
+                        of new inventions and innovations that make Eldur healthier and happier.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-embers": {
+            title:    "Embers",
+            stats:    ["+2 STR"],
+            subtitle: "The Fighting Class",
+            body: `
+                <p>
+                    The fighters of Eldur undergo intense training and continue to do so after they
+                    graduate, ensuring they are of expert skill and capable of handling incredibly
+                    dangerous scenarios.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Patrolling</div>
+                    <p>
+                        To ensure the territory and the city remain safe and secure, Embers are
+                        expected to patrol regularly. They are tasked with spotting dangers from
+                        predators or other cities before they make themselves known. This is
+                        typically done in large groups — if the party finds anything, they will
+                        often face it head-on and deal with the aggressor themselves.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Guarding</div>
+                    <p>
+                        Embers typically guard the city from various watch-points: the city
+                        entrance, the Kindle, the Konungríki and Kinrik, and vantage points
+                        throughout the city. They remain alert while on duty, their sight keen
+                        enough to spot signs of danger and act quickly.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Combat</div>
+                    <p>
+                        When it comes to facing a threat, Embers are at the front lines. All
+                        Embers undergo extensive training and fighting exercises, and even after
+                        completing their specialized novice training, they continue to participate
+                        in large sparring sessions typically overseen by their Torch.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Observing</div>
+                    <p>
+                        Embers are integral to ensuring the city's safety. Guards frequently find
+                        themselves on look-out duty within the city walls as well as on survey
+                        patrols. It is their job to alert the city of unusual activity or approaching
+                        threats, and to lead the charge for offensive and defensive maneuvers.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-seekers": {
+            title:    "Seekers",
+            stats:    ["+2 WIS"],
+            subtitle: "The Hunting Class",
+            body: `
+                <p>
+                    Due to the necessity of self-reliance after the city's trade network was shut
+                    down, the Seekers of Eldur have had to get creative in inventing complex traps
+                    to catch prey.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Trapping</div>
+                    <p>
+                        As Eldurian cats are smaller and less muscular in size, they are not as
+                        efficient when hunting alone. As a result, they have developed complex
+                        trapping techniques and types of bait, though the system is always being
+                        refined. Their job is to regularly check, harvest, and reset traps
+                        throughout the territory.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Scouting</div>
+                    <p>
+                        Frequently outside the city walls due to the constant need for trap-setting
+                        and checks, Seekers use a deep understanding of nature to scout potential
+                        prey and predator hotspots. They are often the first to detect something
+                        nearby, and are invaluable to ensuring the safety of patrols and the city
+                        at large through their early warnings.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Tracking</div>
+                    <p>
+                        Seekers are expected to be efficient in recognizing and identifying animal
+                        tracks, and to quickly seek out prey or predator scents. They are known for
+                        their sharp noses, which are an absolute necessity for their role.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Ambushing</div>
+                    <p>
+                        In addition to solo hunting, Seekers highly value teamwork. They often work
+                        in groups to track and take down larger prey or predators, using
+                        body-language and tail-signals as a form of silent communication.
+                    </p>
+                </div>
+            `
+        },
+
+        "rank-makers": {
+            title:    "Makers",
+            stats:    ["+2 WIS"],
+            subtitle: "The Crafting Class",
+            body: `
+                <p>
+                    Once creators of some of the finest items to trade with other cities, the Makers
+                    now focus on building up the city's strength and crafting the highest quality
+                    weaponry, armor, and accessories available for their citymates.
+                </p>
+
+                <div class="popup-duties-title">Responsibilities</div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Gathering</div>
+                    <p>
+                        All Makers gather their own supplies, particularly through mining in the
+                        caves to find precious metals and gems. They also gather wood, stone, and
+                        animal parts like bone when available in the prairies and forests.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Crafting</div>
+                    <p>
+                        Eldur's Makers are primarily known for their smithwork. Using fire, they
+                        melt down the various ores and minerals collected to forge them into metals,
+                        which are then shaped into goods of great value to the city.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Reinforcing</div>
+                    <p>
+                        In addition to building, Makers are an integral part of reinforcing and
+                        maintaining homes and the city walls. They are also expected to fix and
+                        repair any broken items and weapons.
+                    </p>
+                </div>
+
+                <div class="popup-duty">
+                    <div class="popup-duty-name">Trading</div>
+                    <p>
+                        Although it has been years since the city last traded with the other cities,
+                        the Makers still hold the important role of managing trade. This
+                        responsibility is immeasurably important — Makers' goods are among the
+                        finest to trade with, resulting in the procurement of fine resources and
+                        goods for Eldur.
+                    </p>
+                </div>
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       CULTURE SIDEBAR PANEL DATA
+       Each entry: { title, body }
+       body supports full HTML.
+    ══════════════════════════════════════════════ */
+    const societyContent = {
+
+        culture: {
+            title: "Social Bonds",
+            body: `
+                <p>
+                    In Eldur, who one is related to is of utmost importance. Blood and family
+                    relations are highly valued and influence how one is seen by others — and most
+                    importantly, how one is seen by the ruling Konungríki. A wrong step by one
+                    family member will affect everyone they are connected to, unless they are
+                    disowned, disavowed, or the family takes steps to remedy the mistake. On the
+                    same coin, the achievements of one family member reflect positively upon all,
+                    and the most loyal and successful families often enjoy easier access to
+                    leadership opportunities.
+                </p>
+                <p>
+                    Kittens are raised by their parents, and upon birth a torch is lit within the
+                    city to signify the new addition. Each kitten keeps their torch through
+                    adulthood until they die, at which point it is sent off with them at their
+                    funeral.
+                </p>
+                <p>
+                    Cats live in family tents or within the cave and tunnel system that digs into
+                    the mountains and crawls beneath the city. When a cat passes their assessment
+                    and is recognized as an adult, they may choose to stay with their family, live
+                    on their own, or live with friends. Romantic relationships and cohabitation
+                    with partners are also welcomed.
+                </p>
+                <p>
+                    To bear a heterochromatic child is one of the gravest sins in Eldur, upon
+                    which the parents and sometimes siblings are almost always executed once
+                    discovered. Depending on the environment, available resources, and personality
+                    of the ruling Konungríki, the cursed child may be allowed to remain in the
+                    city — often as a disposable tool for the most dangerous tasks.
+                </p>
+                <p>
+                    The Kinrik are always to be respected above all others. Cats are expected to
+                    avoid direct eye contact, adopt a submissive posture, and speak only when
+                    spoken to or given permission. To deny an order or request from any member of
+                    the Kinrik is considered treason and may be punishable.
+                </p>
+            `
+        },
+
+        religion: {
+            title: "The Ashen Faith",
+            body: `
+                <p>
+                    Considered the most devotedly religious of all the cities, Eldurian cats are
+                    fervent in their faith — frequently praying to the Gods, leaving offerings, and
+                    attributing both positive and negative occurrences as the will of the divine.
+                </p>
+                <p>
+                    Though Eldur gives reverence to all the Gods, the city's particular patron is
+                    Loki. He is often looked to as the source of happenings within the city, and
+                    novices who receive a rank they didn't hope for often comfort themselves with
+                    thoughts of Loki's mischievous nature — trusting that the path laid before
+                    them is his doing.
+                </p>
+                <p>
+                    Eldurians venerate the Phoenix and Loki as their two primary guardians. While
+                    they revere and respect all Nordic gods and legends, those two hold the most
+                    sacred place in their faith — alongside the concept of Fate, which guides
+                    their every decision.
+                </p>
+            `
+        },
+
+        creation: {
+            title: "Creation & Craftsmanship",
+            body: `
+                <p>
+                    Due to their easy access to mines and the city's well-made forges, Eldur is
+                    the undisputed leader of innovation when it comes to metalwork and gem usage.
+                    The most commonly worked metals are Aluminum, Cadmium, Chromium, Iron, Lead,
+                    Nickel, Tin, Copper, and Zinc. Gold is also available, but in finite amounts
+                    and is always reserved for use by the Kinrik only.
+                </p>
+                <p>
+                    Gems and crystals are rarer finds for the city, so mainly common minerals are
+                    used in projects — with rubies a strong favorite. Accessories are commonly
+                    crafted from leather, metal, minerals, and various found gems. Eldurians
+                    particularly enjoy adornments, and nearly everyone wears some kind of
+                    accessory.
+                </p>
+                <p>
+                    Weapons and armor draw from a wide range of materials, taking full advantage
+                    of the bounty of stone and ores found in the mines. Animal parts such as bone,
+                    antler, teeth, and claws are also used. It is common for cats to request
+                    engravings featuring good luck runes and messages of prayer to the Gods for
+                    success in combat.
+                </p>
+
+                <div style="
+                    font-family: var(--font-title);
+                    font-size: 12px;
+                    letter-spacing: 0.35em;
+                    text-transform: uppercase;
+                    color: var(--city-ink);
+                    opacity: 0.6;
+                    margin: 20px 0 12px;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid rgba(42,26,14,0.25);
+                ">
+                    Player Contributions
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:10px;">
+
+                    <div style="
+                        background: rgba(42,26,14,0.1);
+                        border: 1px solid rgba(42,26,14,0.2);
+                        border-left: 3px solid rgba(42,26,14,0.45);
+                        padding: 12px 14px;
+                    ">
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 13px;
+                            letter-spacing: 0.18em;
+                            text-transform: uppercase;
+                            color: var(--city-ink);
+                            margin-bottom: 5px;
+                        ">Surtr's Blade</div>
+                        <div style="
+                            font-family: var(--font-lore);
+                            font-size: 15px;
+                            color: #3a2010;
+                            line-height: 1.6;
+                            margin-bottom: 6px;
+                        ">
+                            A specialized Ember sword that deals burn damage,
+                            with the wielder also taking burn damage over time.
+                        </div>
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 12px;
+                            letter-spacing: 0.15em;
+                            color: rgba(42,26,14,0.55);
+                        ">Crafted by Inger</div>
+                    </div>
+
+                    <div style="
+                        background: rgba(42,26,14,0.1);
+                        border: 1px solid rgba(42,26,14,0.2);
+                        border-left: 3px solid rgba(42,26,14,0.45);
+                        padding: 12px 14px;
+                    ">
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 13px;
+                            letter-spacing: 0.18em;
+                            text-transform: uppercase;
+                            color: var(--city-ink);
+                            margin-bottom: 5px;
+                        ">Gardens</div>
+                        <div style="
+                            font-family: var(--font-lore);
+                            font-size: 15px;
+                            color: #3a2010;
+                            line-height: 1.6;
+                            margin-bottom: 6px;
+                        ">
+                            Updated and expanded the city's gardens to hold
+                            more herbs and flowers.
+                        </div>
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 12px;
+                            letter-spacing: 0.15em;
+                            color: rgba(42,26,14,0.55);
+                        ">Crafted by Stigrun</div>
+                    </div>
+
+                    <div style="
+                        background: rgba(42,26,14,0.1);
+                        border: 1px solid rgba(42,26,14,0.2);
+                        border-left: 3px solid rgba(42,26,14,0.45);
+                        padding: 12px 14px;
+                    ">
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 13px;
+                            letter-spacing: 0.18em;
+                            text-transform: uppercase;
+                            color: var(--city-ink);
+                            margin-bottom: 5px;
+                        ">Metal Traps</div>
+                        <div style="
+                            font-family: var(--font-lore);
+                            font-size: 15px;
+                            color: #3a2010;
+                            line-height: 1.6;
+                            margin-bottom: 6px;
+                        ">
+                            Designed new specialized metal-based Seeker traps.
+                        </div>
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 12px;
+                            letter-spacing: 0.15em;
+                            color: rgba(42,26,14,0.55);
+                        ">Crafted by Rollo</div>
+                    </div>
+
+                    <div style="
+                        background: rgba(42,26,14,0.1);
+                        border: 1px solid rgba(42,26,14,0.2);
+                        border-left: 3px solid rgba(42,26,14,0.45);
+                        padding: 12px 14px;
+                    ">
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 13px;
+                            letter-spacing: 0.18em;
+                            text-transform: uppercase;
+                            color: var(--city-ink);
+                            margin-bottom: 5px;
+                        ">Scented Oil Bait</div>
+                        <div style="
+                            font-family: var(--font-lore);
+                            font-size: 15px;
+                            color: #3a2010;
+                            line-height: 1.6;
+                            margin-bottom: 6px;
+                        ">
+                            A scented oil bait used in traps to increase the
+                            odds of prey interest and capture.
+                        </div>
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 12px;
+                            letter-spacing: 0.15em;
+                            color: rgba(42,26,14,0.55);
+                        ">Crafted by Cwtch</div>
+                    </div>
+
+                    <div style="
+                        background: rgba(42,26,14,0.1);
+                        border: 1px solid rgba(42,26,14,0.2);
+                        border-left: 3px solid rgba(42,26,14,0.45);
+                        padding: 12px 14px;
+                    ">
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 13px;
+                            letter-spacing: 0.18em;
+                            text-transform: uppercase;
+                            color: var(--city-ink);
+                            margin-bottom: 5px;
+                        ">Fertilizer</div>
+                        <div style="
+                            font-family: var(--font-lore);
+                            font-size: 15px;
+                            color: #3a2010;
+                            line-height: 1.6;
+                            margin-bottom: 6px;
+                        ">
+                            Improved the means of growing herbs in the gardens.
+                        </div>
+                        <div style="
+                            font-family: var(--font-title);
+                            font-size: 12px;
+                            letter-spacing: 0.15em;
+                            color: rgba(42,26,14,0.55);
+                        ">Crafted by Saxi</div>
+                    </div>
+
+                </div>
+            `
+        },
+
+        training: {
+            title: "Training & The Card Ceremony",
+            body: `
+                <p>
+                    All kittens, upon reaching the age of 6 cycles, participate in the
+                    card-picking ceremony hosted in the Wyrd Cave, presided over by the city's
+                    eldest Healer. This ceremony holds great importance to Eldur, and it is
+                    expected that everyone in the city will attend. Cats believe the Gods —
+                    especially Loki — are watching and will decide the kitten's fate as they
+                    choose their card.
+                </p>
+                <p>
+                    Each kitten approaches the Healer in charge of the ceremony and picks one of
+                    four wooden cards. When flipped over, the card reveals one of four symbols:
+                    the carved symbol of flames for Ember, an engraving of a single eye for
+                    Seeker, the chiseled cut of a sword for Maker, or an etched drawing of a
+                    heart for Healer.
+                </p>
+                <p>
+                    From 6 cycles to 20 cycles, the specialized novice trains under a mentor in
+                    their revealed rank. At the end of their training, they must pass an
+                    assessment — success resulting in recognition as an adult within their rank,
+                    granting adult privileges and greater access to various armor and weaponry.
+                </p>
+                <p>
+                    No one may change their rank once it has been decided during the card-picking
+                    ceremony. To consider changing it is seen as an affront to the path laid down
+                    by the Gods. All cats are expected to excel in their rank whether they enjoy
+                    it or not, regardless of any physical hindrances, in service to the city and
+                    to the Gods.
+                </p>
+            `
+        },
+
+        jewelry: {
+            title: "Jewelry & Adornment",
+            body: `
+                <p>
+                    Eldurians particularly enjoy adornments compared to the other cities, and
+                    almost everyone wears some kind of accessory. Accessories are commonly made
+                    from leather, metal, minerals, and various found gems, with rubies a strong
+                    favorite of most of the city.
+                </p>
+                <p>
+                    The most coveted adornments are those worked in gold — however, gold is
+                    available only in finite amounts and is strictly reserved for use by the
+                    Kinrik. A member of the Kinrik's gold jewelry marks their station clearly,
+                    the soft gleam of it a quiet reminder of the power they carry.
+                </p>
+                <p>
+                    It is common for cats to request engravings on their personal pieces featuring
+                    good luck runes and messages of prayer to the Gods. Accessories thus serve not
+                    only as personal expression, but as devotional objects — a constant reminder
+                    of duty to the city and faith in the flame.
+                </p>
+            `
+        },
+
+    };
+
+    /* ══════════════════════════════════════════════
+       POPUP ENGINE
+    ══════════════════════════════════════════════ */
+    const popup         = document.getElementById('popup');
+    const popupTitle    = document.getElementById('popup-title');
+    const popupBody     = document.getElementById('popup-body');
+    const popupStatRow  = document.getElementById('popup-stat-row');
+    const popupSubtitle = document.getElementById('popup-subtitle');
+    const popupClose    = document.getElementById('popup-close');
+    const popupPrev     = document.getElementById('popup-prev');
+    const popupNext     = document.getElementById('popup-next');
+
+    /* Track what's currently open so arrows know what to cycle through */
+    let currentMode  = null;  /* 'rank' | 'law' | 'simple' */
+    let currentIndex = 0;
+
+    /* Ordered lists that arrows will cycle through */
+    const rankOrder = [
+        'rank-konungr', 'rank-kinrik', 'rank-torches', 'rank-caretaker',
+        'rank-healers', 'rank-embers', 'rank-seekers', 'rank-makers'
+    ];
+
+    const lawOrder = [
+        'law-1', 'law-2', 'law-3', 'law-4', 'law-5',
+        'law-6', 'law-7', 'law-8', 'law-9', 'law-10'
+    ];
+
+    function updateNavArrows() {
+        const list = currentMode === 'rank' ? rankOrder : lawOrder;
+        if (!list || currentMode === 'simple') {
+            popupPrev.classList.remove('visible');
+            popupNext.classList.remove('visible');
+            return;
+        }
+        popupPrev.classList.toggle('visible', currentIndex > 0);
+        popupNext.classList.toggle('visible', currentIndex < list.length - 1);
+    }
+
+    function renderRank(key) {
+        const d = rankData[key];
+        if (!d) return;
+        popupTitle.textContent = d.title;
+        popupBody.innerHTML    = d.body;
+
+        popupStatRow.innerHTML = d.stats
+            .map(s => `<span class="popup-stat-badge"><span class="stat-gem">✦</span>${s}</span>`)
+            .join('');
+        popupStatRow.style.display  = 'flex';
+        popupSubtitle.textContent   = d.subtitle;
+        popupSubtitle.style.display = 'block';
+        popup.querySelector('.popup-body-scroll').scrollTop = 0;
+    }
+
+    function renderLaw(key) {
+        const d = lore[key];
+        if (!d) return;
+        popupTitle.textContent      = d.title;
+        popupBody.innerHTML         = `<p>${d.text}</p>`;
+        popupStatRow.style.display  = 'none';
+        popupSubtitle.style.display = 'none';
+        popup.querySelector('.popup-body-scroll').scrollTop = 0;
+    }
+
+    function openSimplePopup(key) {
+        const d = lore[key];
+        if (!d) return;
+        currentMode  = 'simple';
+        currentIndex = 0;
+        popupTitle.textContent      = d.title;
+        popupBody.innerHTML         = `<p>${d.text}</p>`;
+        popupStatRow.style.display  = 'none';
+        popupSubtitle.style.display = 'none';
+        updateNavArrows();
+        showPopup();
+    }
+
+    function openRankPopup(key) {
+        const idx = rankOrder.indexOf(key);
+        if (idx === -1) return;
+        currentMode  = 'rank';
+        currentIndex = idx;
+        renderRank(key);
+        updateNavArrows();
+        showPopup();
+    }
+
+    function openLawPopup(key) {
+        const idx = lawOrder.indexOf(key);
+        if (idx === -1) return;
+        currentMode  = 'law';
+        currentIndex = idx;
+        renderLaw(key);
+        updateNavArrows();
+        showPopup();
+    }
+
+    function navigatePopup(direction) {
+        const list = currentMode === 'rank' ? rankOrder : lawOrder;
+        const next = currentIndex + direction;
+        if (next < 0 || next >= list.length) return;
+        currentIndex = next;
+        if (currentMode === 'rank') renderRank(list[currentIndex]);
+        else                        renderLaw(list[currentIndex]);
+        updateNavArrows();
+    }
+
+    function showPopup() {
+        popup.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup() {
+        popup.classList.remove('is-open');
+        document.body.style.overflow = '';
+    }
+
+    document.body.addEventListener('click', e => {
+        const rankTrigger   = e.target.closest('[data-rank-popup]');
+        const simpleTrigger = e.target.closest('[data-popup]');
+        if (rankTrigger)   { openRankPopup(rankTrigger.dataset.rankPopup); return; }
+        if (simpleTrigger) {
+            /* Law rows use data-popup="law-X" — route them to the law navigator */
+            const key = simpleTrigger.dataset.popup;
+            if (key.startsWith('law-')) { openLawPopup(key); return; }
+            openSimplePopup(key);
+            return;
+        }
+        if (e.target === popup) closePopup();
+    });
+
+    popupPrev.addEventListener('click', () => navigatePopup(-1));
+    popupNext.addEventListener('click', () => navigatePopup(+1));
+    popupClose.addEventListener('click', closePopup);
+    document.addEventListener('keydown', e => {
+        if (!popup.classList.contains('is-open')) return;
+        if (e.key === 'Escape')     closePopup();
+        if (e.key === 'ArrowLeft')  navigatePopup(-1);
+        if (e.key === 'ArrowRight') navigatePopup(+1);
+    });
+
+    /* ══════════════════════════════════════════════
+       CULTURE SIDEBAR SWITCHER
+    ══════════════════════════════════════════════ */
+    const panelTitle   = document.getElementById('society-panel-title');
+    const panelBody    = document.getElementById('society-panel-body');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link[data-society]');
+
+    panelTitle.style.transition = 'opacity 0.2s ease';
+    panelBody.style.transition  = 'opacity 0.2s ease';
+
+    function switchSocietyPanel(key) {
+        if (!societyContent[key]) return;
+        panelTitle.style.opacity = panelBody.style.opacity = '0';
+        setTimeout(() => {
+            panelTitle.innerHTML = societyContent[key].title;
+            panelBody.innerHTML  = societyContent[key].body;
+            panelTitle.style.opacity = panelBody.style.opacity = '1';
+        }, 200);
+        sidebarLinks.forEach(l => l.classList.toggle('active', l.dataset.society === key));
+    }
+
+    sidebarLinks.forEach(l => l.addEventListener('click', () => switchSocietyPanel(l.dataset.society)));
+
+    /* Load the first tab on page load */
+    switchSocietyPanel('culture');
+
+    /* ══════════════════════════════════════════════
+       STICKY NAV ACTIVE STATE + SCROLL REVEAL
+    ══════════════════════════════════════════════ */
+    const navLinks = document.querySelectorAll('.city-nav a');
+
+    document.querySelectorAll('section[id]').forEach(section => {
+        new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    navLinks.forEach(a =>
+                        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id)
+                    );
+                }
+            });
+        }, { threshold: 0.3 }).observe(section);
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+        new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 }).observe(el);
+    });
+
+    </script>
+</body>
+</html>

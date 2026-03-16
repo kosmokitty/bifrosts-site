@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>Astronomy ✦ Bifrosts</title>
+    <style>
+
+        /* ===== CONSTELLATIONS ===== */
+        .constellation-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0 40px;
+        }
+
+        .constellation {
+            padding: 14px 18px;
+            border-left: 2px solid rgba(150,200,255,0.25);
+            background: rgba(15,20,40,0.5);
+            border-radius: 0 6px 6px 0;
+            transition: 0.2s ease;
+        }
+
+        .constellation:hover {
+            background: rgba(25,35,65,0.7);
+            border-left-color: rgba(150,200,255,0.5);
+        }
+
+        .constellation h4 {
+            font-family: 'Marcellus SC', serif;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            color: #d6e1ff;
+            margin: 0 0 5px;
+        }
+
+        .constellation p {
+            font-size: 0.84rem;
+            color: #5a6e8a;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ===== ZODIAC LAYOUT ===== */
+        .zodiac-container {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 40px;
+            align-items: start;
+            margin: 30px 0 60px;
+        }
+
+        @media (max-width: 800px) {
+            .zodiac-container { grid-template-columns: 1fr; }
+        }
+
+        /* ===== ZODIAC WHEEL ===== */
+        .zodiac-wheel {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(150,200,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, rgba(120,180,255,0.06) 0%, transparent 70%);
+            flex-shrink: 0;
+        }
+
+        .sign-icon {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: rotate(calc(var(--i) * 30deg)) translateY(-128px) rotate(calc(var(--i) * -30deg));
+            border-radius: 50%;
+        }
+
+        .sign-icon:hover {
+            transform: rotate(calc(var(--i) * 30deg)) translateY(-140px) rotate(calc(var(--i) * -30deg)) scale(1.3);
+            filter: drop-shadow(0 0 8px rgba(165,180,252,0.7));
+        }
+
+        .sign-icon.active {
+            filter: drop-shadow(0 0 12px rgba(165,180,252,0.9));
+        }
+
+        .center-flare {
+            font-size: 2rem;
+            color: #d6e1ff;
+            text-shadow: 0 0 20px rgba(120,180,255,0.6);
+            pointer-events: none;
+        }
+
+        /* ===== DETAIL PANEL ===== */
+        .zodiac-detail-panel {
+            background: rgba(12,18,38,0.9);
+            border: 1px solid rgba(150,200,255,0.15);
+            border-radius: 10px;
+            padding: 28px;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .detail-placeholder {
+            text-align: center;
+            color: #2a3755;
+            font-style: italic;
+            font-size: 0.88rem;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid rgba(150,200,255,0.15);
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+        }
+
+        .detail-header h3 {
+            margin: 0;
+            font-family: 'Marcellus SC', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #d6e6ff;
+            text-shadow: 0 0 12px rgba(120,180,255,0.3);
+        }
+
+        .element-badge {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: #4f6496;
+            letter-spacing: 2px;
+        }
+
+        #z-blurb {
+            font-size: 0.86rem;
+            line-height: 1.75;
+            color: #8899bb;
+            margin: 0 0 18px;
+        }
+
+        .stat-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            background: rgba(0,0,0,0.2);
+            padding: 14px 16px;
+            border-radius: 6px;
+            border: 1px solid rgba(42,55,85,0.5);
+        }
+
+        .stat-item strong {
+            display: block;
+            font-family: 'Marcellus SC', serif;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            color: #a5b4fc;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .stat-item span {
+            font-size: 0.82rem;
+            color: #5a6e8a;
+            line-height: 1.5;
+        }
+
+    
+</style>
+</head>
+
+<body>
+
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    <div class="clouds"></div>
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+
+<!-- ================= END NAV ================= -->
+
+    <main class="archive">
+        <h1>Astronomy</h1>
+        <div class="section-divider"></div>
+
+        <p>
+            The skies above Fyrstrheim hold a quiet mystery. Two moons rise and fall in a dance older than the world itself. With them come stronger tides, more frequent tsunamis, heightened volcanic activity, and a multitude of earthquakes.
+        </p>
+
+        <p>
+            The constellations, shaped by the creatures and gods of this land, trace paths known only to those who walk the earth. Moonlight reflects not just upon the land, but upon the ancient forces of Fenrir and Jord, whose influence runs through the very stars.
+        </p>
+
+        <h2>Constellations and Stars</h2>
+        <div class="section-divider"></div>
+
+        <p>
+            In <i>The Song of the Seer</i>, the origin of the stars and moons is woven into a tapestry passed down for generations — a tale of the world's birth and its foretold end at Ragnarök.
+            Fyrstrheim was shaped from the fallen body of the great giant, Ymer, whose skull became the sky's dome above. Four ancient, sightless cats now hold it steady at the corners of the world.
+            Sparks from Muspellheim leapt into the heavens and became the stars.
+        </p>
+
+        <div class="constellation-grid">
+            <div class="constellation">
+                <h4>Ulf's Keptr</h4>
+                <p>The Mouth of the Wolf — representing the wolves that hunt the sun and moon. Otherwise known as Pisces.</p>
+            </div>
+            <div class="constellation">
+                <h4>Friggs Distaff</h4>
+                <p>Orion. Often used for navigation by those who live along the ocean.</p>
+            </div>
+            <div class="constellation">
+                <h4>Karlsvagn</h4>
+                <p>Ursa Major — the Man's Chariot. Some believe it once belonged to Thor.</p>
+            </div>
+            <div class="constellation">
+                <h4>Kvennavagn</h4>
+                <p>Ursa Minor — the Woman's Chariot. Often associated with Freya.</p>
+            </div>
+            <div class="constellation">
+                <h4>Auriga</h4>
+                <p>Also called Ásar Bardagi — the battlefield of the gods, interpreted as Thor's struggle at Ragnarök.</p>
+            </div>
+            <div class="constellation">
+                <h4>Dagstjarna</h4>
+                <p>The Day Star (Arcturus). Visible before sunrise in late winter and spring — a sign that dawn is coming.</p>
+            </div>
+            <div class="constellation">
+                <h4>Leidarstjarna</h4>
+                <p>The Guiding Star (Polaris). Always in the north, and used for navigation.</p>
+            </div>
+        </div>
+
+        <h2>Zodiak of Fyrstrheim</h2>
+        <div class="section-divider"></div>
+
+        <p>
+            The cats of Fyrstrheim, religious as ever, often look to the stars for answers — and at times, the stars whisper back.
+            Cycles ago, a cat known as <b>Starri</b> took on the mantle of <b>Zodiak Keeper</b>. She traveled to the cities and revealed how birth months dictate personality, beliefs, and actions.
+        </p>
+
+        <div class="zodiac-container">
+
+            <div class="zodiac-wheel">
+                <div class="sign-icon" style="--i:0;"  onclick="updateZodiac(this,'Wolf')">🐺</div>
+                <div class="sign-icon" style="--i:1;"  onclick="updateZodiac(this,'Serpent')">🐍</div>
+                <div class="sign-icon" style="--i:2;"  onclick="updateZodiac(this,'Goat')">🐐</div>
+                <div class="sign-icon" style="--i:3;"  onclick="updateZodiac(this,'Raven')">🐦‍⬛</div>
+                <div class="sign-icon" style="--i:4;"  onclick="updateZodiac(this,'Squirrel')">🐿️</div>
+                <div class="sign-icon" style="--i:5;"  onclick="updateZodiac(this,'Cat')">🐱</div>
+                <div class="sign-icon" style="--i:6;"  onclick="updateZodiac(this,'Dragon')">🐉</div>
+                <div class="sign-icon" style="--i:7;"  onclick="updateZodiac(this,'Bear')">🐻</div>
+                <div class="sign-icon" style="--i:8;"  onclick="updateZodiac(this,'Horse')">🐴</div>
+                <div class="sign-icon" style="--i:9;"  onclick="updateZodiac(this,'Eagle')">🦅</div>
+                <div class="sign-icon" style="--i:10;" onclick="updateZodiac(this,'Stag')">🦌</div>
+                <div class="sign-icon" style="--i:11;" onclick="updateZodiac(this,'Boar')">🐗</div>
+                <div class="center-flare">✦</div>
+            </div>
+
+            <div id="zodiac-display" class="zodiac-detail-panel">
+                <div id="default-msg" class="detail-placeholder">✦ Click a sign to read its star-lore.</div>
+                <div id="zodiac-content" style="display:none;">
+                    <div class="detail-header">
+                        <h3 id="z-title"></h3>
+                        <span class="element-badge" id="z-element"></span>
+                        <span class="element-badge" id="z-dates" style="color:#3a4d6a;"></span>
+                    </div>
+                    <p id="z-blurb"></p>
+                    <div class="stat-columns">
+                        <div class="stat-item">
+                            <strong>Strengths</strong>
+                            <span id="z-strengths"></span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>Weaknesses</strong>
+                            <span id="z-weaknesses"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align:center;">
+        <h2>Birthday Calculator</h2>
+        <div class="section-divider"></div>
+        <p>Enter your birthday to discover your Fyrstrheim zodiak sign.</p>
+
+        <div style="display:flex; gap:10px; align-items:center; justify-content:center; margin:20px 0 10px; flex-wrap:wrap;">
+            <select id="bday-month" style="padding:8px 12px; background:rgba(10,14,30,0.95); border:1px solid #2a3755; color:#d6e1ff; border-radius:4px; font-family:inherit; font-size:0.85rem; outline:none;">
+                <option value="">Month</option>
+                <option value="1">January</option><option value="2">February</option>
+                <option value="3">March</option><option value="4">April</option>
+                <option value="5">May</option><option value="6">June</option>
+                <option value="7">July</option><option value="8">August</option>
+                <option value="9">September</option><option value="10">October</option>
+                <option value="11">November</option><option value="12">December</option>
+            </select>
+            <select id="bday-day" style="padding:8px 12px; background:rgba(10,14,30,0.95); border:1px solid #2a3755; color:#d6e1ff; border-radius:4px; font-family:inherit; font-size:0.85rem; outline:none;">
+                <option value="">Day</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <button onclick="calculateSign()" style="padding:8px 20px; background:rgba(15,20,40,0.9); border:1px solid #2a3755; color:#d6e1ff; border-radius:4px; font-family:inherit; font-size:0.82rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:0.2s;">Find My Sign</button>
+        </div>
+
+        <div id="calc-result" style="display:none; margin:16px auto 0; padding:20px 24px; background:rgba(12,18,38,0.9); border:1px solid rgba(150,200,255,0.15); border-radius:10px; max-width:500px;">
+            <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px;">
+                <span id="calc-emoji" style="font-size:2.4rem;"></span>
+                <div>
+                    <div id="calc-title" style="font-family:'Marcellus SC',serif; font-size:1.1rem; letter-spacing:2px; color:#d6e6ff;"></div>
+                    <div id="calc-dates" style="font-size:0.75rem; color:#3a4d6a; letter-spacing:1px; margin-top:3px;"></div>
+                    <div id="calc-element" style="font-size:0.72rem; color:#4f6496; text-transform:uppercase; letter-spacing:2px; margin-top:2px;"></div>
+                </div>
+            </div>
+            <p id="calc-blurb" style="font-size:0.84rem; color:#8899bb; line-height:1.75; margin:0 0 14px;"></p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; background:rgba(0,0,0,0.2); padding:12px 14px; border-radius:6px; border:1px solid rgba(42,55,85,0.5);">
+                <div><strong style="display:block; font-family:'Marcellus SC',serif; font-size:0.7rem; letter-spacing:1.5px; color:#a5b4fc; text-transform:uppercase; margin-bottom:4px;">Strengths</strong><span id="calc-strengths" style="font-size:0.82rem; color:#5a6e8a;"></span></div>
+                <div><strong style="display:block; font-family:'Marcellus SC',serif; font-size:0.7rem; letter-spacing:1.5px; color:#a5b4fc; text-transform:uppercase; margin-bottom:4px;">Weaknesses</strong><span id="calc-weaknesses" style="font-size:0.82rem; color:#5a6e8a;"></span></div>
+            </div>
+        </div>
+        <div id="calc-none" style="display:none; margin-top:12px; text-align:center; font-size:0.84rem; color:#2a3755; font-style:italic;">Please select both a month and a day.</div>
+        </div>
+
+    </main>
+
+    <script>
+    // Month ranges: [startMonth(1-12), startDay, endMonth, endDay]
+    const zRanges = [
+        { sign: 'Wolf',     start: [1,1],   end: [1,30]  },
+        { sign: 'Serpent',  start: [1,31],  end: [3,1]   },
+        { sign: 'Goat',     start: [3,2],   end: [3,31]  },
+        { sign: 'Raven',    start: [4,1],   end: [4,30]  },
+        { sign: 'Squirrel', start: [5,1],   end: [5,30]  },
+        { sign: 'Cat',      start: [5,31],  end: [6,29]  },
+        { sign: 'Dragon',   start: [6,30],  end: [7,29]  },
+        { sign: 'Bear',     start: [7,30],  end: [8,28]  },
+        { sign: 'Horse',    start: [8,29],  end: [9,27]  },
+        { sign: 'Eagle',    start: [9,28],  end: [10,27] },
+        { sign: 'Stag',     start: [10,28], end: [11,26] },
+        { sign: 'Boar',     start: [11,27], end: [12,31] },
+    ];
+
+    function getSignForDate(month, day) {
+        for (const r of zRanges) {
+            const afterStart = (month > r.start[0]) || (month === r.start[0] && day >= r.start[1]);
+            const beforeEnd  = (month < r.end[0])   || (month === r.end[0]   && day <= r.end[1]);
+            if (afterStart && beforeEnd) return r.sign;
+        }
+        return null;
+    }
+
+    const zData = {
+        'Wolf':     { title: "Month of the Wolf", dates: "Jan 1 – Jan 30",     element: "Moon",
+                      blurb: "Those born in the month of the wolf are known for their fierce dedication. Unafraid of hard decisions, they are quick to spar should someone disagree.",
+                      strengths: "Devoted, protective, decisive", weaknesses: "Emotional, intensive, aggressive" },
+        'Serpent':  { title: "Month of the Serpent", dates: "Jan 31 – Mar 1",  element: "Tide",
+                      blurb: "Mysterious and thoughtful, serpents rarely display all they are capable of. They prefer studying others before sharing opinions.",
+                      strengths: "Thoughtful, strategic, patient", weaknesses: "Reserved, abstract, mysterious" },
+        'Goat':     { title: "Month of the Goat", dates: "Mar 2 – Mar 31",     element: "Root",
+                      blurb: "Stalwart companions known for practical natures. Though they can be rigid or blunt, they care deeply for their loved ones.",
+                      strengths: "Reliable, practical, supportive", weaknesses: "Traditional, rigid, blunt" },
+        'Raven':    { title: "Month of the Raven", dates: "Apr 1 – Apr 30",    element: "Sun",
+                      blurb: "Bright as their symbol, ravens are wellsprings of information. Their complex minds are always searching for secrets.",
+                      strengths: "Intelligent, tireless, insightful", weaknesses: "Complex, analytical, mistrusting" },
+        'Squirrel': { title: "Month of the Squirrel", dates: "May 1 – May 30", element: "Storm",
+                      blurb: "Energetic and restless individuals who have a hard time staying still. They investigate everything but shy away from conflict.",
+                      strengths: "Curious, active, playful", weaknesses: "Restless, skittish, disruptive" },
+        'Cat':      { title: "Month of the Cat", dates: "May 31 – Jun 29",      element: "Moon",
+                      blurb: "Independent and selective, cats only commit to tasks if they have a vested interest. They are charming yet cunning companions.",
+                      strengths: "Charming, brave, loyal", weaknesses: "Selective, cunning, independent" },
+        'Dragon':   { title: "Month of the Dragon", dates: "Jun 30 – Jul 29",   element: "Flame",
+                      blurb: "Overwhelmingly determined trend-setters. While go-getters, their greedy and ambitious nature ensures frequent confrontation.",
+                      strengths: "Determined, transformative, prudent", weaknesses: "Greedy, confrontational, ambitious" },
+        'Bear':     { title: "Month of the Bear", dates: "Jul 30 – Aug 28",     element: "Root",
+                      blurb: "A bulwark for the community, bears are protective and sturdy. They love to indulge and will lay their life on the line for friends.",
+                      strengths: "Protective, sturdy, loyal", weaknesses: "Self-sacrificing, aggressive, indulgent" },
+        'Horse':    { title: "Month of the Horse", dates: "Aug 29 – Sep 27",    element: "Storm",
+                      blurb: "Independent spirits who barely keep their feet on the ground. Driven by internal forces, they possess inexhaustible stamina.",
+                      strengths: "Driven, optimistic, independent", weaknesses: "Adventurous, skittish, impractical" },
+        'Eagle':    { title: "Month of the Eagle", dates: "Sep 28 – Oct 27",    element: "Sun",
+                      blurb: "Incredibly perceptive and principled. While they can be aloof or cold, they are brutal taskmasters to themselves and others.",
+                      strengths: "Perceptive, principled, idealistic", weaknesses: "Aloof, cold, brutal" },
+        'Stag':     { title: "Month of the Stag", dates: "Oct 28 – Nov 26",     element: "Tide",
+                      blurb: "Islands of peace and calm. They are fair-minded mediators who struggle with violence and are easily tricked.",
+                      strengths: "Calm, observant, fair", weaknesses: "Gentle, anxious, gullible" },
+        'Boar':     { title: "Month of the Boar", dates: "Nov 27 – Dec 31",     element: "Flame",
+                      blurb: "Full of passion and generosity. However, they possess an uncompromisingly violent streak when threatened or wronged.",
+                      strengths: "Brave, passionate, generous", weaknesses: "Headstrong, expedient, violent" },
+    };
+
+    function updateZodiac(el, sign) {
+        const data = zData[sign];
+        // active state on icon
+        document.querySelectorAll('.sign-icon').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        // populate panel
+        document.getElementById('default-msg').style.display = 'none';
+        document.getElementById('zodiac-content').style.display = 'block';
+        document.getElementById('z-title').innerText = data.title;
+        document.getElementById('z-element').innerText = data.element;
+        document.getElementById('z-dates').innerText = data.dates;
+        document.getElementById('z-blurb').innerText = data.blurb;
+        document.getElementById('z-strengths').innerText = data.strengths;
+        document.getElementById('z-weaknesses').innerText = data.weaknesses;
+    }
+
+    function calculateSign() {
+        const month = parseInt(document.getElementById('bday-month').value);
+        const day   = parseInt(document.getElementById('bday-day').value);
+        document.getElementById('calc-result').style.display = 'none';
+        document.getElementById('calc-none').style.display = 'none';
+        if (!month || !day) {
+            document.getElementById('calc-none').style.display = 'block';
+            return;
+        }
+        const sign = getSignForDate(month, day);
+        if (!sign) { document.getElementById('calc-none').style.display = 'block'; return; }
+        const d = zData[sign];
+        const emojiMap = {Wolf:'🐺',Serpent:'🐍',Goat:'🐐',Raven:'🐦‍⬛',Squirrel:'🐿️',Cat:'🐱',Dragon:'🐉',Bear:'🐻',Horse:'🐴',Eagle:'🦅',Stag:'🦌',Boar:'🐗'};
+        document.getElementById('calc-emoji').innerText     = emojiMap[sign];
+        document.getElementById('calc-title').innerText     = d.title;
+        document.getElementById('calc-dates').innerText     = d.dates;
+        document.getElementById('calc-element').innerText   = 'Element: ' + d.element;
+        document.getElementById('calc-blurb').innerText     = d.blurb;
+        document.getElementById('calc-strengths').innerText = d.strengths;
+        document.getElementById('calc-weaknesses').innerText= d.weaknesses;
+        document.getElementById('calc-result').style.display = 'block';
+    }
+    </script>
+
+</body>
+</html>

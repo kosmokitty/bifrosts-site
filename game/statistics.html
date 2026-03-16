@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title> Statistics ✦ Bifrosts </title>
+    <style>
+        /* STAT TYPE GRID */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid #2a3755;
+            border-radius: 8px;
+            padding: 15px;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: #4f6496;
+            transform: translateY(-2px);
+        }
+
+        .stat-card b {
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card span {
+            font-size: 0.85rem;
+            color: #d6e1ff;
+            line-height: 1.4;
+        }
+
+        /* LINEAGE GRID */
+        .lineage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .lineage-item {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(79, 100, 150, 0.3);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        /* TABLE STYLING */
+        .stat-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 40px 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .stat-table th {
+            background: #1e293b;
+            color: #fff;
+            padding: 12px;
+            text-align: left;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .stat-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .stat-table tr:hover {
+            background: rgba(79, 100, 150, 0.1);
+        }
+
+        @media (max-width: 900px) {
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+ 
+    <main class="archive">
+
+        <h1> Statistics </h1>
+        <div class="section-divider"></div>
+        <p>Each player's character will have five different statistics: Strength, Constitution, Dexterity, Wisdom, and Intelligence. These six statistics determine how easy or how difficult it is to complete an action, and will translate into modifiers for action dice-rolls. These statistics will scale with a characters age and learning progression in this world. Charisma is no longer a player-determined statistic, and is now influenced by the character's reputation. A character's statistics will determine a character's ability to perform various tasks during events and all roleplays. There's no god-modding here!</p>
+
+        <h2>Statistic Types</h2>
+        <div class="section-divider"></div>
+        <div class="stat-grid">
+            <div class="stat-card"><b>Strength (STR)</b><span>Used for physical power and athletics.</span></div>
+            <div class="stat-card"><b>Constitution (CON)</b><span>Used for endurance and athletics.</span></div>
+            <div class="stat-card"><b>Dexterity (DEX)</b><span>Used for acrobatics, agility, sleight of hand, and stealth.</span></div>
+            <div class="stat-card"><b>Intelligence (INT)</b><span>Used for reasoning, memory, history, nature, and religion.</span></div>
+            <div class="stat-card"><b>Wisdom (WIS)</b><span>Used for perception, insight, handling, medicine, and awareness.</span></div>
+            <div class="stat-card"><b>Charisma (CHA)</b><span>Used for deception, intimidation, performance, and persuasion.</span></div>
+            <div class="stat-card"><b>Reputation (REP)</b><span>Controls how much Charisma your character has. See the Reputation tab for more details.</span></div>
+        </div>
+
+        <h2>Lineage Bonus</h2>
+        <div class="section-divider"></div>
+        <p>Your character's lineage determines what buffs they recieve: </p>
+        <div class="lineage-grid">
+            <div class="lineage-item">🔥 A cat with red eyes will receive +2 DEX.</div>
+            <div class="lineage-item">🌊 A cat with blue eyes will receive +2 DEX.</div>
+            <div class="lineage-item">⚡ A cat with grey eyes will receive +2 CON.</div>
+            <div class="lineage-item">🌲 A cat with green eyes will receive +2 CON.</div>
+            <div class="lineage-item">🌈 A cat with heterochromia will receive +4 WIS.</div>
+        </div>
+
+        <h2>Base Statistics</h2>
+        <div class="section-divider"></div>
+        <p>As characters grow older, they naturally gain additional statistics. At each milestone, players can decide how to distribute these points to suit their character’s development.</p>
+
+        <p>Each age group has a set Statistic Point (SP) limit that cannot be exceeded. However, both city bonuses and class bonuses do not count toward this total.</p>
+        
+        <h2>Lifestage Statistics</h2>
+        <table class="stat-table">
+            <tr>
+                <th>Lifestage</th>
+                <th>Choose SP?</th>
+                <th>Total SP</th>
+                <th>Max Per Stat</th>
+                <th>HP Formula</th>
+                <th>AC Formula</th>
+                <th>Rank Bonus?</th>
+            </tr>
+            <tr>
+                <td>Kitten</td>
+                <td>Yes</td>
+                <td>8</td>
+                <td>2</td>
+                <td>5 + (10 × CON)</td>
+                <td>10 + DEX</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Novice</td>
+                <td>Yes</td>
+                <td>14</td>
+                <td>4</td>
+                <td>10 + (10 × CON)</td>
+                <td>10 + DEX</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>Specialized Novice</td>
+                <td>No</td>
+                <td>16</td>
+                <td>4</td>
+                <td>15 + (10 × CON)</td>
+                <td>10 + DEX</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Adult</td>
+                <td>Yes</td>
+                <td>24</td>
+                <td>10</td>
+                <td>25 + (10 × CON)</td>
+                <td>10 + DEX</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Senior</td>
+                <td>No</td>
+                <td>24</td>
+                <td>10</td>
+                <td>20 + (10 × CON)</td>
+                <td>10 + DEX</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>Elder</td>
+                <td>No</td>
+                <td>24</td>
+                <td>10</td>
+                <td>15 + (10 × CON)</td>
+                <td>10 + DEX</td>
+                <td>No</td>
+            </tr>
+        </table>
+
+        <h2>Class and Rank Bonuses</h2>
+        <div class="section-divider"></div>
+        <p>Classes grant bonus SP automatically based on your character’s rank. These SP bonuses can be viewed on your character card.</p>
+
+        <table class="stat-table">
+            <tr>
+                <th>Lifestage</th>
+                <th>Cycles</th>
+                <th>Fighting</th>
+                <th>Hunting</th>
+                <th>Healing</th>
+                <th>Crafting</th>
+                <th>Teaching</th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>Leaders</td>
+                <td>30+</td>
+                <td>+2 STR</td>
+                <td>+2 WIS</td>
+                <td>+2 WIS</td>
+                <td>+2 WIS</td>
+                <td>+2 INT</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>Leads</td>
+                <td>25+</td>
+                <td>+2 STR</td>
+                <td>+2 WIS</td>
+                <td>+2 WIS</td>
+                <td>+2 WIS</td>
+                <td>+2 INT</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Adult</td>
+                <td>20+</td>
+                <td>+2 STR</td>
+                <td>+2 WIS</td>
+                <td>+2 WIS</td>
+                <td>+2 WIS</td>
+                <td>+2 INT</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Novice</td>
+                <td>10+</td>
+                <td>+2 STR</td>
+                <td>+2 WIS</td>
+                <td>+2 WIS</td>
+                <td>+2 WIS</td>
+                <td>+2 INT</td>
+                <td>2</td>
+            </tr>
+        </table>
+
+    </main>
+</body>
+</html>

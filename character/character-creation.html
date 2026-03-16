@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title> Character Creation ✦ Bifrosts </title>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+
+    <main class="archive">
+        <section class="creation-guide">
+            <h2>Character Creation Guide</h2>
+            
+            <div class="step-nav">
+                <button class="step-link active" onclick="openStep(event, 'step-rules')">1. Rules </button>
+                <button class="step-link" onclick="openStep(event, 'step-id')">2. Identity</button>
+                <button class="step-link" onclick="openStep(event, 'step-eyes')">3. Origins & Eyes</button>
+                <button class="step-link" onclick="openStep(event, 'step-cities')">4. City Traits</button>
+                <button class="step-link" onclick="openStep(event, 'step-design')">5. Design</button>
+                <button class="step-link" onclick="openStep(event, 'step-finish')">6. Finish</button>
+            </div>
+
+            <div id="step-rules" class="step-content" style="display:block;">
+                <h3>I. GENERAL MEMBERSHIP & RULES</h3>
+                
+                <p><b>Character Limitations</b></p>
+                <p>Bifrosts prioritizes active storytelling and meaningful character development. To ensure that no character falls into inactivity or stagnation, we limit how many characters a member may own and how frequently new ones may be obtained. We are a roleplay-driven group, not a character-creation one!</p>
+                <ul>
+                    <li>Maximum Slots: 10 characters per member, your first character slot is free, the rest cost stardust.</li>
+                    <li>Cooldown Period: A mandatory one-month waiting period between the approval of new characters.</li>
+                    <li>Exceptions: During official openings or tryouts, the cooldown requirement is temporarily lifted. Members currently within their cooldown period are still welcome to participate in these events.</li>
+                </ul>
+
+                <p><b>Character Origin</b></p>
+                <ul>
+                    <li>All characters must originate from one of the four cities/origins or an established outpost. If you are interested in a character with loner or rogue origins, you must open a ticket to discuss possibilities with staff. Approval may require a plot purchase. While we encourage creativity in backstories, all origins must remain lore-consistent, so please be flexible with us!</li>
+                    <li>Characters may only be descendants of the city in which they were born. Cross-city lineage must be pre-approved through staff and typically requires a plot purchase to maintain world continuity and balance.</li>
+                </ul>
+
+                <p><b>Tryout & Family Rules</b></p>
+                <ul>
+                    <li>Members may not join simultaneously as siblings unless applying for an official in-character litter or a designated kitten tryout, to save our family trees.</li>
+                    <li>Starting characters may not have pre-existing aunts, uncles, cousins, or extended relatives unless you have been given prior approval!</li>
+                </ul>
+
+                <p><b>Submission Requirements</b></p>
+                <ul>
+                    <li>All applications must use the required PSD or PNG templates on the dA. Biographies must be fully completed; incomplete applications will not be accepted.</li>
+                    <li>Minor design adjustments may be approved by staff. Significant design changes require a ticket submission and the purchase of a pelt-changer item.</li>
+                </ul>
+
+                <h3>V. CHARACTER DEATH</h3>
+                <p><b>Event Death</b></p>
+                <ul>
+                    <li><b>Outcome: </b>The player may immediately create a new character, if they wish, within the same city.</li>
+                </ul>
+                <p><b>Player-Requested Death</b></p>
+                <ul>
+                    <li>Must be approved by staff prior to happening!</li>
+                    <li>The player may not create a new character immediately and must wait until their cooldown is over.</li>
+                </ul>
+            </div>
+
+            <div id="step-id" class="step-content">
+                <h3>III. NAMING REQUIREMENTS</h3>
+                <p><b>Language & Cultural Roots</b></p>
+                <p>Names must originate from one of the following roots: Old Norse, Old Scandinavian, Old Irish, Old Swedish, Old Icelandic, Old Faroese, Old Danish, or Any North Germanic language.</p>
+                
+                <p><b>City Suggestions</b></p>
+                <p>We’ve listed out some suggested naming themes for specific cities, as they’d be the most common from these origins!</p>
+                <ul>
+                    <li><b>Eldur: </b>Old Norse</li>
+                    <li><b>Laguz: </b>Icelandic</li>
+                    <li><b>Stormr: </b>Swedish or Norwegian</li>
+                    <li><b>Forseti: </b>Danish or Faroese</li>
+                </ul>
+
+                <p><b>Naming Rules</b></p>
+                <ul>
+                    <li>Player characters may not share identical names, though familiars may have the same name as an existing character!</li>
+                    <li>Applications must include the English meaning of the name as well as a valid link to its linguistic origin to be approved — oftentimes, Nordic names may have a greek/english origin, and may have to be changed.</li>
+                    <li>Names may not carry sexual, vulgar, or inappropriate meanings.</li>
+                    <li>Characters entering through a kitten tryout must follow the established naming conventions of their parents. Nicknames are not permitted without prior approval from their parents/staff!</li>
+                </ul>
+            </div>
+
+            <div id="step-eyes" class="step-content">
+                <h3>Design Context</h3>
+                <p>In Bifrosts, their ancestry is the primary factor for their appearance. All design elements must align with our lore.</p>
+                <div class="req-highlight">
+                    <p><b>Mutations & Banned Traits</b></p>
+                    <p>Mutations and restricted traits require a shop purchase and staff approval. These traits may directly impact a character’s statistics, mobility, or overall capabilities. Please review the shop page for full guidelines and balancing information.</p>
+                    <a href="/shop/shop.html" class="btn-action" style="display:inline-block; margin-top:10px; text-decoration:none;">Shop Page</a>
+                </div>
+            </div>
+
+            <div id="step-cities" class="step-content">
+                <h3>IV. CITY CHARACTERISTICS</h3>
+                <p>Each city has distinct physical traits and aesthetic limitations to preserve identity.</p>
+                <div class="table-container" style="overflow-x: auto;">
+                    <table class="char-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th style="color:#ef4444;">ELDUR</th>
+                                <th style="color:#3b82f6;">LAGUZ</th>
+                                <th style="color:#14b8a6;">FORSETI</th>
+                                <th style="color:#94a3b8;">STORMR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><b>City Rank</b></td><td>Second Smallest</td><td>Second Largest</td><td>Largest</td><td>Smallest</td></tr>
+                            <tr><td><b>Average Height</b></td><td>12"–14"</td><td>13"–15"</td><td>14"–16"</td><td>11"–13"</td></tr>
+                            <tr><td><b>Abn. Small</b></td><td>11"</td><td>12"</td><td>13"</td><td>10"</td></tr>
+                            <tr><td><b>Abn. Large</b></td><td>15"</td><td>16"</td><td>17"</td><td>14"</td></tr>
+                            <tr><td><b>Munchkin</b></td><td>10"</td><td>11"</td><td>12"</td><td>9"</td></tr>
+                            <tr><td><b>Physique</b></td><td>Small, agile, lean</td><td>Lanky, muscular, short-furred</td><td>Large, muscular, thick-furred</td><td>Small, lithe, long-furred</td></tr>
+                            <tr><td><b>White Percentage</b></td><td>0–10%</td><td>0–60%</td><td>0–60%</td><td>0–100%</td></tr>
+                            <tr><td><b>Permitted Patterns</b></td><td>Pointed, Solid-Tan, Tortie, Tabby, Smoke, Rosette</td><td>Patches, Spots, Ticked, Pointed, Tabby, Solid</td><td>Patches, Spots, Tortie, Mackerel, Tabby, Solid</td><td>Pointed, Clouded Tabby, Calico, Rosette, Ticked, Solid</td></tr>
+                            <tr><td><b>Naming Themes</b></td><td>Fire, Mountains, Gods & Goddesses, Dragons</td><td>Water, Gods, Ice, Rain, Storm, Fish</td><td>Plants, Goddesses, Herbs, Flowers, Earthy</td><td>Storms, Mountains, Gods, Weather, Sky</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="step-design" class="step-content">
+                <h3>II. APPEARANCE & DESIGN</h3>
+                <p><b>The Realism Rule</b></p>
+                <p>Bifrosts follows a semi-realistic design standard to preserve immersion.</p>
+                <ul>
+                    <li>Neon eye colors, rainbow pelts, or other unnatural features are not permitted.</li>
+                    <li>“Pure-bred” status does not exist within this world. While your character may resemble a real-life breed, they are not considered purebred. Breed inspirations may be listed in the biography for artistic reference, but a single breed cannot be listed alone unless accompanied by the term “moggy.”</li>
+                </ul>
+
+                <p><b>Accessories</b></p>
+                <ul>
+                    <li>All accessories must be realistic, obtainable within the world, and approved via a Discord ticket prior to use.</li>
+                    <li>Feather accessories worn on the head or behind the ear are not permitted!</li>
+                </ul>
+                <p>Please refer to the accessory page for additional details.</p>
+                <a href="/character/accessories.html" class="btn-action" style="display:inline-block; margin-bottom: 20px; text-decoration:none;">Accessory Page</a>
+
+                <div class="city-color-grid">
+                    <div class="city-btn city-laguz" data-image="/images/icons/laguz_colors.png">Laguz Colors</div>
+                    <div class="city-btn city-forseti" data-image="/images/icons/forseti_colors.png">Forseti Colors</div>
+                    <div class="city-btn city-stormr" data-image="/images/icons/stormr_colors.png">Stormr Colors</div>
+                    <div class="city-btn city-eldur" data-image="/images/icons/eldur_colors.png">Eldur Colors</div>
+                </div>
+            </div>
+
+            <div id="step-finish" class="step-content">
+                <h3>VI. BASE APPLICATION TEMPLATE</h3>
+                <p>Please use the button below to access the official Google Doc template. Copy the contents to your own document to begin your application.</p>
+                <div style="margin-top: 20px;">
+                    <a href="https://docs.google.com/document/d/1g9attILmsdxiR3EtGgxbQtysNqy8wjGJUcjmlPruybc/edit?usp=sharing" target="_blank">
+                        <button type="button" class="btn-action" style="width:100%; height: 50px; font-size: 1.1rem;">Google Doc Template</button>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeImgModal()">&times;</span>
+        <img class="modal-content" id="popupImage">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+    function openStep(evt, stepName) {
+        var i, content, links;
+        content = document.getElementsByClassName("step-content");
+        for (i = 0; i < content.length; i++) { content[i].style.display = "none"; }
+        links = document.getElementsByClassName("step-link");
+        for (i = 0; i < links.length; i++) { links[i].className = links[i].className.replace(" active", ""); }
+        document.getElementById(stepName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    const imgModal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("popupImage");
+    const captionText = document.getElementById("caption");
+
+    document.querySelectorAll('.city-btn[data-image]').forEach(button => {
+        button.onclick = function() {
+            imgModal.style.display = "block";
+            modalImg.src = this.getAttribute('data-image');
+            captionText.innerHTML = this.innerText;
+        }
+    });
+
+    function closeImgModal() { imgModal.style.display = "none"; }
+    window.onclick = function(event) { if (event.target == imgModal) imgModal.style.display = "none"; }
+    </script>
+</body>
+</html>

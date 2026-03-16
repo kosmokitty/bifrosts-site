@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title> Reputation ✦ Bifrosts </title>
+    <style>
+       
+        .rep-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(79, 100, 150, 0.2);
+        }
+
+        .rep-table th {
+            background: #1e293b;
+            color: #fff;
+            padding: 15px;
+            text-align: left;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #2a3755;
+        }
+
+        .rep-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .rep-table tr:hover {
+            background: rgba(79, 100, 150, 0.15);
+        }
+
+        .rep-table td:first-child {
+            font-weight: bold;
+            color: #fff;
+            font-family: monospace;
+            font-size: 1.1rem;
+            width: 100px;
+        }
+
+        .rep-table td:nth-child(2) {
+            font-weight: bold;
+            color: #d6e1ff;
+            width: 150px;
+        }
+
+        /* Status descriptions */
+        .status-text {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 600px) {
+            .rep-table th:nth-child(2), .rep-table td:nth-child(2) {
+                display: none; 
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+
+    <main class="archive">
+
+        <h1> Reputation </h1>
+        <div class="section-divider"></div>
+
+        <p>Bifrosts runs on a reputation system—which displays how a character is treated or view by their city. Reputation affects your Charisma, and is directly tied to how convincing you'll be in your city, based on the reputation you've earned. </p>
+        
+        <p>All characters start off at 50 reputation, which results in a +0 modifier for Charisma rolls. Reputation can be earned or lost through a characters actions by participating in Seasonal Prompts, Plots, Interactions, or Personal Plots.</p>
+        
+        <h2>Modifiers</h2>
+        <div class="section-divider"></div>
+        <p>Your characters reputation is directly tied to their Charisma. Below, you'll find the appropriate modifiers for each reputation amount and how it compares to your charisma. Don't worry about remembering all of these numbers as your statistics will show on your character card!</p>
+        
+        <table class="rep-table">
+            <thead>
+                <tr>
+                    <th>Reputation</th>
+                    <th>Charisma</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>100</td>
+                    <td>+5 Modifier</td>
+                    <td>The shining example of their city. Leaders of the cities tend to have this reputation.</td>
+                </tr>
+                <tr>
+                    <td>90</td>
+                    <td>+4 Modifier</td>
+                    <td>Beyond upstanding citizens. Deeply respected by all of their city.</td>
+                </tr>
+                <tr>
+                    <td>80</td>
+                    <td>+3 Modifier</td>
+                    <td>Considered for leadership positions within their cities.</td>
+                </tr>
+                <tr>
+                    <td>70</td>
+                    <td>+2 Modifier</td>
+                    <td>Great reputation. Given important tasks and missions.</td>
+                </tr>
+                <tr>
+                    <td>60</td>
+                    <td>+1 Modifier</td>
+                    <td>Good reputation. Trusted by peers and given responsibility.</td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td>0 Modifier</td>
+                    <td>Neutral status. Treated the same as most peers.</td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>-1 Modifier</td>
+                    <td>Typical starting reputation of cursed or ill-born cats. Some ostracizing and disrespect.</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>-2 Modifier</td>
+                    <td>Low reputation. Often distrusted or avoided.</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>-3 Modifier</td>
+                    <td>Extremely poor status. Must often fend for themselves.</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>-4 Modifier</td>
+                    <td>Severely disrespected and barely tolerated.</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>-5 Modifier</td>
+                    <td>Hybrids & prisoners. One wrong move risks exile or death.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+    <link rel="stylesheet" href="/style.css">
+    <title> Equipment ✦ Bifrosts </title>
+    <style>
+      
+        .rune-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            align-items: start;
+            margin-bottom: 3rem;
+        }
+
+        .rune-card {
+            background: rgba(30, 30, 35, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            height: fit-content;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* CITY COLORS */
+        .lock-eldur { border-left: 4px solid #ff4444 !important; }
+        .lock-laguz { border-left: 4px solid #44aaff !important; }
+        .lock-forseti { border-left: 4px solid #44ff44 !important; }
+        .lock-stormr { border-left: 4px solid #aaaaaa !important; }
+        .lock-neutral { border-left: 4px solid #ffd700 !important; }
+
+        .tier-tag {
+            font-size: 0.5rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        .herb-img-top {
+            width: 100%;
+            height: 60px;
+            object-fit: contain;
+            background: rgba(0,0,0,0.3);
+            padding: 5px;
+            display: block;
+        }
+
+        .ailment-header { padding: 8px; }
+        .ailment-header h3 { font-size: 0.7rem; margin: 0; letter-spacing: 1px; text-transform: uppercase; color: #eee; }
+        .weapon-meta { font-size: 0.55rem; color: #ffd700; text-transform: uppercase; margin-top: 2px; }
+
+        .ailment-content {
+            display: none;
+            padding: 0 10px 10px 10px;
+            font-size: 0.7rem;
+            line-height: 1.4;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: left;
+            color: #ccc;
+        }
+        .ailment-content.open { display: block !important; }
+
+        .index-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .key-item { display: flex; align-items: center; gap: 5px; }
+        .dot { height: 8px; width: 8px; border-radius: 50%; }
+
+        h2.section-title {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-family: 'Marcellus SC', serif;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 1000px) { .rune-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .rune-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+<!-- ================= END NAV ================= -->
+
+    <main class="archive">
+        <h1> Equipment </h1>
+        <div class="section-divider"></div>
+
+        <!--Info-->
+
+        <div class="bracket-box">
+    <p>
+        Weaponry is categorized into three tiers: <b>Light, Medium, and Specialty</b>. 
+        Members may upgrade or exchange their equipment at any time by paying the difference in <b>Stardust</b>. 
+        If a purchase results in a lower-tier item, the difference will be refunded.
+    </p>
+
+    <blockquote>
+        <i>Example: Upgrading from a Light weapon (300sd) to a Medium weapon (400sd) requires an additional 100 Stardust.</i>
+    </blockquote>
+
+    <p>
+        To maintain balance in combat, a character's carrying capacity is determined by their age and experience bracket:
+    </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;">
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(68, 255, 68, 0.2);">
+            <h4 style="margin-top:0; color: #44ff44; font-size: 0.75rem; letter-spacing: 1px;">NOVICES</h4>
+            <ul style="margin:0; padding-left: 15px; list-style: circle; font-size: 0.7rem;">
+                <li>One Light Weapon</li>
+                <li>One Healing Salve</li>
+            </ul>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(255, 204, 68, 0.2);">
+            <h4 style="margin-top:0; color: #ffcc44; font-size: 0.75rem; letter-spacing: 1px;">SPECIALIZED NOVICES</h4>
+            <p style="font-size: 0.6rem; font-style: italic; margin-bottom: 5px; opacity: 0.7;">Choose one:</p>
+            <ul style="margin:0; padding-left: 15px; list-style: circle; font-size: 0.7rem;">
+                <li>Light Weapon & Armor</li>
+                <li>Light Weapon & Salve</li>
+                <li>Salve & Armor</li>
+            </ul>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; border: 1px solid rgba(187, 68, 255, 0.2);">
+            <h4 style="margin-top:0; color: #bb44ff; font-size: 0.75rem; letter-spacing: 1px;">ADULTS</h4>
+            <p style="font-size: 0.6rem; font-style: italic; margin-bottom: 5px; opacity: 0.7;">Choose one:</p>
+            <ul style="margin:0; padding-left: 15px; list-style: circle; font-size: 0.7rem;">
+                <li>Light Weapon + Medium Weapon + Armor</li>
+                <li>Light Weapon + Healing Item + Armor</li>
+                <li>Light Weapon + 2 Healing Items</li>
+                <li>Specialty Weapon + Armor</li>
+            </ul>
+        </div>
+
+            </div>
+        </div>
+        
+    <!--INDEX-->
+        <div class="index-container" style="margin-top: 30px;">
+            <div class="key-item"><div class="dot" style="background:#ff4444"></div> Eldur</div>
+            <div class="key-item"><div class="dot" style="background:#44aaff"></div> Laguz</div>
+            <div class="key-item"><div class="dot" style="background:#44ff44"></div> Forseti</div>
+            <div class="key-item"><div class="dot" style="background:#aaaaaa"></div> Stormr</div>
+            <div class="key-item"><div class="dot" style="background:#ffd700"></div> Neutral</div>
+        </div>
+
+
+
+        <h2>The Infirmary</h2>
+        <div class="section-divider"></div>
+        <div class="rune-grid">
+            <div class="rune-card lock-forseti">
+                <img src="https://via.placeholder.com/150x60?text=Salve" class="herb-img-top">
+                <div class="ailment-header ailment-toggle">
+                    <span class="tier-tag">HEALER</span>
+                    <h3>Healing Salve</h3>
+                    <div class="weapon-meta">+6 WIS | 1d10+WIS</div>
+                </div>
+                <div class="ailment-content">
+                    <p><strong>400 Stardust.</strong> Dark green salve that effectively stops bleeding. Age 10+ required. Only purchased/used by healers.</p>
+                </div>
+            </div>
+
+            <div class="rune-card lock-forseti">
+                <img src="https://via.placeholder.com/150x60?text=Pouch" class="herb-img-top">
+                <div class="ailment-header ailment-toggle">
+                    <span class="tier-tag">HEALER</span>
+                    <h3>Healing Pouch</h3>
+                    <div class="weapon-meta">+8 WIS | 2d10+WIS</div>
+                </div>
+                <div class="ailment-content">
+                    <p><strong>500 Stardust.</strong> Waist pouch containing salves, herbs, and wraps. Age 20+ required. Only purchased/used by healers.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>The Armory</h2>
+        <div class="section-divider"></div>
+        <div class="rune-grid">
+
+            <div class="rune-card lock-eldur">
+                <img src="https://via.placeholder.com/150x60?text=LongSword" class="herb-img-top">
+                <div class="ailment-header ailment-toggle">
+                    <span class="tier-tag">SPECIALTY</span>
+                    <h3>Long Sword</h3>
+                    <div class="weapon-meta">Requires +8 STR | 3d6+STR/DEX</div>
+                </div>
+                <div class="ailment-content"><p><strong>500 Stardust.</strong> Heavy and difficult, wielded by mouth or a strong paw. </p></div>
+            </div>
+
+            <div class="rune-card lock-eldur">
+                <img src="https://via.placeholder.com/150x60?text=Surtr" class="herb-img-top">
+                <div class="ailment-header ailment-toggle">
+                    <span class="tier-tag">SPECIALTY</span>
+                    <h3>Surtr's Blade</h3>
+                    <div class="weapon-meta">Requires +8 STR | 3d6+1d5 Burn</div>
+                </div>
+                <div class="ailment-content"><p><strong>500 Stardust.</strong> Flammable sap coating. Deals 1d5 burn to enemy AND user every round.</p></div>
+            </div>
+
+            <div class="rune-card lock-forseti">
+                <img src="https://via.placeholder.com/150x60?text=Axe" class="herb-img-top">
+                <div class="ailment-header ailment-toggle">
+                    <span class="tier-tag">SPECIALTY</span>
+                    <h3>Forsetian Axe</h3>
+                    <div class="weapon-meta">Requires +8 STR | 3d6+STR/DEX</div>
+                </div>
+                <div class="ailment-content"><p><strong>500 Stardust.</strong> Wielded by maw or by paw in a pinch.</p></div>
+            </div>
+
+            <div class="rune-card lock-laguz">
+                <img src="https://via.placeholder.com/150x60?text=Ulfberht" class="herb-img-top">
+                <div class="ailment-header ailment-toggle">
+                    <span class="tier-tag">SPECIALTY</span>
+                    <h3>Ulfberht</h3>
+                    <div class="weapon-meta">+Requires 8 STR | 4d6+STR+1d4 BLUDG</div>
+                </div>
+                <div class="ailment-content"><p><strong>600 Stardust.</strong> Blade is nearly wielder-length, typically reserved for those with high reputation.</p></div>
+            </div>
+
+            <div class="rune-card lock-laguz">
+                <img src="https://via.placeholder.com/150x60?text=Trident" class="herb-img-top">
+                <div class="ailment-header ailment-toggle">
+                    <span class="tier-tag">SPECIALTY</span>
+                    <h3>Trident</h3>
+                    <div class="weapon-meta">Requires +8 STR | 3d6+STR</div>
+                </div>
+                <div class="ailment-content"><p><strong>500 Stardust.</strong> Mouth-held or thrown with forearm.</p></div>
+            </div>
+
+            <div class="rune-card lock-stormr">
+                <img src="https://via.placeholder.com/150x60?text=Hammer" class="herb-img-top">
+                <div class="ailment-header ailment-toggle">
+                    <span class="tier-tag">SPECIALTY</span>
+                    <h3>Hammer</h3>
+                    <div class="weapon-meta">Requires +8 STR | 3d6+STR</div>
+                </div>
+                <div class="ailment-content"><p><strong>500 Stardust.</strong> Requires a strong jaw; paw usage in a pinch.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Bow" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Bow and Arrow</h3>
+                    <div class="weapon-meta">Requires +6 STR | 2d8+STR</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Long range firing from sitting position.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Blade" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span>
+                    <h3>Concealed Blade</h3><div class="weapon-meta">Requires +6 STR | 2d8+STR</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Used with a ring on the claw; unsheathing pulls a trigger to release the blade.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Mace" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span>
+                    <h3>Mace</h3><div class="weapon-meta">Requires +6 STR | 2d8+STR</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Mouth swung or paw thrust, can be released/thrown.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Fangs" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Metal Fangs</h3><div class="weapon-meta">+6 STR/DEX | 2d8</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Face wrap that extends teeth for lethal bite strength.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Spear" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Spear</h3>
+                    <div class="weapon-meta">Requires +6 STR | 2d8+STR</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Used with maw or thrown via paw/forearm.</p></div>
+            </div>
+
+            <div class="rune-card lock-laguz">
+                <img src="https://via.placeholder.com/150x60?text=Net" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Barberhøvel</h3><div class="weapon-meta">Requires +6 STR | 2d8+1d4</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Serrated fishing net. Victim takes 1d4 piercing and rolls disadvantage.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Crossbow" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Crossbow</h3><div class="weapon-meta">Requires +6 STR | 2d8</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> User sits on hind legs to draw and fire.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Dirk" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Dirk</h3><div class="weapon-meta">Requires +6 STR | 2d8</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Mouth wielded; handleable by paw for throwing.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Claws" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Metal Claws</h3><div class="weapon-meta">Requires +6 STR | 2d8</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Metallic cuffs slide over paws as claw extensions.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Seax" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Seax</h3><div class="weapon-meta">Requires +6 STR | 2d8</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Sleek dagger for maneuverability.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Sword" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">MEDIUM</span><h3>Sword</h3><div class="weapon-meta">Requires +6 STR | 2d8</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Typically wielded by maw, though a paw can be used in a pinch.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Dagger" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">LIGHT</span><h3>Dagger</h3><div class="weapon-meta">1d10</div></div>
+                <div class="ailment-content"><p><strong>300 Stardust.</strong> Mouth wielded or thrown. Available to all older than 6 cycles.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Shield" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">ARMOR</span><h3>Shield</h3><div class="weapon-meta">Requires +4 DEX | +3 AC / -2 DEX</div></div>
+                <div class="ailment-content"><p><strong>400 Stardust.</strong> Wooden shield. Forearm or mouth-held. Attached to body for easy access.</p></div>
+            </div>
+
+            <div class="rune-card lock-neutral">
+                <img src="https://via.placeholder.com/150x60?text=Helmet" class="herb-img-top">
+                <div class="ailment-header ailment-toggle"><span class="tier-tag">ARMOR</span><h3>Helmet</h3><div class="weapon-meta">+4 CON</div></div>
+                <div class="ailment-content"><p><strong>500 Stardust.</strong> Adults: +25 HP. Specialized Novices: +15 HP.</p></div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll(".ailment-toggle").forEach(button => {
+            button.addEventListener("click", () => {
+                button.nextElementSibling.classList.toggle("open");
+            });
+        });
+    </script>
+</body>
+</html>

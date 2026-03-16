@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <script src="/music.js" defer></script>
+<meta charset="UTF-8">
+<title>History | Bifrosts</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+
+/* ===== CHAPTER TAB BAR ===== */
+.chapter-tab-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin: 16px 0 24px;
+}
+
+.ch-tab {
+    background: rgba(15,20,40,0.9);
+    border: 1px solid #2a3755;
+    color: #4f6496;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.2s ease;
+    transform: none; box-shadow: none;
+}
+.ch-tab:hover { background: #1e2a45; color: #a5b4fc; transform: none; box-shadow: none; }
+.ch-tab.active {
+    background: #2a3755;
+    border-color: rgba(150,200,255,0.5);
+    color: #d6e1ff;
+    transform: none; box-shadow: none;
+}
+
+/* ===== CHAPTER PANEL ===== */
+.chapter-panel { display: none; }
+.chapter-panel.active { display: block; }
+
+.chapter-intro {
+    text-align: center;
+    padding: 22px 0 16px;
+}
+.chapter-intro h2 {
+    font-family: 'Marcellus SC', serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    color: #d6e6ff;
+    text-shadow: 0 0 16px rgba(120,180,255,0.3);
+    margin: 0 0 8px;
+    text-align: center;
+}
+.chapter-intro p {
+    max-width: 580px;
+    margin: 0 auto;
+    font-size: 0.84rem;
+    line-height: 1.7;
+    color: #5a6e8a;
+    font-style: italic;
+}
+
+
+
+.filter-btn {
+    background: rgba(15,20,40,0.9);
+    border: 1px solid #2a3755;
+    color: #d6e1ff;
+    padding: 4px 13px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.2s ease;
+    transform: none; box-shadow: none;
+}
+.filter-btn:hover, .filter-btn.active {
+    background: #2a3755;
+    border-color: rgba(150,200,255,0.4);
+    transform: none; box-shadow: none;
+}
+
+
+
+/* ===== GRID ===== */
+.history-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+/* ===== CARD ===== */
+.history-card {
+    background: rgba(15,20,40,0.9);
+    border: 1px solid #2a3755;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.22s ease;
+    cursor: pointer;
+}
+.history-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(150,200,255,0.4);
+    box-shadow: 0 8px 28px rgba(80,140,255,0.14);
+}
+.history-card.hidden { display: none; }
+
+.card-thumb { width:100%; height:150px; object-fit:cover; display:block; }
+.card-ph {
+    width:100%; height:150px;
+    display:flex; align-items:center; justify-content:center; font-size:2rem;
+}
+.card-ph.eldur   { background: linear-gradient(135deg,#1a0808,#3d1010); }
+.card-ph.forseti { background: linear-gradient(135deg,#081510,#0f3020); }
+.card-ph.laguz   { background: linear-gradient(135deg,#080f1e,#0e2040); }
+.card-ph.stormr  { background: linear-gradient(135deg,#10121a,#1a2030); }
+.card-ph.multi   { background: linear-gradient(135deg,#130f1e,#201228); }
+
+.history-info { padding: 12px 14px; }
+.history-info h3 {
+    font-family: 'Marcellus SC', serif;
+    font-size: 0.88rem; letter-spacing: 1px;
+    margin-bottom: 5px; color: #d6e1ff;
+}
+.history-info p {
+    font-size: 0.78rem; line-height: 1.5;
+    color: #5d7090; margin-bottom: 9px;
+}
+.tag-container { display:flex; flex-wrap:wrap; gap:4px; }
+.tag {
+    font-size: 0.62rem; padding: 2px 7px;
+    border-radius: 10px; background: #2a3755; color: #a5b4fc;
+}
+.tag.ch     { background: rgba(40,30,70,0.9); color: #b8a9f5; border: 1px solid rgba(139,92,246,0.25); }
+.tag.eldur  { background: rgba(185,28,28,0.2);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+.tag.forseti{ background: rgba(20,184,166,0.2); color: #99f6e4; border: 1px solid rgba(20,184,166,0.3); }
+.tag.laguz  { background: rgba(30,64,175,0.2);  color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+.tag.stormr { background: rgba(100,116,139,0.2);color: #cbd5e1; border: 1px solid rgba(148,163,184,0.3); }
+.tag.multi  { background: rgba(109,40,217,0.15);color: #c4b5fd; border: 1px solid rgba(139,92,246,0.25); }
+
+.no-results { display:none; grid-column:1/-1; text-align:center; padding:40px; color:#2a3755; font-style:italic; font-size:0.88rem; }
+
+
+
+
+/* ===== MODAL ===== */
+.hist-modal-overlay {
+    display: none; position: fixed; inset:0; z-index:3000;
+    background: rgba(5,9,20,0.93); backdrop-filter: blur(8px);
+    overflow-y: auto; padding: 40px 20px 80px;
+}
+.hist-modal {
+    max-width: 740px; margin: 0 auto;
+    background: rgba(9,13,30,0.98);
+    border: 1px solid rgba(150,200,255,0.17);
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 0 60px rgba(80,140,255,0.16);
+    animation: mSlide 0.26s ease; position: relative;
+}
+@keyframes mSlide { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+.modal-hero-wrap { position: relative; }
+.modal-hero { width:100%; height:210px; object-fit:cover; display:block; }
+.modal-hero-ph {
+    width:100%; height:210px;
+    display:flex; align-items:center; justify-content:center; font-size:3rem;
+}
+.modal-hero-ph.eldur   { background: linear-gradient(135deg,#1e0606,#480e0e); }
+.modal-hero-ph.forseti { background: linear-gradient(135deg,#06120e,#0e3018); }
+.modal-hero-ph.laguz   { background: linear-gradient(135deg,#060c1e,#0e2240); }
+.modal-hero-ph.stormr  { background: linear-gradient(135deg,#0c0e16,#181e2e); }
+.modal-hero-ph.multi   { background: linear-gradient(135deg,#0e0a1c,#1c1026); }
+
+.modal-hero-title {
+    position:absolute; bottom:0; left:0; right:0;
+    padding: 45px 26px 16px;
+    background: linear-gradient(to top, rgba(9,13,30,1) 0%, rgba(9,13,30,0.45) 60%, transparent 100%);
+}
+.modal-hero-title h2 {
+    font-family: 'Marcellus SC', serif; font-size: 1.35rem;
+    letter-spacing: 3px; color: #d6e6ff;
+    text-shadow: 0 0 20px rgba(120,180,255,0.5);
+    text-align: left; margin: 0 0 7px;
+}
+.modal-hero-tags { display:flex; flex-wrap:wrap; gap:5px; }
+
+.modal-close {
+    position:absolute; top:12px; right:13px;
+    background: rgba(9,13,30,0.75); border: 1px solid rgba(150,200,255,0.2);
+    color:#d6e1ff; width:30px; height:30px; border-radius:50%;
+    font-size:0.95rem; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; z-index:10; padding:0; line-height:1;
+    transition:0.2s; transform:none; box-shadow:none;
+}
+.modal-close:hover { background: rgba(79,100,150,0.5); transform:none; box-shadow:none; }
+
+.modal-tabs {
+    display:flex; border-bottom: 1px solid rgba(42,55,85,0.8);
+    background: rgba(7,10,24,0.95); padding: 0 20px;
+}
+.modal-tab-btn {
+    background:none; border:none; border-bottom: 2px solid transparent;
+    color:#4f6496; padding: 12px 15px;
+    font-family:inherit; font-size:0.7rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:2px;
+    cursor:pointer; transition:0.2s; margin-bottom:-1px;
+    transform:none; box-shadow:none;
+}
+.modal-tab-btn:hover  { color:#a5b4fc; background:none; transform:none; box-shadow:none; }
+.modal-tab-btn.active { color:#d6e1ff; border-bottom-color:rgba(150,200,255,0.5); background:none; }
+
+.modal-body { padding: 24px 26px 30px; }
+.modal-panel { display:none; animation: mFade 0.22s ease; }
+.modal-panel.active { display:block; }
+@keyframes mFade { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+
+.modal-body p { font-size:0.86rem; line-height:1.8; color:#b0c0da; margin-bottom:13px; }
+.modal-body h4 {
+    font-family:'Marcellus SC',serif; font-size:0.74rem;
+    letter-spacing:2px; color:#a5b4fc; margin:20px 0 8px; text-transform:uppercase;
+}
+
+.event-list { list-style:none; padding:0; margin:0 0 8px; display:flex; flex-direction:column; gap:8px; }
+.event-list li {
+    padding:9px 13px;
+    background:rgba(16,22,46,0.7); border:1px solid rgba(42,55,85,0.65);
+    border-radius:5px; font-size:0.82rem; line-height:1.6; color:#a8bad2;
+}
+.event-list li::before { content:none; }
+.event-name { font-weight:600; color:#d6e1ff; display:block; margin-bottom:3px; font-size:0.8rem; letter-spacing:0.5px; }
+
+.char-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:7px; }
+.char-list li {
+    display:flex; flex-direction:column; padding:9px 13px;
+    background:rgba(16,22,46,0.6); border:1px solid rgba(42,55,85,0.55);
+    border-radius:5px; font-size:0.82rem;
+}
+.char-list li::before { content:none; }
+.char-name { font-weight:bold; color:#d6e1ff; letter-spacing:0.5px; margin-bottom:2px; }
+.char-role { color:#485a70; font-size:0.74rem; }
+
+.consequence-block {
+    background:rgba(16,22,46,0.45); border-left:2px solid rgba(150,200,255,0.22);
+    padding:11px 15px; border-radius:0 5px 5px 0; margin-bottom:10px;
+    font-size:0.84rem; line-height:1.75; color:#a8bad2;
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="twinkling"></div>
+<div class="clouds"></div>
+<div id="nav-placeholder"></div>
+
+
+   <!-- ================= NAV ================= -->
+
+<div id="nav-placeholder"></div>
+
+
+<!-- ================= END NAV ================= -->
+<main class="archive">
+
+<h1>History</h1>
+<div class="section-divider"></div>
+<p>Bifrosts has been active for over six years, building an extensive shared history across all cities. In-depth roleplay logs are stored in our <a href="https://drive.google.com/drive/folders/1BydJnbRxYx6BBsUyOCDKFgqQSnTBSDI0?usp=sharing" target="_blank">Google Drive</a>. Click any card to read the full entry.</p>
+
+
+    <div class="chapter-tab-bar">
+    <button class="ch-tab active" onclick="showChapter(this,'arc1')">Ch. 1</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc2')">Ch. 2</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc3')">Ch. 3</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc4')">Ch. 4</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc5')">Ch. 5</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc6')">Ch. 6</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc7')">Ch. 7</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc8')">Ch. 8</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc9')">Ch. 9</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc10')">Ch. 10</button>
+    <button class="ch-tab" onclick="showChapter(this,'arc11')">Ch. 11</button>
+    </div>
+<div class="chapter-panel active" id="arc1">
+    <div class="chapter-intro"><h2>Sickness</h2><p>The Plague arrives. Cities scramble to contain it, rationing food and sheltering the young.</p></div>
+    <div class="history-grid" id="grid1">
+        <div class="history-card" data-city="laguz" onclick="openModal('m-l1')">
+            <div class="card-ph laguz">🐟</div>
+            <div class="history-info">
+                <h3>Follow Orka</h3>
+                <p>Orka commands children to her tent as the city panics. A swimming lesson later ends in tension when the Tide watches from the sidelines.</p>
+                <div class="tag-container">
+                    <span class="tag laguz">Laguz</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e1')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Painting Lesson</h3>
+                <p>During Mimameidr's lesson, kittens sneak out to watch Eldr punished for breaking ration. The city's hunger is plain to see.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="forseti" onclick="openModal('m-f1')">
+            <div class="card-ph forseti">🌿</div>
+            <div class="history-info">
+                <h3>A Healer's Walk</h3>
+                <p>Kits wander during a herbology lesson at Myrk Lake. Some nearly drown; others discover Sott, the secret plague quarantine hidden in Fela Woods.</p>
+                <div class="tag-container">
+                    <span class="tag forseti">Forseti</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s1')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Quarantine</h3>
+                <p>King Freyr seals children in the caves. Prince Thor goes missing. Search parties split, one finds bones, the other finds Thor's corpse.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc2">
+    <div class="chapter-intro"><h2>Early Days</h2><p>Cities find their footing under pressure. Novices are made early, seeds are planted, and the first generation begins to prove itself.</p></div>
+    <div class="history-grid" id="grid2">
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e2')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Division</h3>
+                <p>Scarce prey forces kittens to become novices a cycle early. Each kitten chooses a card, their path within the city decided.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="forseti" onclick="openModal('m-f2')">
+            <div class="card-ph forseti">🌿</div>
+            <div class="history-info">
+                <h3>Sowing Beginnings</h3>
+                <p>Fritjof leads the children to plant their Pod Seeds. The color of the bloom determines which pod they'll join for life.</p>
+                <div class="tag-container">
+                    <span class="tag forseti">Forseti</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s2')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Passing Clouds</h3>
+                <p>The plague worsens. Older kittens are promoted early. Zora is secretly executed for failing to protect Prince Thor.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="laguz" onclick="openModal('m-l2')">
+            <div class="card-ph laguz">🐟</div>
+            <div class="history-info">
+                <h3>Stone Garden</h3>
+                <p>Jarl takes the kittens to build a cairn for Bo, a city member sent into the ocean so the plague would not spread.</p>
+                <div class="tag-container">
+                    <span class="tag laguz">Laguz</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc3">
+    <div class="chapter-intro"><h2>Midsummer</h2><p>A rare moment of grudging peace between cities. Stormr wins the games, Laguz takes one. Not everyone is who they appear to be.</p></div>
+    <div class="history-grid" id="grid3">
+        <div class="history-card" data-city="multi" onclick="openModal('m-midsummer1')">
+            <div class="card-ph multi">🌺</div>
+            <div class="history-info">
+                <h3>Midsummer Festival</h3>
+                <p>A rare peace between cities. Stormr wins the games, Laguz takes one. Forseti's Hella attends while unknowingly plague-sick.</p>
+                <div class="tag-container">
+                    <span class="tag multi">All Cities</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s4')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>A Gift From Above</h3>
+                <p>The Blue Moon Celebration is held despite grief. Freyr is absent, Vidar hosts. Arguments break out over celebrating while cats are dying.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc4">
+    <div class="chapter-intro"><h2>Grief</h2><p>The Plague has taken too many. Each death leaves a city hollower and angrier. The fractures between leaders are no longer cracks.</p></div>
+    <div class="history-grid" id="grid4">
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e3')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Spirit of a Phoenix</h3>
+                <p>Tove's funeral. Salomon snaps, demanding the young be fed over the elders. Gunvald disagrees. The great divide begins.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="forseti" onclick="openModal('m-f3')">
+            <div class="card-ph forseti">🌿</div>
+            <div class="history-info">
+                <h3>Council Trials</h3>
+                <p>Hella dies of the plague. Forseti holds a trial to fill her seat. Ketil wins by city vote. Eldur bans them from Winternights.</p>
+                <div class="tag-container">
+                    <span class="tag forseti">Forseti</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s3')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Strange Visitors</h3>
+                <p>The Guild confirms Forseti attended Midsummer with a sick cat. Queen Frida dies. Princess Saga is isolated.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="laguz" onclick="openModal('m-l3')">
+            <div class="card-ph laguz">🐟</div>
+            <div class="history-info">
+                <h3>Rite of Passage</h3>
+                <p>Gen 1's official trials begin. Fish carcasses appear on the shore beforehand. Few notice, fewer say anything.</p>
+                <div class="tag-container">
+                    <span class="tag laguz">Laguz</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc5">
+    <div class="chapter-intro"><h2>Fracture</h2><p>Cities reach their breaking points. Eldur tears itself in two. At Winternights, the last pretense of unity shatters completely.</p></div>
+    <div class="history-grid" id="grid5">
+        <div class="history-card" data-city="laguz" onclick="openModal('m-l4')">
+            <div class="card-ph laguz">🐟</div>
+            <div class="history-info">
+                <h3>Our Own Paths</h3>
+                <p>Gen 2's mock trials are derailed by unexplained indents in the sand and distant singing. Adults dismiss it as strange currents.</p>
+                <div class="tag-container">
+                    <span class="tag laguz">Laguz</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="forseti" onclick="openModal('m-f4')">
+            <div class="card-ph forseti">🌿</div>
+            <div class="history-info">
+                <h3>The Labyrinth</h3>
+                <p>Novices navigate Helgafell's tunnels. They emerge to a field of dead butterfly wings and backward voices.</p>
+                <div class="tag-container">
+                    <span class="tag forseti">Forseti</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e4')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Inner War</h3>
+                <p>Salomon challenges Gunvald for the title of Phoenix. The city tears itself apart. Gunvald retreats to Atrid Outpost.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="multi" onclick="openModal('m-winternights1')">
+            <div class="card-ph multi">🌺</div>
+            <div class="history-info">
+                <h3>Winternights Festival</h3>
+                <p>All cities gather despite bans. It erupts. Eldur admits to theft. Both Eldur and Forseti are banned from future festivals.</p>
+                <div class="tag-container">
+                    <span class="tag multi">All Cities</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc6">
+    <div class="chapter-intro"><h2>Something Stirs</h2><p>Nott and Dagen arrive at Midsummer with a warning: the veil between mortals and gods is tearing. That night, every cat wakes beside a familiar.</p></div>
+    <div class="history-grid" id="grid6">
+        <div class="history-card" data-city="multi" onclick="openModal('m-midsummer2')">
+            <div class="card-ph multi">🌺</div>
+            <div class="history-info">
+                <h3>Midsummer and the Familiars</h3>
+                <p>Nott and Dagen warn the cities: the veil is tearing. That night every cat dreams and wakes beside a familiar matching their eye colour.</p>
+                <div class="tag-container">
+                    <span class="tag multi">All Cities</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="laguz" onclick="openModal('m-l5')">
+            <div class="card-ph laguz">🐟</div>
+            <div class="history-info">
+                <h3>Not For The Faint of Heart</h3>
+                <p>Gen 2's trials, two of three pass. A Blue Moon celebration follows where the Tide announces pairings for those of age.</p>
+                <div class="tag-container">
+                    <span class="tag laguz">Laguz</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="forseti" onclick="openModal('m-f5')">
+            <div class="card-ph forseti">🌿</div>
+            <div class="history-info">
+                <h3>Runic Grace</h3>
+                <p>During the novice rune ceremony, every torch goes out and the runes glow green with Yr, the death sign. Jord's shrine is found desecrated.</p>
+                <div class="tag-container">
+                    <span class="tag forseti">Forseti</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc7">
+    <div class="chapter-intro"><h2>Crowning and Conquest</h2><p>New leadership rises. Old alliances crumble. The border between Eldur and Stormr becomes a line in the blood.</p></div>
+    <div class="history-grid" id="grid7">
+        <div class="history-card" data-city="laguz" onclick="openModal('m-l6')">
+            <div class="card-ph laguz">🐟</div>
+            <div class="history-info">
+                <h3>A Funeral</h3>
+                <p>Eivor, K'inok and Gunhild's funeral is interrupted by a leopard seal attack. Agnaar dies. Ruaidhri is voted in as Voice of Laguz.</p>
+                <div class="tag-container">
+                    <span class="tag laguz">Laguz</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s5')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Crowning</h3>
+                <p>Freyr and Leif die of the plague. Princess Rota is crowned mid-ceremony, only for news to arrive that Eldur is attacking Njord Outpost.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e5')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Plan of Action</h3>
+                <p>Salomon purges disloyal leads and orders an ambush on Njord Outpost. Eldur wins, at heavy cost. The border war begins.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Fall</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc8">
+    <div class="chapter-intro"><h2>Into the Dark</h2><p>Mares stalk Eldur's nights. Blood is shed at the border. In Forseti, a murderer walks freely among the city.</p></div>
+    <div class="history-grid" id="grid8">
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e8')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Darker Than You Dreamt It</h3>
+                <p>On night watch, Snorri and Aloisa are the first to see a Mare slip from the shadows. Eldur faces another sleepless night of terror.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Spring</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e6')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Keen Eyes and Ears</h3>
+                <p>Patrol leader Akin is killed at the border by Stormr's Isarok. Eldur retaliates. Ex-Laguz Gymir appears aiding Stormr.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s6')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Harsh Realities</h3>
+                <p>Isarok dies at the border. Suvituuli orders a cover-up. Queen Rota accepts ex-Laguz Gymir into Stormr's ranks, angering the public.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="forseti" onclick="openModal('m-f6')">
+            <div class="card-ph forseti">🌿</div>
+            <div class="history-info">
+                <h3>The Murders</h3>
+                <p>Rura investigates Helgafell alone. Three ritual murders follow. The killer is Warda, an elder and servant of Hel, exiled on sight.</p>
+                <div class="tag-container">
+                    <span class="tag forseti">Forseti</span>
+                    <span class="tag season-label">Summer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc9">
+    <div class="chapter-intro"><h2>Blood Moon</h2><p>On the same night, across every city, the worst arrives. Forseti burns. The dead rise from Laguz's ocean. When the sun rises, nothing is the same.</p></div>
+    <div class="history-grid" id="grid9">
+        <div class="history-card" data-city="forseti" onclick="openModal('m-f7')">
+            <div class="card-ph forseti">🌿</div>
+            <div class="history-info">
+                <h3>Whispers of Shadows</h3>
+                <p>The Hel Cult surrounds the city in fire. Grimur stays behind to fight so the rest can flee. Forseti crosses the mountain pass and loses their home.</p>
+                <div class="tag-container">
+                    <span class="tag forseti">Forseti</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="laguz" onclick="openModal('m-l7')">
+            <div class="card-ph laguz">🐟</div>
+            <div class="history-info">
+                <h3>The Rot Comes Knocking</h3>
+                <p>On the blood moon, the dead rise from the ocean. Draugr cats, rotten seals, and an eldritch mass breach the city walls.</p>
+                <div class="tag-container">
+                    <span class="tag laguz">Laguz</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e7')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Something Wicked This Way Comes</h3>
+                <p>Nott hands out rune necklaces. Wearers are led to a divine sanctuary at The Leap. Those left behind are attacked by Mares.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s7')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Concealed in Snow</h3>
+                <p>An avalanche forces the city into the tunnels. They find an old throne room, a labradorite, and Queen Frida's secret scroll about hidden bloodlines.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc10">
+    <div class="chapter-intro"><h2>What Remains</h2><p>In the aftermath, cities pick up the pieces. Forseti and Laguz converge and become something new. Stormr's own missing cats return wrong.</p></div>
+    <div class="history-grid" id="grid10">
+        <div class="history-card" data-city="fifrildi" onclick="openModal('m-f8')">
+            <div class="card-ph fifrildi">🦋</div>
+            <div class="history-info">
+                <h3>The Sea and the Forest</h3>
+                <p>Homeless Forseti marches south and finds Laguz. Two cities, both battered, both searching, converge on the beachside. Fifrildi is born.</p>
+                <div class="tag-container">
+                    <span class="tag fifrildi">Fifrildi</span>
+                    <span class="tag season-label">Spring</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s8')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Dusting Off the Pages</h3>
+                <p>Flaemingr and Svanhildr send Orm, Atti, and Reginleif on a covert intelligence mission into the woods with novices as cover.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Spring</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e9')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Bad Company</h3>
+                <p>A fog swallows the city in seconds. A scream in the darkness. Something has come to Eldur and the mist means no one can see what.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s9')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Till Kingdom Comes</h3>
+                <p>Missing Stormr cats return, drained of color, eyes glazed. Carwyn kills Hilal and the horde of corrupted citymates attacks.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    <span class="tag season-label">Winter</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chapter-panel" id="arc11">
+    <div class="chapter-intro"><h2>Ongoing</h2><p>These events are still unfolding in Discord.</p></div>
+    <div class="history-grid" id="grid11">
+        <div class="history-card" data-city="eldur" onclick="openModal('m-e10')">
+            <div class="card-ph eldur">🔥</div>
+            <div class="history-info">
+                <h3>Trouble Is Brewing</h3>
+                <p>Still unfolding.</p>
+                <div class="tag-container">
+                    <span class="tag eldur">Eldur</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="stormr" onclick="openModal('m-s10')">
+            <div class="card-ph stormr">⚡</div>
+            <div class="history-info">
+                <h3>Paradise Is Burning</h3>
+                <p>Still unfolding.</p>
+                <div class="tag-container">
+                    <span class="tag stormr">Stormr</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="history-card" data-city="fifrildi" onclick="openModal('m-s10')">
+            <div class="card-ph fifrildi">🦋</div>
+            <div class="history-info">
+                <h3>A Hero's Journey</h3>
+                <p>Still unfolding.</p>
+                <div class="tag-container">
+                    <span class="tag fifrildi">Fifrildi</span>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</main>
+
+
+<!-- ================================================================ -->
+<!-- MODALS                                                           -->
+<!-- ================================================================ -->
+
+<!-- helper macro: each modal follows the same structure -->
+
+<!-- MIDSUMMER I -->
+<div class="hist-modal-overlay" id="m-midsummer1"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-midsummer1')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph multi">🌺</div>
+        <div class="modal-hero-title"><h2>Midsummer Festival</h2>
+        <div class="modal-hero-tags"><span class="tag multi">All Cities</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'ms1-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'ms1-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'ms1-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="ms1-ov">
+            <p>The Midsummer Festival is held — a rare moment of grudging peace. The games are competed in good spirit and the day ends without incident. Stormr wins the majority of events; Laguz claims one win.</p>
+            <p>Unknown to the other cities: Forseti's Council member Hella is already sick with the plague when she attends.</p>
+        </div>
+        <div class="modal-panel" id="ms1-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Hella (Forseti)</span><span class="char-role">Council member — attended while unknowingly plague-sick; her presence becomes a diplomatic catastrophe</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="ms1-af">
+            <div class="consequence-block">Hella's unknowing attendance triggers Forseti's exclusion from Winternights and collapses their standing with Eldur and Stormr for the foreseeable future.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH1: PAINTING LESSON -->
+<div class="hist-modal-overlay" id="m-e1"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e1')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Painting Lesson</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e1-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e1-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e1-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e1-ov">
+            <p>What should have been a calm painting lesson with Maker Mimamedir is spoiled when a commotion breaks out outside. A handful of kittens sneak away from the lesson to watch Eldr, a seeker, be publicly punished by The Phoenix and Fire for breaking ration. With empty stomachs, the city's desperation is plain to see — even for the youngest cats.</p>
+        </div>
+        <div class="modal-panel" id="e1-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Mimameidr</span><span class="char-role">Maker — led the painting lesson</span></li>
+                <li><span class="char-name">Eldr</span><span class="char-role">Seeker — publicly punished for breaking ration</span></li>
+                <li><span class="char-name">Gunvald</span><span class="char-role">The Phoenix — presided over Eldr's punishment</span></li>
+                <li><span class="char-name">Dagny / Aleyna / Einar / Eko / Tove</span><span class="char-role">Present during the lesson</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="e1-af">
+            <div class="consequence-block">The public punishment reinforces how seriously Eldur's leadership is enforcing rations — and how desperate the city has become. It marks the kittens' first real glimpse of the tension their city is under.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH1: DIVISION -->
+<div class="hist-modal-overlay" id="m-e2"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e2')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Division</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e2-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e2-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e2-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e2-ov">
+            <p>Due to the short supply of food, the kittens of Eldur are forced to step up and become novices a cycle early. K'atek performs the ceremony, presenting each kitten with four cards — the carving on the chosen card determines their path within the city.</p>
+            <p>Many are nervous, but step up to the challenge. K'atek reveals their cards hoping the gods have blessed Eldur with these fresh faces.</p>
+        </div>
+        <div class="modal-panel" id="e2-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Audhild</span><span class="char-role">Kept watch over the kittens before the ceremony</span></li>
+                <li><span class="char-name">Salomon</span><span class="char-role">The Fire — present; the city's tension is palpable</span></li>
+                <li><span class="char-name">Dagny / Aleyna / Einar / Eko / Tove</span><span class="char-role">Among the kittens promoted early</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="e2-af">
+            <div class="consequence-block">An entire generation of Eldur's youth is fast-tracked into adulthood by scarcity. Their path is chosen not by readiness but by survival — a weight that shapes who they become.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH1: SPIRIT OF A PHOENIX -->
+<div class="hist-modal-overlay" id="m-e3"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e3')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Spirit of a Phoenix</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e3-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e3-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e3-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e3-ov">
+            <p>The passing of Tove and hungry bellies have left patience worn thin and tempers high. At her funeral, Salomon finally snaps — claiming that the young and seekers should be prioritized with the limited food over the old and weak. Gunvald firmly disagrees, defending the elders' worth and wisdom.</p>
+            <p>A great divide festers in the city. The novices are left with a few hares at their feet — a gift from Salomon — and a very important decision to make about where their loyalty lies.</p>
+        </div>
+        <div class="modal-panel" id="e3-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Tove</span><span class="char-role">Daughter of Salomon and Ruad — her death is the breaking point</span></li>
+                <li><span class="char-name">Salomon</span><span class="char-role">The Fire — snaps at the funeral; demands the young be prioritized</span></li>
+                <li><span class="char-name">Gunvald</span><span class="char-role">The Phoenix — defends the elders; fracture deepens</span></li>
+                <li><span class="char-name">Ruad</span><span class="char-role">Mother of Tove</span></li>
+                <li><span class="char-name">Adalina / Aleyna / Dagny / Eldr / Kolli / Soile / Sylvi</span><span class="char-role">City members present at the funeral</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="e3-af">
+            <div class="consequence-block">The city is visibly split. Salomon's public challenge to Gunvald's authority — and the gift of hares to the novices — is a political move. The inner war is coming.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH1: INNER WAR -->
+<div class="hist-modal-overlay" id="m-e4"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e4')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Inner War</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e4-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e4-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e4-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e4-ov">
+            <p>Salomon disappears at dawn with most of the seekers. When he returns, he challenges Gunvald for the title of Phoenix. The city tears itself apart — cats fight their own friends and families in a rippling inner war.</p>
+            <p>Gunvald calls for a retreat and leads his faction to Atrid Outpost. The healers declare neutrality, splitting themselves between both groups so they may serve the city to the best of their ability.</p>
+        </div>
+        <div class="modal-panel" id="e4-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Salomon</span><span class="char-role">Challenger — seizes control of the city after the inner war</span></li>
+                <li><span class="char-name">Gunvald</span><span class="char-role">The Phoenix — retreats to Atrid Outpost with his loyal faction</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="e4-af">
+            <div class="consequence-block">Eldur enters Chapter II split in two. Salomon's faction holds the city; Gunvald's is in exile at Atrid Outpost. The healers attempt to serve both, walking a dangerous line.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- FORSETI CH1: A HEALER'S WALK -->
+<div class="hist-modal-overlay" id="m-f1"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-f1')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph forseti">🌿</div>
+        <div class="modal-hero-title"><h2>A Healer's Walk</h2>
+        <div class="modal-hero-tags"><span class="tag forseti">Forseti</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'f1-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f1-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f1-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="f1-ov">
+            <p>During what should have been an educational herbology walk through the woods with healers Sixten, Ketil, and Asa, various kittens wander off on their own. The group splinters into three.</p>
+            <ul class="event-list">
+                <li><span class="event-name">At the lake</span>A distant fog and storm roll in. A dark figure stands near the water. A kit begins to drown — Ketil saves them in time.</li>
+                <li><span class="event-name">Into the woods</span>Two kits sprint into Fela Woods — off-limits territory. They find the scent of rotting prey, a large wooden gate, and discover Sótt: the secret quarantine where all plague-sick are sent to recover or die.</li>
+                <li><span class="event-name">Under the rock</span>The remaining kits shelter from the storm and continue learning herbology.</li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="f1-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Sixten</span><span class="char-role">Healer — opened the gate for the walk; nervous from the start</span></li>
+                <li><span class="char-name">Ketil</span><span class="char-role">Healer — saved the drowning kit at the lake</span></li>
+                <li><span class="char-name">Asa</span><span class="char-role">Healer — discovered the kits who snuck into Fela Woods; told them about Sótt</span></li>
+                <li><span class="char-name">Arianrhod / Aslaug / Colborn / Eirunn / Gleym / Kindred / Misteltein / Rura</span><span class="char-role">Kittens on the walk</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="f1-af">
+            <div class="consequence-block">The discovery of Sótt — the city's plague quarantine hidden deep in Fela Woods — is the first crack in Forseti's carefully maintained façade of control. The kittens now know the sick don't just disappear.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- FORSETI CH1: SOWING BEGINNINGS -->
+<div class="hist-modal-overlay" id="m-f2"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-f2')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph forseti">🌿</div>
+        <div class="modal-hero-title"><h2>Sowing Beginnings</h2>
+        <div class="modal-hero-tags"><span class="tag forseti">Forseti</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'f2-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f2-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f2-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="f2-ov">
+            <p>Council member Fritjof — the only male on the council — gathers the children for a fieldtrip. Today is the day they choose what path they will pave through the city of Forseti.</p>
+            <p>Each kit plants a Pod Seed, choosing which one they feel called to. When the seeds bloom, the color of the flower will determine which pod they join — their identity within the city for life.</p>
+        </div>
+        <div class="modal-panel" id="f2-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Fritjof</span><span class="char-role">Council member — only male on the council; led the Sowing Beginnings ceremony</span></li>
+                <li><span class="char-name">Asa / Hella</span><span class="char-role">Healers present during the planting</span></li>
+                <li><span class="char-name">Aslaug / Blom / Colborn / Gleym / Misteltein / Rura</span><span class="char-role">Kittens choosing their Pod Seeds</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="f2-af">
+            <div class="consequence-block">Each kit's pod placement shapes their friendships, their training, and their role within Forseti. The seeds planted today determine who they stand beside through the trials ahead.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- FORSETI CH1: COUNCIL TRIALS -->
+<div class="hist-modal-overlay" id="m-f3"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-f3')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph forseti">🌿</div>
+        <div class="modal-hero-title"><h2>Council Trials</h2>
+        <div class="modal-hero-tags"><span class="tag forseti">Forseti</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'f3-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f3-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f3-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="f3-ov">
+            <p>Half a cycle after Midsummer, Council member Hella falls ill. The healers conclude she was already carrying the plague when she attended the festival. A city-wide vote is held on whether to warn the other cities — the majority votes yes. Hella is quarantined in Sótt. She does not survive.</p>
+            <p>A funeral is held for Hella. Forseti then holds a council trial to fill her seat — Healer Kettil, Builder Selby, and Builder Elskar compete. Kettil is voted in by the city.</p>
+            <p>Shortly after, Hunter Liv returns from her mission delivering news to the other cities. She carries a message from Eldur: Forseti is forbidden from attending the coming Winternights celebration.</p>
+        </div>
+        <div class="modal-panel" id="f3-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Hella</span><span class="char-role">Council member — died of the plague; her funeral opens this chapter</span></li>
+                <li><span class="char-name">Kettil</span><span class="char-role">Healer — elected to the council seat by city vote</span></li>
+                <li><span class="char-name">Selby / Elskar</span><span class="char-role">Builders — competed in the council trial against Kettil</span></li>
+                <li><span class="char-name">Liv</span><span class="char-role">Hunter — carried Forseti's warning to other cities; returned with Eldur's ban</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="f3-af">
+            <div class="consequence-block">Forseti's honesty in warning the other cities backfires — Eldur bans them from Winternights, beginning a period of diplomatic isolation that deepens throughout Chapter I and II.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- FORSETI CH1: LABYRINTH -->
+<div class="hist-modal-overlay" id="m-f4"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-f4')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph forseti">🌿</div>
+        <div class="modal-hero-title"><h2>The Labyrinth</h2>
+        <div class="modal-hero-tags"><span class="tag forseti">Forseti</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'f4-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f4-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f4-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="f4-ov">
+            <p>The first generation is ready to graduate. Council members Ylva, Erica, Erling, and Ragna bring all current novices to the base of Helgafell for a coming-of-age trial — navigating the tunnels beneath the mountain, split into their pods.</p>
+            <ul class="event-list">
+                <li><span class="event-name">Red Pod</span>Hears unexplained crying that leads them through darkness. As they close in on the sound it stops entirely — the silence is absolute. The smell of grass and wind guides them out. The wind calls out their names as they exit.</li>
+                <li><span class="event-name">Blue Pod</span>Feels watched. Shadows grow on the walls, following them. Growls and hissing are audible. A voice whispers "run." They find a large room with a strange glowing ditch — it dissolves with a hiss as they pass through. The wind calls their names at the exit too.</li>
+                <li><span class="event-name">The meadow</span>Exiting, the novices find what looks like a flowery field — but underfoot, they hear crunching. The flowers are the bright wings of dead butterflies. Backward voices speak: "it to be heed my warnings or despair" / "beware he who is not… what he seems… not all is what you believe."</li>
+            </ul>
+            <p>The Council members arrive, gasping. They call it a sign from the gods and usher the novices away. Any novice who looks back sees faint flickering lights — glowing eyes in the dark.</p>
+        </div>
+        <div class="modal-panel" id="f4-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Ylva / Erica / Erling / Ragna</span><span class="char-role">Council members — supervised the trial; visibly shaken by what they found in the meadow</span></li>
+                <li><span class="char-name">Arianrhod / Aslaug / Bengt / Colborn / Gleym / Lif / Misteltein / Rura / Syn / Tusmørke</span><span class="char-role">Novices navigating the tunnels</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="f4-af">
+            <div class="consequence-block">The backward voices, the dead butterfly wings, the glowing eyes — these are the first clear signs of the Hel Cult's presence in Forseti's territory. The council knows more than they tell the novices.</div>
+            <div class="consequence-block">The phrase "beware he who is not what he seems" will take on new meaning as Forseti's traitor reveals themselves in Chapter II.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- LAGUZ CH1: FOLLOW ORKA / KALDR POND -->
+<div class="hist-modal-overlay" id="m-l1"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-l1')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph laguz">🐟</div>
+        <div class="modal-hero-title"><h2>Follow Orka / Kaldr Pond</h2>
+        <div class="modal-hero-tags"><span class="tag laguz">Laguz</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'l1-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l1-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l1-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="l1-ov">
+            <p>Coughing is heard in the city. Orka orders the children to stay in her tent while the rest of the city gathers at the beach. Some sneak out anyway, following along behind her as she heads to the shore — grief already plain on her face.</p>
+            <p>Later, a swimming lesson at Kaldr Pond turns tense when the Tide positions themselves to watch from the sidelines rather than participate. Their comments and judgment over the kittens' performance creates friction. The group returns home with storm clouds overhead and a disappointed Orka.</p>
+        </div>
+        <div class="modal-panel" id="l1-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Orka</span><span class="char-role">Laguz lead — commanded the children to stay put; clearly grieving at the shore</span></li>
+                <li><span class="char-name">Jarl</span><span class="char-role">The Tide — observed and judged the kittens at Kaldr Pond</span></li>
+                <li><span class="char-name">Firth / Fiske / Gymir / Sigurd / Agnaar / Gerd / Gudlaug / Gunhild / Hugleikr / Ingegerd / Linnéa</span><span class="char-role">Kittens and city members present</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="l1-af">
+            <div class="consequence-block">The early tension between the kittens and the Tide plants seeds of resentment that persist through the next generation's trials.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- LAGUZ CH1: STONE GARDEN -->
+<div class="hist-modal-overlay" id="m-l2"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-l2')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph laguz">🐟</div>
+        <div class="modal-hero-title"><h2>Stone Garden</h2>
+        <div class="modal-hero-tags"><span class="tag laguz">Laguz</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'l2-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l2-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l2-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="l2-ov">
+            <p>Jarl from the Tide takes the kittens outside of camp to build a cairn and final mark for Bo — a former city member who caught the plague and was sent into the ocean to prevent it from spreading to the rest of Laguz. It is quiet, solemn, and necessary.</p>
+        </div>
+        <div class="modal-panel" id="l2-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Jarl</span><span class="char-role">The Tide — led the Stone Garden cairn-building for Bo</span></li>
+                <li><span class="char-name">Bo</span><span class="char-role">Former city member — lost to the plague; sent to sea so the sickness wouldn't spread</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="l2-af">
+            <div class="consequence-block">Bo's death — and the manner of it — establishes Laguz's approach to the plague: containment at all costs. The ocean becomes both burial ground and boundary.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- LAGUZ CH1: RITE OF PASSAGE -->
+<div class="hist-modal-overlay" id="m-l3"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-l3')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph laguz">🐟</div>
+        <div class="modal-hero-title"><h2>Rite of Passage</h2>
+        <div class="modal-hero-tags"><span class="tag laguz">Laguz</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'l3-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l3-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l3-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="l3-ov">
+            <p>It is time for gen 1's novices to have their trials — strength, diving, weaving, and herbal knowledge — while gen 2 runs their own mock trials alongside. Only a few of the sharper novices notice fish carcasses on the shore before the trials begin, and even fewer bring it to an adult's attention. The Tide observe, deliberate, and decide on rank placements. It will be several days before results are announced.</p>
+        </div>
+        <div class="modal-panel" id="l3-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Jarl / Agnaar / Orka / Ruaidhri</span><span class="char-role">The Tide — observed the trials and deliberated on ranks</span></li>
+                <li><span class="char-name">Firth / Fiske / Ari / Arvid / Blar / Gudlaug / Gunhild / Gymir / Ingegerd / Linnéa / Nessa / Nisa / Räv / Sigurd / Ubah / Allotar</span><span class="char-role">Gen 1 novices being ranked; gen 2 running mock trials alongside</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="l3-af">
+            <div class="consequence-block">The fish carcasses on the shore go unaddressed — a small, easy-to-dismiss sign of what begins to plague Laguz's shores in Chapter II.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- LAGUZ CH1: OUR OWN PATHS -->
+<div class="hist-modal-overlay" id="m-l4"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-l4')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph laguz">🐟</div>
+        <div class="modal-hero-title"><h2>Our Own Paths</h2>
+        <div class="modal-hero-tags"><span class="tag laguz">Laguz</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'l4-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l4-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l4-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="l4-ov">
+            <p>A day of mock trials to prepare gen 2 novices for what will be expected of them. Things derail when novices find large, unexplained indents in the sand — and one hears singing from somewhere in the distance. Adults dismiss both as nothing more than strange currents shaping the beach.</p>
+        </div>
+        <div class="modal-panel" id="l4-ch"><ul class="char-list">
+            <li><span class="char-name">Firth</span><span class="char-role">Led gen 2 through their mock trials</span></li>
+            <li><span class="char-name">Allotar / Nessa / Räv / Ubah / Uliok</span><span class="char-role">Gen 2 novices — first to notice the indents and hear the singing</span></li>
+        </ul></div>
+        <div class="modal-panel" id="l4-af">
+            <div class="consequence-block">The indents and the singing are the first signs of the supernatural threat creeping toward Laguz from the sea. Adults dismiss them. They won't be able to dismiss what comes next.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- LAGUZ CH1: NOT FOR THE FAINT + A NIGHT OF DANCE -->
+<div class="hist-modal-overlay" id="m-l5"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-l5')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph laguz">🐟</div>
+        <div class="modal-hero-title"><h2>Not For The Faint of Heart &amp; A Night of Dance</h2>
+        <div class="modal-hero-tags"><span class="tag laguz">Laguz</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'l5-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l5-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l5-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="l5-ov">
+            <p><strong>Not For The Faint of Heart:</strong> Gen 2's official trials commence right after the announcement of gen 3's teachers. A large group leaves for the shore. Two of three pass their trials.</p>
+            <p><strong>A Night of Dance:</strong> Laguz gathers on the shore for a night of festivities and celebration beneath the Blue Moon. Dancing, games, and the company of the whole city — including the outposts. The real event comes when the Tide announces pairings for those of age. Some are disappointed; most take it with good nature. The night closes with a dance between couples and city-mates.</p>
+        </div>
+        <div class="modal-panel" id="l5-ch"><ul class="char-list">
+            <li><span class="char-name">Agnaar / Ruaidhri</span><span class="char-role">Led the shore gathering alongside the Tide</span></li>
+            <li><span class="char-name">Jarl</span><span class="char-role">The Tide — announced the pairings for those of age</span></li>
+            <li><span class="char-name">Ari / Estrid / Firth / Fiske / Gunhild / Gymir / Hugleikr / Hvitserk / Linnéa / Nessa / Räv / Sköll</span><span class="char-role">City members present at the Blue Moon celebration</span></li>
+        </ul></div>
+        <div class="modal-panel" id="l5-af">
+            <div class="consequence-block">A Night of Dance is one of the last moments of true peace for Laguz before the city is plunged into loss and supernatural crisis in Chapter II.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH1: QUARANTINE -->
+<div class="hist-modal-overlay" id="m-s1"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s1')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Quarantine</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s1-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s1-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s1-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s1-ov">
+            <p>The plague reappears in Stormr. King Freyr orders all children quarantined in the mountain caves immediately, accompanied by Princesses Suvituuli and Rota, and Prince Thor. Once the adults seal the entrance and fall asleep, the children sneak deeper into the cave to explore.</p>
+            <p>Prince Thor goes missing. The princesses organize a search party that splits into two tunnels.</p>
+            <ul class="event-list">
+                <li><span class="event-name">Right tunnel</span>Bits of fabric and cat bones scattered throughout the dim passageway.</li>
+                <li><span class="event-name">Left tunnel</span>A corpse resembling Prince Thor — being feasted on by rats.</li>
+            </ul>
+            <p>The rats attack the children. Adult screams echo through the tunnel and adults arrive in time to stop the worst of it. The children remain in the tunnels until permitted to leave.</p>
+        </div>
+        <div class="modal-panel" id="s1-ch">
+            <ul class="char-list">
+                <li><span class="char-name">King Freyr</span><span class="char-role">Ordered the quarantine</span></li>
+                <li><span class="char-name">Prince Thor</span><span class="char-role">Youngest heir — went missing; found dead in the tunnels</span></li>
+                <li><span class="char-name">Princess Róta</span><span class="char-role">Co-led the kitten search party</span></li>
+                <li><span class="char-name">Princess Suvituuli</span><span class="char-role">Co-led the kitten search party</span></li>
+                <li><span class="char-name">Dagrun</span><span class="char-role">Led the children to the cave; tried to keep order under pressure</span></li>
+                <li><span class="char-name">Quinnlan / Orm / Freyja / Ivar / Ifrah / Adelais / Verdandi / Oleifr / Zora</span><span class="char-role">Kittens quarantined in the caves</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="s1-af">
+            <div class="consequence-block">Prince Thor's death is the first royal loss of the plague — and it is kept hidden from the city. The cover begins here and will extend through multiple chapters.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH1: PASSING CLOUDS -->
+<div class="hist-modal-overlay" id="m-s2"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s2')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Passing Clouds</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s2-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s2-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s2-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s2-ov">
+            <p>The severity of the plague escalates. After the loss of many lives, the older kittens can no longer stand idle — they are allowed out of the cave and promoted to novices a cycle early, given tasks by teachers Gollnir and Ugla to help contribute to the city's survival.</p>
+            <p>Zora is executed in secret for her failure to protect and guard Prince Thor.</p>
+        </div>
+        <div class="modal-panel" id="s2-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Gollnir / Ugla</span><span class="char-role">Teachers — assigned the newly promoted novices their first tasks</span></li>
+                <li><span class="char-name">Zora</span><span class="char-role">Executed secretly for failing to protect Prince Thor</span></li>
+                <li><span class="char-name">Dagrun / Eir / Idunn / Orm / Freyja / Ivar / Adelais / Verdandi</span><span class="char-role">Present during the promotion and early novice tasks</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="s2-af">
+            <div class="consequence-block">Zora's secret execution is a precedent: in Stormr, failures of duty to the royal family carry the ultimate cost — and the city is not told.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH1: STRANGE VISITORS -->
+<div class="hist-modal-overlay" id="m-s3"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s3')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Strange Visitors</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s3-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s3-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s3-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s3-ov">
+            <p>Stormr receives a visit from the Guild — a group of outcast cats who travel between cities gathering records and spreading news. They confirm what Stormr had feared: Forseti attended Midsummer with a plague-sick cat. This may have contributed to Queen Frida's death.</p>
+            <p>Princess Saga has fallen ill with the plague and is isolated in the palace.</p>
+        </div>
+        <div class="modal-panel" id="s3-ch">
+            <ul class="char-list">
+                <li><span class="char-name">The Guild</span><span class="char-role">Traveling outcast cats — arrived with news about Forseti and Midsummer</span></li>
+                <li><span class="char-name">King Freyr</span><span class="char-role">Received the Guild's news; increasingly ill himself</span></li>
+                <li><span class="char-name">Queen Frida</span><span class="char-role">Died of the plague; the Guild's news implicates Forseti in her death</span></li>
+                <li><span class="char-name">Princess Saga</span><span class="char-role">Fell ill; isolated in the palace</span></li>
+                <li><span class="char-name">Pilvi</span><span class="char-role">Head healer — treating the royal family</span></li>
+                <li><span class="char-name">Orm / Ivar / Adelais / Verdandi / Vidar</span><span class="char-role">Present during the Guild's visit</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="s3-af">
+            <div class="consequence-block">The Guild's confirmation cements Stormr's anger toward Forseti and strengthens the case for the Winternights ban. Queen Frida's death leaves the royal family dangerously thin.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH1: A GIFT FROM ABOVE -->
+<div class="hist-modal-overlay" id="m-s4"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s4')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>A Gift From Above</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s4-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s4-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s4-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s4-ov">
+            <p>Despite the city's deep concern, the Blue Moon Celebration is held. King Freyr does not appear — the event is hosted by his seer, Vidar, in the king's absence. The entire city celebrates, dancing, painting, and participating in festivities.</p>
+            <p>But tensions flare. Many cats openly voice their disapproval — stating they shouldn't be gathering and celebrating when city members are dying. Arguments break out despite Vidar's best efforts to lift spirits.</p>
+        </div>
+        <div class="modal-panel" id="s4-ch">
+            <ul class="char-list">
+                <li><span class="char-name">Vidar</span><span class="char-role">Seer — hosted the Blue Moon Celebration in Freyr's absence; tried to maintain morale</span></li>
+                <li><span class="char-name">King Freyr</span><span class="char-role">Absent from the celebration — presumed gravely ill</span></li>
+                <li><span class="char-name">Orm / Ivar / Atti / Adelais / Quinnlan / Verdandi / Flaemingr / Caniad / Andri</span><span class="char-role">Present at the celebration</span></li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="s4-af">
+            <div class="consequence-block">Freyr's absence from the celebration is a signal to the city that something is deeply wrong with the king. His death is confirmed at the start of Chapter II.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- WINTERNIGHTS I -->
+<div class="hist-modal-overlay" id="m-winternights1"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-winternights1')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph multi">🌲</div>
+        <div class="modal-hero-title"><h2>Winternights Festival</h2>
+        <div class="modal-hero-tags"><span class="tag multi">All Cities</span><span class="tag ch">Ch I</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'wn-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'wn-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'wn-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="wn-ov">
+            <p>Severe blizzards force postponement. All cats are confined to their tents during the storm. Once it passes, all cities gather at Helgafell for the annual festival — but tensions boil over almost immediately.</p>
+            <ul class="event-list">
+                <li>Forseti attends despite Eldur's explicit ban.</li>
+                <li>Numerous fights break out between cities.</li>
+                <li>Eldur publicly admits to stealing prey from Stormr.</li>
+                <li>Stormr and Laguz formally agree to ban both Eldur and Forseti from attending future Winternights.</li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="wn-ch"><ul class="char-list">
+            <li><span class="char-name">Forseti delegation</span><span class="char-role">Attended despite being banned — escalated the situation</span></li>
+            <li><span class="char-name">Eldur delegation</span><span class="char-role">Confessed to stealing prey from Stormr</span></li>
+            <li><span class="char-name">Stormr &amp; Laguz</span><span class="char-role">Jointly issued the ban on Eldur and Forseti</span></li>
+        </ul></div>
+        <div class="modal-panel" id="wn-af">
+            <div class="consequence-block">The formal ban is a symbolic breaking of what little unity remained. The theft admission plants the seeds of the border war that erupts fully in Chapter II.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- MIDSUMMER II -->
+<div class="hist-modal-overlay" id="m-midsummer2"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-midsummer2')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph multi">🌺</div>
+        <div class="modal-hero-title"><h2>Midsummer &amp; The Familiars</h2>
+        <div class="modal-hero-tags"><span class="tag multi">All Cities</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'ms2-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'ms2-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'ms2-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="ms2-ov">
+            <p>Eldur arrives visibly split — one group with Salomon, another with Gunvald. Despite the tension, the festival begins as it always has. Games proceed, cities hold their grudging peace.</p>
+            <p>Then Nótt and Dagen arrive — outcast siblings — and interrupt the games. They warn the cities: the veil between mortals and the gods is tearing. Strange events are coming. They are not wrong.</p>
+            <p>That night, every cat across every city dreams. They wake to find a familiar beside them — a creature whose eye colour matches their own.</p>
+        </div>
+        <div class="modal-panel" id="ms2-ch"><ul class="char-list">
+            <li><span class="char-name">Nótt</span><span class="char-role">Outcast sibling — warned the cities of the tearing veil; distributes protective necklaces in Eldur later</span></li>
+            <li><span class="char-name">Dagen</span><span class="char-role">Outcast sibling — accompanied Notti; a recurring figure throughout Chapter II</span></li>
+        </ul></div>
+        <div class="modal-panel" id="ms2-af">
+            <div class="consequence-block">The arrival of familiars is a permanent, tangible shift in the world — a divine connection that will factor into the conflicts ahead. Nótt and Dagen's warning proves accurate faster than anyone expects.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH2: PLAN OF ACTION -->
+<div class="hist-modal-overlay" id="m-e5"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e5')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Plan of Action</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e5-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e5-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e5-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e5-ov">
+            <p>Gunvald's faction returns from Atrid Outpost — Salomon demands each of them bow at the gates. He calls a meeting and announces his plan: ambush Njord Outpost to claim it and expand Eldur's food territory. Leads Valkyrie, Audhild, and Logi are stripped of their roles; loyal replacements take over (Eir for Makers, Aligok for Embers, Eldr for Seekers). Logi is elevated to The Fire.</p>
+            <p>Dagny and Alotte are reassigned as messengers after speaking out of turn. The ambush is launched — Eldur wins, holding Njord Outpost even as Stormr sends reinforcements. The cost is heavy: many fatally injured or killed. Salomon calls for reinforcements from Einn Outpost.</p>
+        </div>
+        <div class="modal-panel" id="e5-ch"><ul class="char-list">
+            <li><span class="char-name">Salomon</span><span class="char-role">The Phoenix — orders conquest of Njord; consolidates absolute control</span></li>
+            <li><span class="char-name">Logi</span><span class="char-role">Elevated to The Fire — Salomon's new second</span></li>
+            <li><span class="char-name">Aligok</span><span class="char-role">Installed as loyal lead for Embers</span></li>
+            <li><span class="char-name">Audhild / Valkyrie</span><span class="char-role">Stripped of their lead roles for perceived disloyalty</span></li>
+            <li><span class="char-name">Dagny / Alotte</span><span class="char-role">Demoted to messengers for speaking out of turn</span></li>
+            <li><span class="char-name">Adalina / Aleyna / Einar / Rollo / Sindri / Sylvi</span><span class="char-role">Present during the meeting and the ambush</span></li>
+        </ul></div>
+        <div class="modal-panel" id="e5-af">
+            <div class="consequence-block">The seizure of Njord Outpost is an act of open war against Stormr. Eldur holds it — at heavy cost — and the border between the two cities becomes a flashpoint for every chapter that follows.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH2: KEEN EYES AND EARS -->
+<div class="hist-modal-overlay" id="m-e6"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e6')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Keen Eyes and Ears</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e6-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e6-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e6-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e6-ov">
+            <p>Akin leads a patrol toward the new border and they split on discovering Stormr scent crossing over. Both groups come face to face with a Stormr patrol. When they regroup — Akin is dead at Stormr talon Isarok's feet. Isarok crossed the border. Eldur retaliates together and Isarok falls to the ember sword. A skirmish erupts between the two cities.</p>
+            <p>To Eldur's disgust, ex-Laguz guild member Gymir appears and aids the Stormr patrol.</p>
+        </div>
+        <div class="modal-panel" id="e6-ch"><ul class="char-list">
+            <li><span class="char-name">Akin</span><span class="char-role">Eldur Ember patrol leader — killed by Stormr's Isarok at the border</span></li>
+            <li><span class="char-name">Isarok (Stormr)</span><span class="char-role">Stormr Talon — crossed the border; killed by Eldur's retaliatory patrol</span></li>
+            <li><span class="char-name">Gymir</span><span class="char-role">Ex-Laguz guild member — aided Stormr; enrages Eldur's patrol</span></li>
+            <li><span class="char-name">Orm / Atti / Reginleif / Finke</span><span class="char-role">Stormr patrol present at the border skirmish</span></li>
+            <li><span class="char-name">Adalina / Aleyna / Astridr / Angrboda / Hjordis / Sylvi / Ve</span><span class="char-role">Eldur patrol members</span></li>
+        </ul></div>
+        <div class="modal-panel" id="e6-af">
+            <div class="consequence-block">Both cities lose someone at the border. Stormr's Princess Suvituuli orders her patrol to cover up who really killed Isarok. The truth is buried — for now.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH2: SOMETHING WICKED -->
+<div class="hist-modal-overlay" id="m-e7"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e7')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Something Wicked This Way Comes</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e7-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e7-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e7-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e7-ov">
+            <p>Nótt returns to Eldur alone with a single escort — and a bowl of rune-of-protection necklaces, which she distributes to anyone who will take one. That night, the city doesn't sleep well.</p>
+            <ul class="event-list">
+                <li><span class="event-name">Those with necklaces</span>Wake from restless dreams and are led by ghostly spirits and Níðhöggr to The Leap — where they find an abandoned divine sanctuary: a podium, seats, images of the gods, glowing orbs. Some take scrolls and trinkets. Others leave it untouched. They are ushered back before sunrise.</li>
+                <li><span class="event-name">Those without necklaces</span>Plunged into an unnaturally deep sleep — and attacked by Mares. The dark beasts tear through those who couldn't wake, leaving many wounded and some dead. The Mares retreat as the sun rises.</li>
+            </ul>
+        </div>
+        <div class="modal-panel" id="e7-ch"><ul class="char-list">
+            <li><span class="char-name">Nótt</span><span class="char-role">Distributed the protective rune necklaces; her foresight saved those who accepted them</span></li>
+            <li><span class="char-name">Nídhöggr</span><span class="char-role">Led the necklace-wearers through the night to The Leap</span></li>
+        </ul></div>
+        <div class="modal-panel" id="e7-af">
+            <div class="consequence-block">The divine sanctuary at The Leap is real — and something powerful was left there. The scrolls and trinkets some cats carried back may hold answers to what is coming.</div>
+            <div class="consequence-block">The Mares took lives. Those who declined the necklaces paid the highest price.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH2: DARKER THAN YOU DREAMT IT -->
+<div class="hist-modal-overlay" id="m-e8"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e8')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Darker Than You Dreamt It</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e8-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e8-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e8-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e8-ov">
+            <p>High above the expansive fields, as the sun sets and the sky darkens to midnight purple, two cats on night watch — Snorri and Aloisa — notice something wrong in the shadows. There is no wind. No sound. The moon is barely visible. Something in the darkness watches back.</p>
+            <p>A Mare slips from the shadows — slow, taunting, angling its head as it studies them. It speaks in nonsense. Its soulless eyes hold no emotion. Its presence alone is enough to freeze the blood. Eldur faces another night of creatures in the dark.</p>
+        </div>
+        <div class="modal-panel" id="e8-ch"><ul class="char-list">
+            <li><span class="char-name">Snorri</span><span class="char-role">On night watch — first to notice something in the dark</span></li>
+            <li><span class="char-name">Aloisa</span><span class="char-role">On night watch with Snorri — dismissed the feeling until she saw it too</span></li>
+        </ul></div>
+        <div class="modal-panel" id="e8-af">
+            <div class="consequence-block">The Mares are not gone. They return night after night, wearing Eldur down. The city is exhausted, grieving, and learning to fight something that does not play by the rules of the living.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- ELDUR CH2: BAD COMPANY -->
+<div class="hist-modal-overlay" id="m-e9"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e9')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Bad Company</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'e9-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e9-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'e9-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="e9-ov">
+            <p>The city drifts in and out of exhausted sleep. Then — a wave of mist surges up from the tent floors, consuming the entire city in seconds. Everything vanishes from sight. In the darkness and fog, a scream rings out: <em>"Help! Oh, by the norns, help!"</em></p>
+            <p>Cats scramble from their tents blind, calling out to each other across a city they can no longer see. Something has come to Eldur under the cover of the fog — and this time, they cannot see what they are fighting.</p>
+        </div>
+        <div class="modal-panel" id="e9-ch"><ul class="char-list">
+            <li><span class="char-name">Adalina</span><span class="char-role">Roused by the scream; grabbed her mace and headed toward the voice</span></li>
+            <li><span class="char-name">Astridr</span><span class="char-role">Followed his mother into the fog toward a blurred silhouette</span></li>
+            <li><span class="char-name">Välkkyä</span><span class="char-role">Woke and scrambled out, shouting into the darkness</span></li>
+        </ul></div>
+        <div class="modal-panel" id="e9-af">
+            <div class="consequence-block">Eldur is being attacked through increasingly difficult conditions — the Mares, the dark, and now fog that strips away every advantage. The city's resolve is being tested night after night.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- FORSETI CH2: RUNIC GRACE -->
+<div class="hist-modal-overlay" id="m-f5"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-f5')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph forseti">🌿</div>
+        <div class="modal-hero-title"><h2>Runic Grace</h2>
+        <div class="modal-hero-tags"><span class="tag forseti">Forseti</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'f5-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f5-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f5-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="f5-ov">
+            <p>Gen 3 novices (Bengt, Lif, Tusmørke, and Syn) receive their gifted runes — a celebration painted in colour and drumbeats. Then the torches go out. Every rune on every novice begins glowing green: the death sign Yr, masking the runes that were just painted there.</p>
+            <p>The city falls into panic. Erling and Ragna lead the younger generation to Jord's shrine seeking answers — and find it desecrated. The shrine stone is cracked, Yr painted over it, animal bones and corpses littering the ground. Erling commands silence. The shrine is sealed off.</p>
+            <p>With fear spreading, cats who trained at the outpost are invited into the main city to bolster their numbers.</p>
+        </div>
+        <div class="modal-panel" id="f5-ch"><ul class="char-list">
+            <li><span class="char-name">Bengt / Lif / Tusmørke / Syn</span><span class="char-role">Gen 3 novices — received runes; their ceremony is the site of the Yr manifestation</span></li>
+            <li><span class="char-name">Erling</span><span class="char-role">Council member — led the shrine investigation; ordered silence about what they found</span></li>
+            <li><span class="char-name">Ragna</span><span class="char-role">Council member — accompanied Erling to the shrine</span></li>
+            <li><span class="char-name">Ylva</span><span class="char-role">Called the ceremony; witnessed the torches go out</span></li>
+            <li><span class="char-name">Arianrhod / Asiarpak / Aslaug / Colborn / Elskar / Gleym / Halvard / Ketil / Misteltein / Rura</span><span class="char-role">City members present at the ceremony</span></li>
+        </ul></div>
+        <div class="modal-panel" id="f5-af">
+            <div class="consequence-block">Jord's shrine is desecrated and sealed. The council knows something is deeply wrong — and chooses to keep it from the city. The Hel Cult is making its presence known.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- FORSETI CH2: RURA'S INVESTIGATION + MURDERS -->
+<div class="hist-modal-overlay" id="m-f6"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-f6')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph forseti">🌿</div>
+        <div class="modal-hero-title"><h2>Rura's Investigation &amp; The Murders</h2>
+        <div class="modal-hero-tags"><span class="tag forseti">Forseti</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'f6-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f6-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f6-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="f6-ov">
+            <p>Rura slips away alone to investigate Helgafell, hoping to find answers. She discovers runes covering the walls urging them to leave — and believes Hel is warning them. Asiarpak and Osborn find her; the three argue. Rura leads them to the dead butterfly field — but finds nothing there now.</p>
+            <p>Three ritual murders occur in the city, each identically staged: white petals, prey in a circle, runes painted in blood on the trees (Ehwaz, Isa, Hagalaz, Yr), a veil over the face, and Yr carved into the victim's pelt. The scent of yarrow is always fresh.</p>
+            <ul class="event-list">
+                <li><span class="event-name">First murder</span>Vidher found dead. No scent, no trace of the killer.</li>
+                <li><span class="event-name">Second murder</span>Audr and the remaining elders Nerthus, Sirkka, and Warda are standing by the scene.</li>
+                <li><span class="event-name">Third murder</span>Warda screams for help; Liv is found dead. Erling takes the witnesses in for questioning — and turns her focus to Warda.</li>
+            </ul>
+            <p>Erling stands before the city and names the murderer: <strong>Warda</strong>. The elder laughs — reveals herself as a servant of Hel, names four cats as Hel's chosen, and is sentenced to exile. Kill on sight if she returns.</p>
+        </div>
+        <div class="modal-panel" id="f6-ch"><ul class="char-list">
+            <li><span class="char-name">Warda</span><span class="char-role">Elder — unmasked as the ritual murderer and servant of Hel; exiled</span></li>
+            <li><span class="char-name">Rura</span><span class="char-role">Investigated Helgafell solo; found the warning runes</span></li>
+            <li><span class="char-name">Erling</span><span class="char-role">Led the investigation and publicly named Warda as the killer</span></li>
+            <li><span class="char-name">Vidher / Liv</span><span class="char-role">Victims of Warda's ritual murders</span></li>
+            <li><span class="char-name">Asiarpak / Osborn</span><span class="char-role">Found Rura at Helgafell; later revealed as cult members</span></li>
+            <li><span class="char-name">Aslaug / Embla / Misteltein / Nerthus / Sirkka / Audr</span><span class="char-role">Present at or near the murder scenes</span></li>
+        </ul></div>
+        <div class="modal-panel" id="f6-af">
+            <div class="consequence-block">Warda's exile does not end the threat. She named four cats as "chosen by Hel" — and those four will carry that mark into everything that follows. Asiarpak and Osborn's presence at Helgafell takes on new meaning in retrospect.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- FORSETI CH2: WHISPERS OF SHADOWS -->
+<div class="hist-modal-overlay" id="m-f7"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-f7')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph forseti">🌿</div>
+        <div class="modal-hero-title"><h2>Whispers of Shadows</h2>
+        <div class="modal-hero-tags"><span class="tag forseti">Forseti</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'f7-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f7-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f7-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="f7-ov">
+            <p>On the night of the blood moon, Forseti wakes to screaming. The city is surrounded by a wall of flame — the Cult of Hel has come in full force.</p>
+            <ul class="event-list">
+                <li>Sixten and Ebbe are found hanging above the city. Sixten speaks words of encouragement before dying.</li>
+                <li>Asiarpak drags Frode behind a burning tent and kills her. Berglijot attacks Tusmørke. Debora wounds Ylva and kills Astridr.</li>
+                <li>A fallen tree creates an opening. Most flee. Erling and Grimur stay to fight.</li>
+                <li>Lofn joins them — killing Warda and Osborn with a poison-coated dagger. Erling and Lofn escape. Grimur fights alone until his final breath in the fire.</li>
+                <li>The rest of Forseti, led by Fritjof, flee over the mountain pass. In the chaos, Frigg's panicked shoving sends Daimhin falling to his death from the pass. They cross the river and find Erling and an unconscious Lofn waiting — with the news that Grimur is dead.</li>
+            </ul>
+            <p>Forseti walks until they find somewhere to rest. Their city is gone.</p>
+        </div>
+        <div class="modal-panel" id="f7-ch"><ul class="char-list">
+            <li><span class="char-name">Grímur</span><span class="char-role">Stayed behind alone to hold the cult at bay — died in the fire</span></li>
+            <li><span class="char-name">Lofn</span><span class="char-role">Killed Warda and Osborn with a poison dagger; escaped unconscious</span></li>
+            <li><span class="char-name">Erling</span><span class="char-role">Fought alongside Grímur; survived and led the aftermath</span></li>
+            <li><span class="char-name">Sixten</span><span class="char-role">Found hanging above the city; died with words of encouragement</span></li>
+            <li><span class="char-name">Ebbe</span><span class="char-role">Found hanging alongside Sixten above the burning city</span></li>
+            <li><span class="char-name">Berglijot</span><span class="char-role">Head healer — revealed as a cult member; attacked Tusmørke</span></li>
+            <li><span class="char-name">Debora</span><span class="char-role">Cult member — wounded Ylva; killed Astridr</span></li>
+            <li><span class="char-name">Asiarpak</span><span class="char-role">Cult member — killed Frode behind a burning tent</span></li>
+            <li><span class="char-name">Daimhin</span><span class="char-role">Died falling from the mountain pass in the chaos of the escape</span></li>
+            <li><span class="char-name">Frigg</span><span class="char-role">Her panicked shoving on the pass nearly cost Vuokko her life</span></li>
+            <li><span class="char-name">Fritjof</span><span class="char-role">Led the survivors over the mountain pass to safety</span></li>
+            <li><span class="char-name">Aksel / Arianrhod / Asa / Aslaug / Bengt / Dalla / Elskar / Embla / Erica / Esko / Halvard / Ketil / Kierr / Lorna / Misteltein / Otto / Ove / Radulfr / Ragna / Randi / Reidar / Rura / Sigfúss / Sirkka / Syn / Tippi / Tusmørke / Vuokko / Ylva</span><span class="char-role">Forseti members who fought or fled during the cult attack</span></li>
+        </ul></div>
+        <div class="modal-panel" id="f7-af">
+            <div class="consequence-block">Forseti is homeless. Grimur's death — holding the line alone — becomes one of the defining acts of sacrifice in the city's history. Four cats were named Hel's chosen by Warda. Their fates remain unresolved.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- FORSETI CH2: THE SEA AND THE FOREST -->
+<div class="hist-modal-overlay" id="m-f8"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-f8')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph fifrildi">🦋</div>
+        <div class="modal-hero-title"><h2>The Sea and the Forest</h2>
+        <div class="modal-hero-tags"><span class="tag forseti">Forseti</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'f8-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f8-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'f8-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="f8-ov">
+            <p>Armed with intel from three Laguz cats — Maelstrom, Fyrri, and Otava — Forseti sets out to find Laguz, heading south along the beachside. The majority of the city is allowed to join, regardless of rank. Children remain behind in Erling's care.</p>
+            <p>Patrol leader Björn leads them down the cliffside at dawn, expressions grim. Based on the Laguz cats' descriptions, the monsters they may encounter are the dead reborn by Hel's will. Forseti believes they are being punished by Odin for allowing certain figures to survive in their city.</p>
+            <p>They head south. What they find when they reach Laguz's territory is still being written.</p>
+        </div>
+        <div class="modal-panel" id="f8-ch"><ul class="char-list">
+            <li><span class="char-name">Björn</span><span class="char-role">Patrol leader — led Forseti south to find Laguz</span></li>
+            <li><span class="char-name">Maelstrom / Fyrri / Otava</span><span class="char-role">Laguz cats sheltering with Forseti — provided intel; joined the search</span></li>
+            <li><span class="char-name">Erling</span><span class="char-role">Remained behind to care for the children of Forseti</span></li>
+            <li><span class="char-name">Ketil / Ragna / Ylva</span><span class="char-role">Council members who joined the patrol south</span></li>
+            <li><span class="char-name">Uwila / Sirkka / Saniainen / Aasveig / Aksel / Kilpikonna / Muratti / Aave / Elskar / Esko</span><span class="char-role">Healers, warriors, hunters, builders and novices on the patrol</span></li>
+        </ul></div>
+        <div class="modal-panel" id="f8-af">
+            <div class="consequence-block">Forseti and Laguz are moving toward each other — one searching for a home, the other surrounded by the undead. This convergence shapes what comes next.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- LAGUZ CH2: A FUNERAL -->
+<div class="hist-modal-overlay" id="m-l6"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-l6')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph laguz">🐟</div>
+        <div class="modal-hero-title"><h2>A Funeral</h2>
+        <div class="modal-hero-tags"><span class="tag laguz">Laguz</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'l6-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l6-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l6-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="l6-ov">
+            <p>Eivor, K'inok, and Gunhild are found dead — well-liked, well-respected city members all. The city gathers at the ocean for their funeral at moonlight. The procession is interrupted by a leopard seal pup attacking. Pikes rush to battle. Agnaar dies defending the city.</p>
+            <p>With Agnaar gone — the rightful heir being Firth — the city votes on whether to change the law of succession. The majority votes to allow Ruaidhri to take over as Voice of Laguz. Magni is named as Will. Reinforcements are called from Mountain Outpost.</p>
+        </div>
+        <div class="modal-panel" id="l6-ch"><ul class="char-list">
+            <li><span class="char-name">Eivor / K'inok / Gunhild</span><span class="char-role">The three city members whose funeral was interrupted by the seal attack</span></li>
+            <li><span class="char-name">Agnaar</span><span class="char-role">Died in the leopard seal attack; former leader</span></li>
+            <li><span class="char-name">Firth</span><span class="char-role">Agnaar's natural-born heir — bypassed by a democratic city vote</span></li>
+            <li><span class="char-name">Ruaidhri</span><span class="char-role">New Voice of Laguz — voted in over Firth</span></li>
+            <li><span class="char-name">Magni</span><span class="char-role">Named Will under Ruaidhri</span></li>
+            <li><span class="char-name">Ari / Aideen / Estrid / Heidrun / Hugleikr / Hvitserk / Ingegerd / Linnéa / Masik / Meaw / Mí-ádh / Mira / Nessa / Nisa / Oithona / Räv / Selr / Ubah</span><span class="char-role">City members at the funeral and vote</span></li>
+        </ul></div>
+        <div class="modal-panel" id="l6-af">
+            <div class="consequence-block">The democratic bypass of Firth creates a political fracture beneath Laguz's surface. Ruaidhri leads with legitimacy by vote — but not by bloodline. This tension persists.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- LAGUZ CH2: THE ROT COMES KNOCKING -->
+<div class="hist-modal-overlay" id="m-l7"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-l7')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph laguz">🐟</div>
+        <div class="modal-hero-title"><h2>The Rot Comes Knocking</h2>
+        <div class="modal-hero-tags"><span class="tag laguz">Laguz</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'l7-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l7-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'l7-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="l7-ov">
+            <p>The weeks before the blood moon: patrols vanish without a trace. The seals grow larger and return. A heavy fog settles over the city. Fish disappear. Search parties come back frozen or don't return at all. Those who do describe a silhouette tracking them in the territory and flickering lights in the distance. Headless fish are found in storage — still moving. Magni orders the supply burned and fresh prey only.</p>
+            <p>On the blood moon itself: dark scarlet light floods the territory. The moon is blood red. Clouds swallow the stars. A hissing hum grows outside the walls — then screaming from the sentries: <em>"They're coming! They're all coming!"</em></p>
+            <p>The walls break. Draugr cats — friends, family, loved ones, drained of color with heterochromatic eyes — pour in alongside rotten seals. An eldritch mass crawls through the gap, shedding draugr from its surface. A grey horse with broken bones. A flayed bull rams the remaining walls. Three full-grown rotten seals sing and attack.</p>
+            <p>Ruaidhri orders Magni to lead the city to the tunnels. The entrance is sealed with a boulder. Those who remained fight until dawn. The draugr retreat with the sun. New leads are appointed: Uliok, Yulla, and Ubah. Masik becomes the new Will.</p>
+        </div>
+        <div class="modal-panel" id="l7-ch"><ul class="char-list">
+            <li><span class="char-name">Ruaidhri</span><span class="char-role">Voice — commanded the city's retreat to the tunnels</span></li>
+            <li><span class="char-name">Magni</span><span class="char-role">Will — led the city to the tunnels; stepped down after; replaced by Masik</span></li>
+            <li><span class="char-name">Masik</span><span class="char-role">New Will — appointed after the blood moon attack</span></li>
+            <li><span class="char-name">Uliok / Yulla / Ubah</span><span class="char-role">Newly appointed city leads after the attack</span></li>
+            <li><span class="char-name">Renfrew</span><span class="char-role">First to raise the alarm when the seals returned</span></li>
+            <li><span class="char-name">Firth (draugr)</span><span class="char-role">Among the dead risen — recognized headless and blackened</span></li>
+            <li><span class="char-name">Agnaar (draugr) / Veigur (draugr) / Aurnir (draugr) / Anahita (draugr) / Jori (draugr)</span><span class="char-role">Former city members risen as draugr; attacked their own city</span></li>
+            <li><span class="char-name">Ari / Fyrri / Glaw / Hafsjór / Heidrun / Hvitserk / Inktvis / Kula / Linnéa / Maelstrom / Meryl / Mira / Nanok / Nessa / Nisa / Nuotia / Odr / Räv / Selr / Solfrid / Soren / Vargr / Yrya</span><span class="char-role">Defenders fighting or fleeing the blood moon attack</span></li>
+        </ul></div>
+        <div class="modal-panel" id="l7-af">
+            <div class="consequence-block">Laguz survived — but at great cost. The draugr are gone for now. The city has new leadership and a clearer understanding of the enemy. Forseti is searching for them — and the convergence of both cities will shape what comes next.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH2: CROWNING -->
+<div class="hist-modal-overlay" id="m-s5"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s5')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Crowning</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s5-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s5-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s5-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s5-ov">
+            <p>King Freyr and Crown Prince Leif die of the plague. Princess Róta — next in line — is crowned Queen Róta in a traditional ceremony. She is given her antlers and her title. The city celebrates.</p>
+            <p>Mid-ceremony, news arrives that Eldur has launched an ambush on the Raptors and novices at Njord Outpost. Reinforcements are sent immediately — but despite their advantage, Stormr loses the outpost. The new queen's reign begins with a military defeat. Reinforcements are called from River Outpost.</p>
+        </div>
+        <div class="modal-panel" id="s5-ch"><ul class="char-list">
+            <li><span class="char-name">Queen Róta</span><span class="char-role">Newly crowned — her reign begins mid-crisis</span></li>
+            <li><span class="char-name">King Freyr / Crown Prince Leif</span><span class="char-role">Both died of the plague at the start of Chapter II</span></li>
+            <li><span class="char-name">Vidar / Torgny / Orm / Atti / Adalina / Ifrah / Pilvi / Dagrun / Ingrid</span><span class="char-role">Present at the crowning ceremony</span></li>
+        </ul></div>
+        <div class="modal-panel" id="s5-af">
+            <div class="consequence-block">Queen Róta's first act as ruler is receiving news of a military defeat. The loss of Njord Outpost to Eldur defines the strategic situation for her entire reign.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH2: HARSH REALITIES -->
+<div class="hist-modal-overlay" id="m-s6"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s6')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Harsh Realities</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s6-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s6-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s6-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s6-ov">
+            <p>A border patrol — Isarok, Orm, Atti, Reginleif, and Finke — splits while following Eldur scent across the border. Both patrols regroup to find Eldur's Akin dead at Isarok's feet — Isarok crossed the border first. Eldur retaliates; Isarok falls to the ember sword.</p>
+            <p>Princess Suvituuli summons the patrol afterward and orders them to swear silence. The official story: an eagle. Isarok was in the wrong place at the wrong time. Meanwhile, Queen Róta accepts ex-Laguz guild member Gymir into Stormr — this causes public uproar.</p>
+            <p>Later: a group of dissident Raptors led by Torgny rise against the Queen's rationing policies. An arrow meant for Rota strikes Princess Suvituuli in the chest. The traitors are captured and sent beyond The Leap — a death sentence. The city goes numb.</p>
+        </div>
+        <div class="modal-panel" id="s6-ch"><ul class="char-list">
+            <li><span class="char-name">Princess Suvituuli</span><span class="char-role">Shot in the chest by Torgny's arrow; ordered the cover-up of Isarok's death</span></li>
+            <li><span class="char-name">Isarok</span><span class="char-role">Talon — killed in the border skirmish; death officially attributed to an eagle</span></li>
+            <li><span class="char-name">Torgny</span><span class="char-role">Ringleader of the failed coup — sent beyond The Leap</span></li>
+            <li><span class="char-name">Queen Róta</span><span class="char-role">Accepted ex-Laguz Gymir into Stormr's ranks despite public opposition</span></li>
+            <li><span class="char-name">Gymir</span><span class="char-role">Ex-Laguz — accepted into Stormr by Queen Róta; divisive figure</span></li>
+            <li><span class="char-name">Orm / Atti / Reginleif / Finke</span><span class="char-role">Border patrol — sworn to silence about Isarok</span></li>
+            <li><span class="char-name">Adalina / Aleyna / Astridr / Angrboda / Hjordis / Sylvi / Ve</span><span class="char-role">Eldur patrol members at the border</span></li>
+        </ul></div>
+        <div class="modal-panel" id="s6-af">
+            <div class="consequence-block">The cover-up of Isarok's death is another layer of hidden truth stacking up inside Stormr. The city's culture of concealment — begun with Thor's death — continues under Suvituuli's orders.</div>
+            <div class="consequence-block">Torgny's coup attempt leaves the city shaken and silent. Queen Róta holds — but barely.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH2: CONCEALED IN SNOW -->
+<div class="hist-modal-overlay" id="m-s7"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s7')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Concealed in Snow</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s7-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s7-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s7-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s7-ov">
+            <p>During a thunderstorm, mournful cries wake the city and an elder is found dead. Then the ground shudders — an avalanche. The city flees into the mountain tunnels. Three groups, three discoveries.</p>
+            <ul class="event-list">
+                <li><span class="event-name">Tunnel 1</span>The old throne room — a labradorite swirling in its center, murals of the gods on every wall. Vidar confronts them. A talon touches his necklace and nearly chokes another cat. Fighting breaks out; Svanhildr attacks. Orm touches the necklace and sees a vision of things to come. Vidar silences everyone with a warning and leads them out.</li>
+                <li><span class="event-name">Tunnel 2</span>The seer's hidden study beneath the palace. A half-open scroll — Queen Frida's own investigation into a secret heritage of bastard bloodlines within Stormr. The group takes the scroll and keeps their discovery secret.</li>
+                <li><span class="event-name">Tunnel 3</span>A group of novices trapped alone in the dark. They encounter rats and flee, escaping mostly unscathed.</li>
+            </ul>
+            <p>All three groups regroup at the palace to rest and recover before the danger passes.</p>
+        </div>
+        <div class="modal-panel" id="s7-ch"><ul class="char-list">
+            <li><span class="char-name">Vidar</span><span class="char-role">Seer — confronted the group in the throne room; silenced them with a warning</span></li>
+            <li><span class="char-name">Orm</span><span class="char-role">Touched the labradorite necklace; received a vision of the future</span></li>
+            <li><span class="char-name">Svanhildr</span><span class="char-role">Moved to attack the perceived traitor during the throne room confrontation</span></li>
+            <li><span class="char-name">Queen Frida</span><span class="char-role">Her scroll — hidden in the seer's study — documents an investigation into secret bloodlines</span></li>
+            <li><span class="char-name">Atti / Reginleif / Ivar / Eilif / Niviatsiak / Nivtailánguak / Esteri / Snefnug / Pilvi / Himinn / Shams</span><span class="char-role">Present during the avalanche and tunnel exploration</span></li>
+        </ul></div>
+        <div class="modal-panel" id="s7-af">
+            <div class="consequence-block">Queen Frida's scroll is now in someone's possession — its contents about Stormr's hidden bloodlines kept secret for now. Whatever Orm saw through the labradorite has not been shared.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH2: DUSTING OFF THE PAGES -->
+<div class="hist-modal-overlay" id="m-s8"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s8')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Dusting Off the Pages</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s8-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s8-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s8-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s8-ov">
+            <p>Svanhildr and Flaemingr gather the older cats for a covert intelligence mission into the woods. Orm, Atti, and Reginleif are sent out — with novices in tow as cover, making it look like a training patrol. Two groups leave simultaneously: Orm's and Ivar's.</p>
+            <p>The mission: find information. What they find in the fjordlands goes beyond what any of them expected. Full details remain in the Google Drive logs.</p>
+        </div>
+        <div class="modal-panel" id="s8-ch"><ul class="char-list">
+            <li><span class="char-name">Flaemingr</span><span class="char-role">Briefed the mission team; trusted Orm, Atti, and Reginleif to lead</span></li>
+            <li><span class="char-name">Svanhildr</span><span class="char-role">Co-organized the covert mission</span></li>
+            <li><span class="char-name">Orm / Atti / Reginleif</span><span class="char-role">Led the intel patrol into the woods with novices as cover</span></li>
+            <li><span class="char-name">Ivar</span><span class="char-role">Led the second group departing simultaneously</span></li>
+            <li><span class="char-name">Niviatsiak / Esteri / Snefnug / Eilif</span><span class="char-role">Novices along as cover for the covert patrol</span></li>
+        </ul></div>
+        <div class="modal-panel" id="s8-af">
+            <div class="consequence-block">Stormr is actively gathering intelligence — a sign that Queen Róta's court is planning its next move rather than simply reacting. What the patrol found feeds directly into the events of Till Kingdom Comes.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- STORMR CH2: TILL KINGDOM COMES -->
+<div class="hist-modal-overlay" id="m-s9"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s9')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Till Kingdom Comes</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch II</span></div></div></div>
+    <div class="modal-tabs">
+        <button class="modal-tab-btn active" onclick="switchTab(this,'s9-ov')">Overview</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s9-ch')">Characters</button>
+        <button class="modal-tab-btn" onclick="switchTab(this,'s9-af')">Aftermath</button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-panel active" id="s9-ov">
+            <p>The cry for help cuts short. Carwyn — a missing Stormr cat, now drained of color and glassy-eyed — launches himself at Hilal's throat and kills him. Behind Carwyn stands a hoard of the city's own missing: friends, family, loved ones, every one of them gone wrong.</p>
+            <p>K'anik, Caniad, Sionnach, Nivtailánguak, Carwyn, Kaari, and Hilal launch themselves at Stormr cats, biting, mauling, and commanding each other to <em>"get the kittens."</em> The palace fills with the sounds of fighting as Stormr tries to defend itself against its own corrupted citymates.</p>
+        </div>
+        <div class="modal-panel" id="s9-ch"><ul class="char-list">
+            <li><span class="char-name">Carwyn</span><span class="char-role">Missing cat — returned corrupted; killed Hilal on re-entry</span></li>
+            <li><span class="char-name">Hilal</span><span class="char-role">Talon — killed by Carwyn; briefly reanimated</span></li>
+            <li><span class="char-name">Even</span><span class="char-role">Talon novice — among the first attacked; fought back with a dagger</span></li>
+            <li><span class="char-name">Verdandi</span><span class="char-role">Scrambled through the palace trying to find Eir and gather supplies for the wounded</span></li>
+            <li><span class="char-name">Astrid</span><span class="char-role">Immediately searched for the royal family when the horde arrived</span></li>
+            <li><span class="char-name">K'anik / Caniad / Sionnach / Nivtailánguak</span><span class="char-role">Missing Stormr cats — returned corrupted; attacked citymates</span></li>
+            <li><span class="char-name">Orm / Atti / Ivar / Svanhildr / Flaemingr / Vidar / Eilif / Niviatsiak / Dagfinn / Dáinn / Lorcan / Morrigan / Nanna</span><span class="char-role">Defenders fighting the corrupted citymates</span></li>
+        </ul></div>
+        <div class="modal-panel" id="s9-af">
+            <div class="consequence-block">Stormr's missing cats have been taken and turned. Whatever power did this — the same force behind Laguz's draugr — has now reached inside Stormr's walls. The war is no longer just at the borders.</div>
+        </div>
+    </div>
+</div></div>
+
+<!-- CH3 PLACEHOLDER MODALS -->
+<div class="hist-modal-overlay" id="m-e10"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-e10')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph eldur">🔥</div>
+        <div class="modal-hero-title"><h2>Trouble Is Brewing</h2>
+        <div class="modal-hero-tags"><span class="tag eldur">Eldur</span><span class="tag ch">Ch III</span></div></div></div>
+    <div class="modal-tabs"><button class="modal-tab-btn active" onclick="switchTab(this,'e10-ov')">Overview</button></div>
+    <div class="modal-body"><div class="modal-panel active" id="e10-ov">
+        <p>This chapter is currently ongoing. Check the <a href="https://drive.google.com/drive/folders/1BydJnbRxYx6BBsUyOCDKFgqQSnTBSDI0?usp=sharing" target="_blank">Google Drive</a> for the latest Eldur logs. This entry will be updated when the chapter concludes.</p>
+    </div></div>
+</div></div>
+
+<div class="hist-modal-overlay" id="m-s10"><div class="hist-modal">
+    <button class="modal-close" onclick="closeModal('m-s10')">✕</button>
+    <div class="modal-hero-wrap"><div class="modal-hero-ph stormr">⚡</div>
+        <div class="modal-hero-title"><h2>Trouble Is Brewing / Paradise Is Burning</h2>
+        <div class="modal-hero-tags"><span class="tag stormr">Stormr</span><span class="tag ch">Ch III</span></div></div></div>
+    <div class="modal-tabs"><button class="modal-tab-btn active" onclick="switchTab(this,'s10-ov')">Overview</button></div>
+    <div class="modal-body"><div class="modal-panel active" id="s10-ov">
+        <p>These chapters are currently ongoing. Check the <a href="https://drive.google.com/drive/folders/1BydJnbRxYx6BBsUyOCDKFgqQSnTBSDI0?usp=sharing" target="_blank">Google Drive</a> for the latest Stormr logs. This entry will be updated when the chapters conclude.</p>
+    </div></div>
+</div></div>
+
+
+<!-- ================================================================ -->
+<!-- SCRIPTS                                                          -->
+<!-- ================================================================ -->
+
+<script>
+/* =====================================================
+   TO ADD A NEW EVENT:
+   1. Add a new card div inside the correct chapter panel
+   2. Add a matching modal below the MODALS comment
+   3. Copy any existing card/modal pair as a template
+
+   Card template:
+   <div class="history-card" data-city="CITY" onclick="openModal('MODAL_ID')">
+       <div class="card-ph CITY">EMOJI</div>
+       <div class="history-info">
+           <h3>EVENT TITLE</h3>
+           <p>Short description.</p>
+           <div class="tag-container">
+               <span class="tag CITY">CITY LABEL</span>
+               <span class="tag season-label">SEASON</span>
+           </div>
+       </div>
+   </div>
+
+   Cities: eldur / forseti / laguz / stormr / fifrildi / multi
+   Emojis: eldur=🔥 forseti=🌿 laguz=🐟 stormr=⚡ fifrildi=🦋 multi=🌺
+===================================================== */
+
+function showChapter(btn, panelId) {
+    document.querySelectorAll('.ch-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.chapter-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(panelId).classList.add('active');
+}
+
+
+function openModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.display = 'none';
+    document.body.style.overflow = '';
+}
+document.querySelectorAll('.hist-modal-overlay').forEach(o => {
+    o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); });
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.hist-modal-overlay').forEach(o => closeModal(o.id));
+});
+
+function switchTab(btn, panelId) {
+    const modal = btn.closest('.hist-modal');
+    modal.querySelectorAll('.modal-tab-btn').forEach(b => b.classList.remove('active'));
+    modal.querySelectorAll('.modal-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(panelId).classList.add('active');
+}
+</script>
+
+</body>
+</html>
