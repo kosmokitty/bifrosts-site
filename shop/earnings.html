@@ -172,9 +172,18 @@
                         <label>Shading</label>
                         <select id="shading" onchange="runCalc()">
                             <option value="0">None</option>
+                            <option value="1">Partial (+1)</option>
+
                             <option value="5">Simple Headshot (+5)</option>
+                            <option value="10">Simple Halfbody (+10)</option>
                             <option value="15">Simple Fullbody (+15)</option>
+
+                            <option value="15">Moderate Headshot (+15)</option>
+                            <option value="15">Moderate Halfbody (+20)</option>
                             <option value="25">Moderate Fullbody (+25)</option>
+
+                            <option value="25">Complex Headshot (+25)</option>
+                            <option value="30">Complex Halfbody (+30)</option>
                             <option value="35">Complex Fullbody (+35)</option>
                         </select>
                     </div>
@@ -202,7 +211,7 @@
                         <label>Misc Bonuses</label>
                         <select id="miscBonus" onchange="runCalc()">
                             <option value="0">None</option>
-                            <option value="20">Prompt Partic. (+20)</option>
+                            <option value="15">Prompt Partic. (+15)</option>
                             <option value="20">COTM Bonus (+20)</option>
                             <option value="10">NPC Art Bonus (+10)</option>
                             <option value="15">Meme/Ad/Join (+15)</option>
@@ -319,7 +328,7 @@
             </div>
             <div class="earnings-card">
                 <h4>Prompt Participation</h4>
-                <div class="earning-row"><span>+20 Stardust as long as it includes a colored fullbody</span></div>
+                <div class="earning-row"><span>+15 Stardust as long as it includes a colored fullbody</span></div>
             </div>
             <div class="earnings-card">
                 <h4>DeviantArt Meme Pieces</h4>
@@ -349,7 +358,13 @@
             </div>
             <div class="earnings-card">
                 <h4>NPC & Other Character Art Bonus</h4>
-                <div class="earning-row"><span>+10 Stardust</span></div>
+                <div class="earning-row"><span>NPC Fullbody</span><span class="sd-value">15 Stardust</span></div>
+                <div class="earning-row"><span>NPC Halfbody</span><span class="sd-value">10 Stardust</span></div>
+                <div class="earning-row"><span>NPC Headshot</span><span class="sd-value">5 Stardust</span></div>
+                
+                <div class="earning-row"><span>Other PC Fullbody</span><span class="sd-value">5 Stardust</span></div>
+                <div class="earning-row"><span>Other PC Halfbody</span><span class="sd-value">10 Stardust</span></div>
+                <div class="earning-row"><span>Other PC Headshot</span><span class="sd-value">15 Stardust</span></div>
             </div>
         </div>
 
